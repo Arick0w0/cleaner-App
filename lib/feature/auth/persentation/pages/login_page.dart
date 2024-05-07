@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: Text(
                 mLogo,
                 // style: Theme.of(context).textTheme.titleLarge,
@@ -51,6 +51,16 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
+                // TextFormField(
+                //   style: const TextStyle(color: mSecondaryColor),
+                //   decoration: InputDecoration(
+                //     hintText: mPassword,
+                //     border: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(5.0),
+                //     ),
+                //   ),
+                // ),
+
                 TextFormField(
                   style: const TextStyle(color: mSecondaryColor),
                   decoration: InputDecoration(
@@ -59,7 +69,7 @@ class LoginPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                ),
+                )
               ],
             )
           ],
