@@ -33,9 +33,9 @@
     },
     {
       "name": "cupertino_icons",
-      "rootUri": "file:///Users/rick/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.6",
+      "rootUri": "file:///Users/rick/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "fake_async",
@@ -170,7 +170,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-04-07T15:04:23.936212Z",
+  "generated": "2024-05-07T08:09:44.947976Z",
   "generator": "pub",
-  "generatorVersion": "3.3.0"
+  "generatorVersion": "3.3.4"
 }

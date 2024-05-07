@@ -1,0 +1,1 @@
+ /Users/rick/Code/FinalMaeBan/maeban/.dart_tool/flutter_build/60c8249fa1a9e68746e5399906e31248/native_assets.yaml: 
