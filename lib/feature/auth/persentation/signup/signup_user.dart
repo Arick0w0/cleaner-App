@@ -4,7 +4,6 @@ import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/core/constants/size.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/feature/auth/persentation/signup/signup_hunter.dart';
-import 'package:mae_ban/feature/auth/persentation/widgets/check_box.dart';
 
 class SignUpUserPage extends StatelessWidget {
   const SignUpUserPage({super.key});
