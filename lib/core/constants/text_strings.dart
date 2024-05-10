@@ -1,61 +1,61 @@
-/* -- App Text Strings -- */
+class MTexts {
+  MTexts._();
+  /* -- App Text Strings -- */
 
 // -- Generic Text
-const String mLogIn = "ເຂົ້າສູລະບົບ";
-const String mSignUp = "ລົງທະບຽນ";
+  static const String logIn = "ເຂົ້າສູລະບົບ";
+  static const String signUp = "ລົງທະບຽນ";
 
 // Login Screen Text
-const String mLogo = "MaeBan";
+  static const String logo = "MaeBan";
 
 // --- SignUp User Screen Text
-const String mInputPersonalInfo = "ປ້ອນຂໍ້ມູນສ່ວນຕົວ";
-const String mLoginPassword = "ລະຫັດຜ່ານເຂົ້າສູລະບົບ";
-const String mConfirmPassword = "ຢືນຢັນລະຫັດຜ່ານ";
-const String mSigUpHunterQ = "ທ່ານຕ້ອງການສະໝັກເປັນ";
-const String mSure = "ແມ່ນບໍ່?";
+  static const String inputPersonalInfo = "ປ້ອນຂໍ້ມູນສ່ວນຕົວ";
+  static const String loginPassword = "ລະຫັດຜ່ານເຂົ້າສູລະບົບ";
+  static const String confirmPassword = "ຢືນຢັນລະຫັດຜ່ານ";
+  static const String doYouWantTosigUpHunter = "ທ່ານຕ້ອງການສະໝັກເປັນ ";
+  static const String sure = " ແມ່ນບໍ່?";
 
 // -- SignUp Hunter Screen Text
-const String mHunter = "ພະນັກງານ";
-const String mSignUpHunter = "ລົງທະບຽນສໍາລັບພະນັກງານ";
-const String mPhoto = "ຖ່າຍຮູບພ້ອມ";
-const String mIdCard = "ບັດປະຈໍາໂຕ";
-const String mVillage = "ບ້ານ";
-const String mDistrict = "ເມືອງ";
-const String mProvince = "ແຂວງ";
-const String mCareer = "ອາຊີບ";
-const String mNationality = "ສັນຊາດ";
+  static const String hunter = "ພະນັກງານ";
+  static const String signUpHunter = "ລົງທະບຽນສໍາລັບພະນັກງານ";
+  static const String photo = "ຖ່າຍຮູບພ້ອມ";
+  static const String idCard = "ບັດປະຈໍາໂຕ";
+  static const String village = "ບ້ານ";
+  static const String district = "ເມືອງ";
+  static const String province = "ແຂວງ";
+  static const String career = "ອາຊີບ";
+  static const String nationality = "ສັນຊາດ";
 
 // -- Progress Hunter Screen Text
-const String mHunterProgress = "ດໍາເນີນການລົງທະບຽນພະນັກງານ";
+  static const String hunterProgress = "ດໍາເນີນການລົງທະບຽນພະນັກງານ";
 
 // Forgot Password Screen Text
-const String mPasswordRecovery = "ກູ້ຄືນລະຫັດຜ່ານ";
-const String mCheck = "ກວດສອບ";
+  static const String passwordRecovery = "ກູ້ຄືນລະຫັດຜ່ານ";
+  static const String check = "ກວດສອບ";
 
 // OTP Screen Text
-const String mConfirmOtp = "ຢືນຢັນ OTP";
-const String mResent = "ສົ່ງໃໝ່ອີກຄັ້ງ";
+  static const String confirmOtp = "ຢືນຢັນ OTP";
+  static const String resent = "ສົ່ງໃໝ່ອີກຄັ້ງ";
 
 // Reset Password Screen Text
-const String mNewPassword = "ປ່ຽນລະຫັດຜ່ານ";
-const String mResetPassword = "ປ່ຽນລະຫັດຜ່ານໃຫມ່";
-const String mSave = "ບັນທຶກ";
+  static const String newPassword = "ປ່ຽນລະຫັດຜ່ານ";
+  static const String resetPassword = "ປ່ຽນລະຫັດຜ່ານໃຫມ່";
+  static const String save = "ບັນທຶກ";
 
 //--- Common Text
 
-const String mFirstName = "ຊື່ແທ້ First Name";
-const String mLastName = "ນາມສະກຸນ Last Name";
-const String mPhoneNumber = "ເບີໂທ";
-const String mPassword = "ລະຫັດຜ່ານ";
-const String mForgotPassword = "ລືມລະຫັດຜ່ານ";
-const String mDontHaveAnAccount = "ທ່ານມີບັນຊີແລ້ວບໍ່ ";
-const String mOk = "ຕົກລົງ";
-const String mMen = "ຊາຍ";
-const String mWomen = "ຍິງ";
-const String mSignUpSuccess = "ລົງທະບຽນ ສໍາເລັດ!";
-// const String mCancel = "ຍົກເລີກ";
-
-
+  static const String firstName = "ຊື່ແທ້ First Name";
+  static const String lastName = "ນາມສະກຸນ Last Name";
+  static const String phoneNumber = "ເບີໂທ";
+  static const String password = "ລະຫັດຜ່ານ";
+  static const String forgotPassword = "ລືມລະຫັດຜ່ານ";
+  static const String doYouHaveAnAccount = "ທ່ານມີບັນຊີແລ້ວບໍ່? ";
+  static const String ok = "ຕົກລົງ";
+  static const String men = "ຊາຍ";
+  static const String women = "ຍິງ";
+  static const String signUpSuccess = "ລົງທະບຽນ ສໍາເລັດ!";
+// static const String mCancel = "ຍົກເລີກ";
 
 //--- Home Screen Text
-
+}
