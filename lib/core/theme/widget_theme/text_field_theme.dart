@@ -12,7 +12,7 @@ class MTextFormFieldTheme {
         const TextStyle().copyWith(fontSize: 14, color: MColors.secondary),
     hintStyle:
         const TextStyle().copyWith(fontSize: 14, color: MColors.secondary),
-    floatingLabelBehavior: FloatingLabelBehavior.never, // text animations
+    floatingLabelBehavior: FloatingLabelBehavior.auto, // text animations
     // isCollapsed: true,
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
     floatingLabelStyle:
