@@ -1,0 +1,1 @@
+ /Users/DIMA/project-workspaces/MaeBan-app/maeban/.dart_tool/flutter_build/a557b8b7bda2746133dcff69cc6ebdb8/native_assets.yaml: 
