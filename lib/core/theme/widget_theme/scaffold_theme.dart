@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mae_ban/core/constants/color.dart';
 
-class MAppTheme {
-  MAppTheme._();
+class MScaffoldTheme {
+  MScaffoldTheme._();
 
-  static ThemeData lightTheme = ThemeData(
-    // primarySwatch: Colors.blue,
+  static ThemeData lightScaffoldTheme = ThemeData(
     scaffoldBackgroundColor: MColors.primary,
-    // appBarTheme: RAppBarTheme.lightAppBarTheme,
-    // Add other theme properties as needed
   );
 }

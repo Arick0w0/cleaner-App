@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mae_ban/core/constants/color.dart';
 
 // ignore: camel_case_types
-class mTextTheme {
+class MTextTheme {
   static TextTheme lightTextTheme = TextTheme(
     // displayLarge: const TextStyle().copyWith(
     //   fontFamily: 'Meticula',

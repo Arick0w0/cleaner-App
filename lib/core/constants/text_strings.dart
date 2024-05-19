@@ -7,7 +7,7 @@ class MTexts {
   static const String signUp = "ລົງທະບຽນ";
 
 // Login Screen Text
-  static const String logo = "MaeBan";
+  static const String logo = 'assets/logo/logo.png';
 
 // --- SignUp User Screen Text
   static const String inputPersonalInfo = "ປ້ອນຂໍ້ມູນສ່ວນຕົວ";
@@ -19,7 +19,8 @@ class MTexts {
 // -- SignUp Hunter Screen Text
   static const String hunter = "ພະນັກງານ";
   static const String signUpHunter = "ລົງທະບຽນສໍາລັບພະນັກງານ";
-  static const String photo = "ຖ່າຍຮູບພ້ອມ";
+  // static const String photo = "ຖ່າຍຮູບພ້ອມ";
+  static const String photoandid = "ຖ່າຍຮູບພ້ອມບັດປະຈໍາໂຕ";
   static const String idCard = "ບັດປະຈໍາໂຕ";
   static const String village = "ບ້ານ";
   static const String district = "ເມືອງ";
@@ -55,6 +56,8 @@ class MTexts {
   static const String men = "ຊາຍ";
   static const String women = "ຍິງ";
   static const String signUpSuccess = "ລົງທະບຽນ ສໍາເລັດ!";
+  static const String date = "ວວ/ດດ/ປປ";
+
 // static const String mCancel = "ຍົກເລີກ";
 
 //--- Home Screen Text

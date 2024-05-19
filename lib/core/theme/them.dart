@@ -9,7 +9,7 @@ import 'package:mae_ban/core/theme/widget_theme/text_theme.dart';
 class MAppTheme {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: 'NotoSansLao',
-    textTheme: mTextTheme.lightTextTheme,
+    textTheme: MTextTheme.lightTextTheme,
     scaffoldBackgroundColor: MColors.primary,
     appBarTheme: MAppBarTheme.lightAppBarTheme,
     bottomSheetTheme: MBottomSheetTheme.lightBottomSheetTheme,
