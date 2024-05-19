@@ -8,11 +8,10 @@ import 'package:mae_ban/core/utils/show_snackbar.dart';
 
 import 'package:mae_ban/core/widgets/loader.dart';
 import 'package:mae_ban/feature/auth/data/models/job_offer_model.dart';
-import 'package:mae_ban/feature/auth/persentation/bloc/auth_bloc.dart';
-import 'package:mae_ban/feature/auth/persentation/signup/signup_hunter.dart';
+import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
 
-import 'package:mae_ban/feature/auth/persentation/widgets/passwordmath.dart';
-import 'package:mae_ban/feature/auth/persentation/widgets/text_form_field.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/password_match.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/text_form_field.dart';
 import 'package:mae_ban/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

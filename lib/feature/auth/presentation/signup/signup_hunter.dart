@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -9,10 +8,10 @@ import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/core/utils/show_snackbar.dart';
 import 'package:mae_ban/core/widgets/loader.dart';
 import 'package:mae_ban/feature/auth/data/models/job_hunter_model.dart';
-import 'package:mae_ban/feature/auth/persentation/bloc/auth_bloc.dart';
-import 'package:mae_ban/feature/auth/persentation/widgets/passwordmath.dart';
-import 'package:mae_ban/feature/auth/persentation/widgets/text_form_field.dart';
-import 'package:mae_ban/feature/auth/persentation/widgets/image_picker_widget.dart';
+import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/password_match.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/text_form_field.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/image_picker_widget.dart';
 import 'package:mae_ban/service_locator.dart';
 
 class SignUpHunterPage extends StatefulWidget {
@@ -58,22 +57,22 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
       create: (_) => sl<AuthBloc>(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(MTexts.signUpHunter),
+          title: const Text(MTexts.signUpHunter),
         ),
         body: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthFailure) {
-              showSnackBar(context, 'Signup failed: ${state.error}',
+              showSnackBar(context, 'Sign up failed: ${state.error}',
                   backgroundColor: Colors.red);
             } else if (state is AuthSuccess) {
-              showSnackBar(context, 'Signup successful',
+              showSnackBar(context, 'Sign up successful',
                   backgroundColor: Colors.green);
               context.go('/home-job-hunter');
             }
           },
           builder: (context, state) {
             if (state is AuthLoading) {
-              return Loader(); // Ensure Loader widget does not show the AppBar
+              return const Loader(); // Ensure Loader widget does not show the AppBar
             }
             return SingleChildScrollView(
               child: Padding(
@@ -87,7 +86,7 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        MTexts.photoandid,
+                        MTexts.photoAndId,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       const Gap(MSize.spaceBtwItems),
