@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mae_ban/feature/auth/persentation/login/login_page.dart';
-import 'package:mae_ban/feature/auth/persentation/signup/signup_hunter.dart';
-import 'package:mae_ban/feature/auth/persentation/signup/signup_user.dart';
+import 'package:mae_ban/feature/auth/presentation/login/login_page.dart';
+import 'package:mae_ban/feature/auth/presentation/signup/signup_hunter.dart';
+import 'package:mae_ban/feature/auth/presentation/signup/signup_user.dart';
 import 'package:mae_ban/feature/home/persentation/hunter_page/hunter_home_page.dart';
 import 'package:mae_ban/feature/home/persentation/offer_page/offer_home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';

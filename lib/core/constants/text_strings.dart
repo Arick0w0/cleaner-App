@@ -20,7 +20,7 @@ class MTexts {
   static const String hunter = "ພະນັກງານ";
   static const String signUpHunter = "ລົງທະບຽນສໍາລັບພະນັກງານ";
   // static const String photo = "ຖ່າຍຮູບພ້ອມ";
-  static const String photoandid = "ຖ່າຍຮູບພ້ອມບັດປະຈໍາໂຕ";
+  static const String photoAndId = "ຖ່າຍຮູບພ້ອມບັດປະຈໍາໂຕ";
   static const String idCard = "ບັດປະຈໍາໂຕ";
   static const String village = "ບ້ານ";
   static const String district = "ເມືອງ";
@@ -56,9 +56,25 @@ class MTexts {
   static const String men = "ຊາຍ";
   static const String women = "ຍິງ";
   static const String signUpSuccess = "ລົງທະບຽນ ສໍາເລັດ!";
-  static const String date = "ວວ/ດດ/ປປ";
+  static const String date = "ວວ-ດດ-ປປ";
 
 // static const String mCancel = "ຍົກເລີກ";
+// Error Messages
+  static const String pleaseenteryourfirstname = "ກະລຸນາໃສ່ຊື່ແທ້";
+  static const String pleaseenteryourlastname = "ກະລຸນາໃສ່ນາມສະກຸນ";
+  static const String pleaseenteryourphonenumber = "ກະລຸນາໃສ່ເບີໂທ";
+  static const String pleaseenteryourpassword = "ກະລຸນາໃສ່ລະຫັດຜ່ານ";
+  // static const String confirmpassword = "ຢືນຢັນລະຫັດຜ່ານຢືນຢັນ";
+  static const String pleaseenteryourbirthday = "ກະລຸນາໃສ່ ວວ-ດດ-ປປ";
+  static const String pleaseenteryourvillage = "ກະລຸນາໃສ່ບ້ານ";
+  static const String pleaseenteryourdistrict = "ກະລຸນາໃສ່ເມືອງ";
+  static const String pleaseenteryourprovince = "ກະລຸນາໃສ່ແຂວງ";
+  static const String pleaseenteryourcareer = "ກະລຸນາໃສ່ອາຊີບ";
+  static const String pleaseenteryournationality = "ກະລຸນາໃສ່ສັນຊາດ";
+
+  static const String plsenterpassword = " ກະລຸນາໃສ່ລະຫັດຜ່ານ";
+  static const String passwordsdonotmatch = "ລະຫັດຜ່ານບໍ່ຄືກັນ";
+  static const String plsselectimage = "ກະລຸນາເລືອກຮູບ ແລະ ປ້ອນຂໍ້ມູນ";
 
 //--- Home Screen Text
 }

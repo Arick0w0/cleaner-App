@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
-import 'package:mae_ban/core/constants/color.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class ImagePickerController {
   File? _file;
@@ -14,34 +15,35 @@ class ImagePickerController {
 }
 
 class ImagePickerWidget extends StatefulWidget {
-  final String title;
+  // final String title;
   final double height;
   final double width;
-  final Color backgroundColor;
+  // final Color backgroundColor;
   final BorderRadius borderRadius;
   final ImagePickerController controller;
-  final String? errorText;
+  // final String? errorText;
+  final bool showError;
 
   const ImagePickerWidget({
-    Key? key,
-    required this.title,
+    super.key,
     required this.controller,
     this.height = 180,
     this.width = double.infinity,
-    this.backgroundColor = MColors.grey,
+    // this.backgroundColor = MColors.primary,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
-    this.errorText,
-  }) : super(key: key);
+    // this.errorText,
+    this.showError = false,
+  });
 
   @override
   _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
 }
 
 class _ImagePickerWidgetState extends State<ImagePickerWidget> {
-  Future<void> _pickImage(ImageSource source) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: source);
+  final ImagePicker _picker = ImagePicker();
 
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
         widget.controller.setFile(File(pickedFile.path));
@@ -49,33 +51,62 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     }
   }
 
-  void _showPickerDialog() {
+  void _showImageSourceActionSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SafeArea(
-          child: Wrap(
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Gallery'),
-                onTap: () {
-                  _pickImage(ImageSource.gallery);
-                  Navigator.of(context).pop();
-                },
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.photo_library, size: 50),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _pickImage(ImageSource.gallery);
+                    },
+                  ),
+                  Text(
+                    'Gallery',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
               ),
-              ListTile(
-                leading: const Icon(Icons.photo_camera),
-                title: const Text('Camera'),
-                onTap: () {
-                  _pickImage(ImageSource.camera);
-                  Navigator.of(context).pop();
-                },
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt, size: 50),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _pickImage(ImageSource.camera);
+                    },
+                  ),
+                  Text(
+                    'Camera',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
               ),
             ],
           ),
         );
       },
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.3,
+      ),
     );
   }
 
@@ -85,36 +116,34 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-          onTap: _showPickerDialog,
-          child: Container(
-            height: widget.height,
-            width: widget.width,
-            decoration: BoxDecoration(
-              color: widget.backgroundColor,
-              borderRadius: widget.borderRadius,
-              border: Border.all(
-                color:
-                    widget.controller.file == null && widget.errorText != null
-                        ? Colors.red
-                        : Colors.transparent,
+          onTap: () {
+            _showImageSourceActionSheet(context);
+          },
+          child: DottedBorder(
+            color: Colors.black,
+            dashPattern: [10, 4],
+            borderType: BorderType.RRect,
+            radius: Radius.circular(8),
+            child: Container(
+              height: widget.height,
+              width: widget.width,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: widget.borderRadius,
               ),
-            ),
-            child: ClipRRect(
-              borderRadius: widget.borderRadius,
-              child: widget.controller.file == null
-                  ? Center(child: Text(widget.title))
-                  : Image.file(widget.controller.file!, fit: BoxFit.cover),
+              child: ClipRRect(
+                borderRadius: widget.borderRadius,
+                child: widget.controller.file == null
+                    ? Center(
+                        child: Icon(
+                        Icons.add_a_photo,
+                        size: 40,
+                      ))
+                    : Image.file(widget.controller.file!, fit: BoxFit.cover),
+              ),
             ),
           ),
         ),
-        if (widget.controller.file == null && widget.errorText != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              widget.errorText!,
-              style: TextStyle(color: Colors.red, fontSize: 12),
-            ),
-          ),
       ],
     );
   }

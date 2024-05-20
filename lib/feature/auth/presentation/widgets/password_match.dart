@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mae_ban/core/constants/size.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
-import 'package:mae_ban/feature/auth/persentation/widgets/password_text_form_field.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/password_text_form_field.dart';
 
 class PasswordMatch extends StatelessWidget {
   const PasswordMatch({
@@ -23,14 +23,14 @@ class PasswordMatch extends StatelessWidget {
           labelText: MTexts.password,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please enter a password';
+              return MTexts.plsenterpassword;
             }
             return null;
           },
           showSuffixIcon:
               true, // Set to false if you don't want to show the icon
           icon: const Icon(Icons.lock), // Example icon
-          error: 'Please enter a password',
+          error: MTexts.plsenterpassword,
         ),
         const Gap(MSize.spaceBtwItems),
         PasswordTextFormField(
@@ -38,17 +38,17 @@ class PasswordMatch extends StatelessWidget {
           labelText: MTexts.confirmPassword,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please confirm your password';
+              return MTexts.confirmPassword;
             }
             if (value != passwordController.text) {
-              return 'Passwords do not match';
+              return MTexts.passwordsdonotmatch;
             }
             return null;
           },
           showSuffixIcon:
               true, // Set to false if you don't want to show the icon
           icon: const Icon(Icons.lock), // Example icon
-          error: 'Please confirm your password',
+          error: MTexts.confirmPassword,
         ),
       ],
     );

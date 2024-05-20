@@ -9,8 +9,9 @@ import 'package:mae_ban/core/constants/size.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/core/utils/show_snackbar.dart';
 import 'package:mae_ban/core/widgets/loader.dart';
-import 'package:mae_ban/feature/auth/persentation/bloc/auth_bloc.dart';
-import 'package:mae_ban/feature/auth/persentation/widgets/password_text_form_field.dart';
+import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/password_text_form_field.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/text_form_field.dart';
 import 'package:mae_ban/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               showSnackBar(
                   backgroundColor: Colors.lightGreen,
                   context,
-                  'Login successful');
+                  MTexts.signUpSuccess);
               await sharedPreferences.setString(
                   'accessToken', state.authResponse?.accessToken ?? '');
               await sharedPreferences.setString(
@@ -96,18 +97,11 @@ class _LoginPageState extends State<LoginPage> {
                             textAlign: TextAlign.start,
                           ),
                           const Gap(MSize.spaceBtwItems),
-                          TextFormField(
+                          CustomTextFormField(
                             controller: usernameController,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.phone),
-                              labelText: MTexts.phoneNumber,
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter a phone number';
-                              }
-                              return null;
-                            },
+                            labelText: MTexts.phoneNumber,
+                            prefixIcon: const Icon(Icons.phone),
+                            errorText: MTexts.pleaseenteryourphonenumber,
                           ),
                           const Gap(MSize.spaceBtwSections),
                           Text(
@@ -125,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                           PasswordTextFormField(
                             controller: passwordController,
                             labelText: MTexts.password,
-                            error: 'Please enter a password',
+                            error: MTexts.plsenterpassword,
                             icon: const Icon(Icons.lock),
                           ),
                           Row(

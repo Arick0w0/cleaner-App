@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		EbqT4F375rV7IsvCBi63oPb720A=
+		PHY9svnJL7qgy2KDCmMFlHuvUYs=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,15 +54,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		d9AF0/gRbenCrIQ9fD8OaQc3Lww=
+		4veelqMscxlXcIptkauOiVrMm+E=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
-		rdbTRzurM1+Wc+8NcOkUIT98foA=
+		LHnyVnpHJZYJai3RsZ7up6lG99c=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		X0rIM/+RTCJhnYWzDP3KohyF3ZY=
+		kg9t9eNsFYZX40B6yA1UcdOQmSE=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		8tgBl8sbew9WAsegnkqJRWuKDbc=
+		+iVZg6A0s8puN1VHDoExAepq1lM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/NotoSansLao-Bold.ttf</key>
 		<data>
@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		I/LfXRrw/tD2reRLMzYLJJ3V/IA=
+		46O1QK8YrwyZ567dcLKzExCFTCI=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -252,6 +252,26 @@
 		<data>
 		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
 		</data>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<data>
+		4XF1V8ez3Ajm/96N9mmq++cZHO0=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		P6vsqLo8ovZh6ATcc4Uh58X45nw=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<data>
+		lVl42NUtBq0weRBX4bbkvGP+INU=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/Info.plist</key>
+		<data>
+		xgBHpAMjtHWdta8I4fsAb3VIAtA=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
+		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
 		<data>
 		urhFbnhIcPtSgp6XTQDdbL2oCSU=
@@ -357,7 +377,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GRDyjJ01gJBC+/XjhxJIA4ngHPwfs8lsk0YI5VE9gPs=
+			bnobt/Gn04yawZutrwgKSt8gGRRp6ejJUH+qNyiDSEM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -371,21 +391,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			hFpTvbzvH7jh5XHaKQ/r7yrh9+OBsFpCb6C0fj/wU4M=
+			3B9EBRLYl1OR0WLtZJFn0kQ74q4RbN9J1yq3TMmNhA8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3rvvHrkCpKg1E4O6aOsb/W+ND6ywcy5kaK7+LCQDpy8=
+			lAOS6odjVe88ois1eP4ylrX6MYTXvMT6wmE6bo8g6fc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7zl0ouQ4FvCHs8apnMGzjFkQyoaD0vSA31zGlRr3CIw=
+			EKc/qSxrNM425gf05yjRpVgmfbgNqRK4b83EvfqLSC0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
@@ -399,7 +419,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			hYL1BalYAvWFiVjDyHny8wBt8j4ec+TX+gIODC27Pvo=
+			LGLXu0wyN+uEUpy8IQhcmCCc9Hjt36eQ5uzA6deRfZ0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/NotoSansLao-Bold.ttf</key>
@@ -469,7 +489,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wZqgo7x5+ZVQDQHBGsmg/q5vcSFNNC6bMcXKh7FdhZ8=
+			8sT2BlnQ5YYhWULws34KCBdAy2i8JkDq+FVQbFhtKUE=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -711,6 +731,41 @@
 			</data>
 		</dict>
 		<key>Frameworks/image_picker_ios.framework/image_picker_ios_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xTKrASlF61DNxI260a7s/b5JH8g3+bK0ED2Qb+YIDoI=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0vRqKI4znPtrpKLAdx41xsNBiR1HiFCjsmTNs2TEwyU=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Ljbf8Nl43jLepb1Knztp/LA8mK7vvrquXk/OBO7UPsE=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0mxV8dQKVrKIyRxvKdQK1Xz4FEfIKfvBKjfh1TGnCHs=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation_privacy.bundle/PrivacyInfo.xcprivacy</key>
 		<dict>
 			<key>hash2</key>
 			<data>

@@ -12,7 +12,8 @@ class ApiService {
 
   ApiService({
     required this.client,
-    this.baseUrl = 'http://192.168.100.73:7070/auth-service/api/v1/auth',
+    this.baseUrl = 'http://54.179.166.162:7070/auth-service/api/v1/auth',
+    // 'http://192.168.100.73:7070/auth-service/api/v1/auth',
   });
 
   Future<void> signupJobOffer(JobOfferModel jobOffer) async {
@@ -63,7 +64,7 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
-        // print('Login response: $jsonResponse'); // Debugging line
+        print('Login response: $jsonResponse'); // Debugging line
         final authResponse = AuthResponseModel.fromJson(jsonResponse);
         print('Parsed role: ${authResponse.role}'); // Debugging line
         return authResponse;

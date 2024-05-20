@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:mae_ban/core/theme/them.dart';
 import 'package:mae_ban/service_locator.dart' as di;
-import 'package:mae_ban/feature/auth/persentation/bloc/auth_bloc.dart';
+import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'app_routes.dart';
 import 'core/theme/them.dart';
 

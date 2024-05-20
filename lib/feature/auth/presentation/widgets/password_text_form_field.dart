@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mae_ban/feature/auth/persentation/bloc/obscure_text_bloc.dart';
+import 'package:mae_ban/feature/auth/presentation/bloc/obscure_text_bloc.dart';
 
 class PasswordTextFormField extends StatelessWidget {
   final TextEditingController controller;

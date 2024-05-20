@@ -7,7 +7,7 @@ import 'package:mae_ban/feature/auth/domain/repositories/auth_repository.dart';
 import 'package:mae_ban/feature/auth/domain/usecases/login.dart';
 import 'package:mae_ban/feature/auth/domain/usecases/signup_job_hunter.dart';
 import 'package:mae_ban/feature/auth/domain/usecases/signup_job_offer.dart';
-import 'package:mae_ban/feature/auth/persentation/bloc/auth_bloc.dart';
+import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;

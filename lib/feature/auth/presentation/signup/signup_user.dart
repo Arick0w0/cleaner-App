@@ -5,11 +5,11 @@ import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/core/constants/size.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/core/utils/show_snackbar.dart';
-
 import 'package:mae_ban/core/widgets/loader.dart';
 import 'package:mae_ban/feature/auth/data/models/job_offer_model.dart';
 import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
-
+import 'package:mae_ban/feature/auth/presentation/bloc/obscure_text_bloc.dart';
+import 'package:mae_ban/feature/auth/presentation/widgets/gender_selection_widget.dart';
 import 'package:mae_ban/feature/auth/presentation/widgets/password_match.dart';
 import 'package:mae_ban/feature/auth/presentation/widgets/text_form_field.dart';
 import 'package:mae_ban/service_locator.dart';
@@ -30,18 +30,38 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  String gender = 'MALE';
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<AuthBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<AuthBloc>()),
+        BlocProvider(create: (_) => GenderSelectionCubit()),
+      ],
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthFailure) {
-            showSnackBar(context, 'Signup failed: ${state.error}');
+            showSnackBar(
+              context,
+              'Signup failed: ${state.error}',
+              backgroundColor: Colors.red,
+            );
           } else if (state is AuthSuccess) {
-            showSnackBar(context, 'Signup successful');
+            showSnackBar(
+              context,
+              MTexts.signUpSuccess,
+              backgroundColor: Colors.green,
+            );
             context.go('/home-job-offer');
           }
         },
@@ -73,45 +93,18 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
                         controller: firstNameController,
                         labelText: MTexts.firstName,
                         prefixIcon: const Icon(Icons.person),
-                        errorText: 'Please enter your first name',
+                        errorText: MTexts.pleaseenteryourfirstname,
                       ),
                       const Gap(MSize.spaceBtwItems),
                       CustomTextFormField(
                         controller: lastNameController,
                         labelText: MTexts.lastName,
                         prefixIcon: const Icon(Icons.person),
-                        errorText: 'Please enter your last name',
+                        errorText: MTexts.pleaseenteryourlastname,
                       ),
-                      // const Gap(MSize.spaceBtwItems),
-                      Row(
-                        children: [
-                          Radio<String>(
-                            // focusColor: MColors.secondary,
-                            fillColor:
-                                MaterialStateProperty.all(MColors.secondary),
-                            value: 'MALE',
-                            groupValue: gender,
-                            onChanged: (String? value) {
-                              setState(() {
-                                gender = value!;
-                              });
-                            },
-                          ),
-                          const Text(MTexts.men),
-                          Radio<String>(
-                            value: 'FEMALE',
-                            fillColor:
-                                MaterialStateProperty.all(MColors.secondary),
-                            groupValue: gender,
-                            onChanged: (String? value) {
-                              setState(() {
-                                gender = value!;
-                              });
-                            },
-                          ),
-                          const Text(MTexts.women),
-                        ],
-                      ),
+                      const Gap(MSize.spaceBtwItems),
+                      const GenderSelectionWidget(),
+                      const Gap(MSize.defaultSpace),
                       Text(
                         MTexts.loginPassword,
                         style: Theme.of(context).textTheme.bodyLarge,
@@ -121,7 +114,10 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
                         controller: usernameController,
                         labelText: MTexts.phoneNumber,
                         prefixIcon: const Icon(Icons.phone),
-                        errorText: 'Please enter your phone number',
+                        keyboardType: TextInputType.phone,
+                        errorText: MTexts.pleaseenteryourphonenumber,
+
+                        prefix: '20', // Set the prefix to 020
                       ),
                       const Gap(MSize.spaceBtwItems),
                       PasswordMatch(
@@ -135,6 +131,11 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+                              final gender =
+                                  context.read<GenderSelectionCubit>().state;
+                              print(
+                                  'Selected Gender: $gender'); // Debug statement
+
                               final jobOffer = JobOfferModel(
                                 username: usernameController.text,
                                 password: passwordController.text,
@@ -142,6 +143,9 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
                                 lastName: lastNameController.text,
                                 gender: gender,
                               );
+
+                              print('JobOffer: $jobOffer'); // Debug statement
+
                               context
                                   .read<AuthBloc>()
                                   .add(SignupJobOfferEvent(jobOffer));
@@ -178,7 +182,7 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
