@@ -1,4 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class DateTextInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final text = newValue.text
+        .replaceAll(RegExp(r'[^0-9]'), ''); // Remove non-digit characters
+    if (text.length > 8) return oldValue; // Limit to 8 digits (ddmmyyyy)
+
+    final buffer = StringBuffer();
+    for (int i = 0; i < text.length; i++) {
+      if (i == 2 || i == 4) buffer.write('-');
+      buffer.write(text[i]);
+    }
+
+    final newText = buffer.toString();
+    return TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: newText.length),
+    );
+  }
+}
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -6,19 +29,23 @@ class CustomTextFormField extends StatelessWidget {
   final Icon prefixIcon;
   final String errorText;
   final String? Function(String?)? validator;
-  final TextInputType keyboardType; // Add this line
-  final String prefix; // Add this line
+  final TextInputType keyboardType;
+  final String prefix;
+  final bool enableDatePicker; // Add this line to enable/disable the formatter
+  final VoidCallback? onTap;
 
   CustomTextFormField({
-    super.key,
+    Key? key,
     required this.controller,
     required this.labelText,
     required this.prefixIcon,
     required this.errorText,
-    this.keyboardType = TextInputType.text, // Default to text if not provided
+    this.keyboardType = TextInputType.text,
     this.validator,
-    this.prefix = '', // Default prefix to empty string
-  }) {
+    this.prefix = '',
+    this.enableDatePicker = false,
+    this.onTap,
+  }) : super(key: key) {
     // Initialize the controller with the prefix
     controller.text = prefix;
     controller.addListener(() {
@@ -49,6 +76,10 @@ class CustomTextFormField extends StatelessWidget {
         return validator?.call(value);
       },
       keyboardType: keyboardType,
+      inputFormatters: enableDatePicker
+          ? [DateTextInputFormatter(), LengthLimitingTextInputFormatter(10)]
+          : null,
+      onTap: onTap,
     );
   }
 }

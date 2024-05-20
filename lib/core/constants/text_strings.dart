@@ -56,7 +56,7 @@ class MTexts {
   static const String men = "ຊາຍ";
   static const String women = "ຍິງ";
   static const String signUpSuccess = "ລົງທະບຽນ ສໍາເລັດ!";
-  static const String date = "ວວ-ດດ-ປປ";
+  static const String date = "ວວ-ດດ-ປປປປ";
 
 // static const String mCancel = "ຍົກເລີກ";
 // Error Messages
@@ -65,7 +65,7 @@ class MTexts {
   static const String pleaseenteryourphonenumber = "ກະລຸນາໃສ່ເບີໂທ";
   static const String pleaseenteryourpassword = "ກະລຸນາໃສ່ລະຫັດຜ່ານ";
   // static const String confirmpassword = "ຢືນຢັນລະຫັດຜ່ານຢືນຢັນ";
-  static const String pleaseenteryourbirthday = "ກະລຸນາໃສ່ ວວ-ດດ-ປປ";
+  static const String pleaseenteryourbirthday = "ກະລຸນາໃສ່ ວວ-ດດ-ປປປປ";
   static const String pleaseenteryourvillage = "ກະລຸນາໃສ່ບ້ານ";
   static const String pleaseenteryourdistrict = "ກະລຸນາໃສ່ເມືອງ";
   static const String pleaseenteryourprovince = "ກະລຸນາໃສ່ແຂວງ";

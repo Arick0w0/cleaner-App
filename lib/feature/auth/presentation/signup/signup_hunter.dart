@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mae_ban/core/constants/color.dart';
+// import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/core/constants/size.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/core/utils/show_snackbar.dart';
@@ -127,6 +127,9 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                         labelText: MTexts.date,
                         prefixIcon: const Icon(Icons.calendar_today),
                         errorText: MTexts.pleaseenteryourbirthday,
+                        keyboardType: TextInputType.phone,
+
+                        enableDatePicker: true, //enable for format yyyy-mm-dd
                       ),
                       const Gap(MSize.spaceBtwItems),
                       CustomTextFormField(
@@ -173,6 +176,9 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                         controller: usernameController,
                         labelText: MTexts.phoneNumber,
                         prefixIcon: const Icon(Icons.phone),
+                        keyboardType: TextInputType.phone,
+                        prefix: '20', // Set the prefix to 020
+
                         errorText: MTexts.pleaseenteryourphonenumber,
                       ),
                       const Gap(MSize.spaceBtwItems),

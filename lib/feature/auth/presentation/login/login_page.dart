@@ -101,6 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                             controller: usernameController,
                             labelText: MTexts.phoneNumber,
                             prefixIcon: const Icon(Icons.phone),
+                            prefix: '20', // Set the prefix to 020
+                            keyboardType: TextInputType.phone,
+
                             errorText: MTexts.pleaseenteryourphonenumber,
                           ),
                           const Gap(MSize.spaceBtwSections),
