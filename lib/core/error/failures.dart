@@ -9,6 +9,14 @@ abstract class Failure extends Equatable {
   List<Object> get props => [properties];
 }
 
+class InvalidCredentialsException implements Exception {
+  final String message;
+  InvalidCredentialsException(this.message);
+
+  @override
+  String toString() => message;
+}
+
 class ServerFailure extends Failure {}
 
 class CacheFailure extends Failure {}

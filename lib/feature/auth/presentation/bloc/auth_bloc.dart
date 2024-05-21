@@ -33,12 +33,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onSignupJobOffer(
       SignupJobOfferEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    print('AuthLoading emitted for SignupJobOfferEvent'); // Debugging line
+    logger.i('AuthLoading emitted for SignupJobOfferEvent'); // Debugging line
     try {
       await signupJobOffer.execute(event.jobOffer);
       // await _storeAuthState(event.jobOffer.username, 'JOB_OFFER');
       emit(AuthSuccess(null));
-      print('AuthSuccess emitted for SignupJobOfferEvent'); // Debugging line
+      logger.i('AuthSuccess emitted for SignupJobOfferEvent'); // Debugging line
     } catch (e) {
       emit(AuthFailure(e.toString()));
       logger.e(
@@ -49,12 +49,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onSignupJobHunter(
       SignupJobHunterEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    print('AuthLoading emitted for SignupJobHunterEvent'); // Debugging line
+    logger.i('AuthLoading emitted for SignupJobHunterEvent'); // Debugging line
     try {
       await signupJobHunter.execute(event.jobHunter);
       // await _storeAuthState(event.jobHunter.username, 'JOB_HUNTER');
       emit(AuthSuccess(null));
-      print('AuthSuccess emitted for SignupJobHunterEvent'); // Debugging line
+      logger
+          .i('AuthSuccess emitted for SignupJobHunterEvent'); // Debugging line
     } catch (e) {
       emit(AuthFailure(e.toString()));
       logger.e(
@@ -64,13 +65,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    print('AuthLoading emitted for LoginEvent'); // Debugging line
+    logger.i('AuthLoading emitted for LoginEvent'); // Debugging line
     try {
       final authResponse = await login.execute(event.username, event.password);
       await _storeAuthState(
           event.username, authResponse.role, authResponse.accessToken);
       emit(AuthSuccess(authResponse));
-      print(
+      logger.i(
           'AuthSuccess emitted for LoginEvent with role: ${authResponse.role}'); // Debugging line
     } catch (e) {
       emit(AuthFailure(e.toString()));

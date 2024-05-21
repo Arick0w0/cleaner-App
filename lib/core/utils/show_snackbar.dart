@@ -28,7 +28,12 @@ void showSnackBar(BuildContext context, String content,
     ..hideCurrentSnackBar()
     ..showSnackBar(
       SnackBar(
-        content: Text(content),
+        content: Text(
+          content,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+              ),
+        ),
         backgroundColor: backgroundColor,
       ),
     );

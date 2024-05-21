@@ -7,6 +7,9 @@ class MColors {
   static const Color accent = Color(0xFF33C6C2); //button
   static const Color lights = Color(0xFF2EB1AE); //button
 
+// snackbar
+  static const Color emerald = Color(0xFF32DE84);
+  static const Color indianred = Color(0xFFE35959);
   // Background Colors
   static const Color light = Color(0xFFF6F6F6);
   static const Color dark = Color(0xFF272727);

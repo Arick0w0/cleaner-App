@@ -41,11 +41,14 @@ class _LoginPageState extends State<LoginPage> {
         body: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) async {
             if (state is AuthFailure) {
-              showSnackBar(context, 'Login failed: ${state.error}',
-                  backgroundColor: Colors.red.shade400);
+              showSnackBar(
+                context,
+                'Login failed: ${state.error}',
+                backgroundColor: MColors.indianred,
+              );
             } else if (state is AuthSuccess) {
               showSnackBar(
-                  backgroundColor: Colors.lightGreen,
+                  backgroundColor: MColors.emerald,
                   context,
                   MTexts.signUpSuccess);
               await sharedPreferences.setString(
@@ -101,9 +104,9 @@ class _LoginPageState extends State<LoginPage> {
                             controller: usernameController,
                             labelText: MTexts.phoneNumber,
                             prefixIcon: const Icon(Icons.phone),
-                            prefix: '20', // Set the prefix to 020
+                            usePrefix: true, // Set the prefix to 020
                             keyboardType: TextInputType.phone,
-
+                            useMaxLength: true, // Enable max length
                             errorText: MTexts.pleaseenteryourphonenumber,
                           ),
                           const Gap(MSize.spaceBtwSections),
@@ -149,9 +152,12 @@ class _LoginPageState extends State<LoginPage> {
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
+                                  final usernameWithPrefix =
+                                      '20${usernameController.text}';
                                   context.read<AuthBloc>().add(
                                         LoginEvent(
-                                          usernameController.text,
+                                          // usernameController.text,
+                                          usernameWithPrefix,
                                           passwordController.text,
                                         ),
                                       );

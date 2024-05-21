@@ -54,13 +54,13 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
             showSnackBar(
               context,
               'Signup failed: ${state.error}',
-              backgroundColor: Colors.red,
+              backgroundColor: MColors.indianred,
             );
           } else if (state is AuthSuccess) {
             showSnackBar(
               context,
               MTexts.signUpSuccess,
-              backgroundColor: Colors.green,
+              backgroundColor: MColors.emerald,
             );
             context.go('/home-job-offer');
           }
@@ -116,8 +116,8 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
                         prefixIcon: const Icon(Icons.phone),
                         keyboardType: TextInputType.phone,
                         errorText: MTexts.pleaseenteryourphonenumber,
-
-                        prefix: '20', // Set the prefix to 020
+                        useMaxLength: true,
+                        usePrefix: true, // Show prefix
                       ),
                       const Gap(MSize.spaceBtwItems),
                       PasswordMatch(
@@ -131,13 +131,15 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+                              final usernameWithPrefix =
+                                  '20${usernameController.text}';
                               final gender =
                                   context.read<GenderSelectionCubit>().state;
                               print(
                                   'Selected Gender: $gender'); // Debug statement
 
                               final jobOffer = JobOfferModel(
-                                username: usernameController.text,
+                                username: usernameWithPrefix,
                                 password: passwordController.text,
                                 firstName: firstNameController.text,
                                 lastName: lastNameController.text,

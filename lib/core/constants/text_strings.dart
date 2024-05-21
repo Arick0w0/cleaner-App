@@ -64,7 +64,7 @@ class MTexts {
   static const String pleaseenteryourlastname = "ກະລຸນາໃສ່ນາມສະກຸນ";
   static const String pleaseenteryourphonenumber = "ກະລຸນາໃສ່ເບີໂທ";
   static const String pleaseenteryourpassword = "ກະລຸນາໃສ່ລະຫັດຜ່ານ";
-  // static const String confirmpassword = "ຢືນຢັນລະຫັດຜ່ານຢືນຢັນ";
+  static const String confirmpassword = "ຢືນຢັນລະຫັດຜ່ານຢືນຢັນ";
   static const String pleaseenteryourbirthday = "ກະລຸນາໃສ່ ວວ-ດດ-ປປປປ";
   static const String pleaseenteryourvillage = "ກະລຸນາໃສ່ບ້ານ";
   static const String pleaseenteryourdistrict = "ກະລຸນາໃສ່ເມືອງ";
@@ -74,7 +74,7 @@ class MTexts {
 
   static const String plsenterpassword = " ກະລຸນາໃສ່ລະຫັດຜ່ານ";
   static const String passwordsdonotmatch = "ລະຫັດຜ່ານບໍ່ຄືກັນ";
-  static const String plsselectimage = "ກະລຸນາເລືອກຮູບ ແລະ ປ້ອນຂໍ້ມູນ";
-
+  static const String plsselectimage = "ກະລຸນາເລືອກຮູບ ແລະ ປ້ອນຂໍ້ມູນໃຫ້ຄົບ";
+  static const String plsenterphonenumber = " ກະລຸນາປ່ອນເບີໂທຂອງທ່ານໃຫ້ຄົບ";
 //--- Home Screen Text
 }

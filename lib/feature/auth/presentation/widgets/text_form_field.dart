@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mae_ban/core/constants/text_strings.dart';
 
 class DateTextInputFormatter extends TextInputFormatter {
   @override
@@ -30,36 +31,26 @@ class CustomTextFormField extends StatelessWidget {
   final String errorText;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
-  final String prefix;
-  final bool enableDatePicker; // Add this line to enable/disable the formatter
+  final bool enableDatePicker;
   final VoidCallback? onTap;
+  final bool usePrefix;
+  final bool useMaxLength;
+  final int maxLength;
 
-  CustomTextFormField({
-    Key? key,
+  const CustomTextFormField({
+    super.key,
     required this.controller,
     required this.labelText,
     required this.prefixIcon,
     required this.errorText,
     this.keyboardType = TextInputType.text,
     this.validator,
-    this.prefix = '',
     this.enableDatePicker = false,
     this.onTap,
-  }) : super(key: key) {
-    // Initialize the controller with the prefix
-    controller.text = prefix;
-    controller.addListener(() {
-      // Ensure the prefix is maintained
-      if (!controller.text.startsWith(prefix)) {
-        final cursorPosition = controller.selection;
-        controller.text = prefix + controller.text.replaceFirst(prefix, '');
-        controller.selection = cursorPosition.copyWith(
-          baseOffset: cursorPosition.baseOffset + prefix.length,
-          extentOffset: cursorPosition.extentOffset + prefix.length,
-        );
-      }
-    });
-  }
+    this.usePrefix = false,
+    this.useMaxLength = false,
+    this.maxLength = 8,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,17 +59,23 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         labelText: labelText,
+        prefixText: usePrefix ? '20 ' : null, // Show prefix 20
       ),
       validator: (value) {
-        if (value == null || value.isEmpty || value == prefix) {
+        if (value == null || value.isEmpty) {
           return errorText;
+        }
+        if (useMaxLength && value.length != maxLength) {
+          // return 'ກະລຸນາປ່ອນເບີໂທຂອງທ່ານໃຫ້ຄົບ  $maxLength ';
+          return MTexts.plsenterphonenumber;
         }
         return validator?.call(value);
       },
       keyboardType: keyboardType,
-      inputFormatters: enableDatePicker
-          ? [DateTextInputFormatter(), LengthLimitingTextInputFormatter(10)]
-          : null,
+      inputFormatters: [
+        if (useMaxLength) LengthLimitingTextInputFormatter(maxLength),
+        if (enableDatePicker) DateTextInputFormatter(),
+      ],
       onTap: onTap,
     );
   }

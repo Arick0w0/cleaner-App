@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mae_ban/core/constants/color.dart';
 // import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/core/constants/size.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
@@ -55,21 +56,24 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
             showSnackBar(
               context,
               'Signup failed: ${state.error}',
-              backgroundColor: Colors.red,
+              backgroundColor: MColors.indianred,
             );
           } else if (state is AuthSuccess) {
-            showSnackBar(context, MTexts.signUpSuccess,
-                backgroundColor: Colors.green);
+            showSnackBar(
+              context,
+              MTexts.signUpSuccess,
+              backgroundColor: MColors.emerald,
+            );
             context.go('/home-job-hunter');
           }
         },
         builder: (context, state) {
           if (state is AuthLoading) {
-            return Loader();
+            return const Loader();
           }
           return Scaffold(
             appBar: AppBar(
-              title: Text(MTexts.signUpHunter),
+              title: const Text(MTexts.signUpHunter),
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -177,8 +181,8 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                         labelText: MTexts.phoneNumber,
                         prefixIcon: const Icon(Icons.phone),
                         keyboardType: TextInputType.phone,
-                        prefix: '20', // Set the prefix to 020
-
+                        usePrefix: true, // Show prefix // Set the prefix to 020
+                        useMaxLength: true,
                         errorText: MTexts.pleaseenteryourphonenumber,
                       ),
                       const Gap(MSize.spaceBtwItems),
@@ -196,6 +200,8 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                                 photoIdController.file != null) {
                               final gender =
                                   context.read<GenderSelectionCubit>().state;
+                              final usernameWithPrefix =
+                                  '20${usernameController.text}';
                               final address = AddressModel(
                                 village: villageController.text,
                                 district: districtController.text,
@@ -203,7 +209,7 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                               );
 
                               final jobHunter = JobHunterModel(
-                                username: usernameController.text,
+                                username: usernameWithPrefix,
                                 password: passwordController.text,
                                 firstName: firstNameController.text,
                                 lastName: lastNameController.text,
@@ -225,8 +231,7 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                               showSnackBar(
                                 context,
                                 MTexts.plsselectimage,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 226, 186, 86),
+                                backgroundColor: Colors.orange,
                               );
                             }
                           },
