@@ -53,7 +53,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     try {
       var response = await http.post(
         Uri.parse(
-            'http://127.0.0.1:7070/auth-service/api/v1/auth/generate-presigned-url'),
+            'http://54.179.166.162:7070/auth-service/api/v1/auth/generate-presigned-url'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'file_name': fileName}),
       );
