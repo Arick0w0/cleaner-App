@@ -218,8 +218,14 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                                 career: careerController.text,
                                 nationality: nationalityController.text,
                                 gender: gender,
-                                idCardImage: idCardController.file!.path,
-                                selfImageIdCard: photoIdController.file!.path,
+                                idCardImage:
+                                    Uri.file(idCardController.file!.path)
+                                        .pathSegments
+                                        .last,
+                                selfImageIdCard:
+                                    Uri.file(photoIdController.file!.path)
+                                        .pathSegments
+                                        .last,
                               );
 
                               print('JobHunter data: $jobHunter');
