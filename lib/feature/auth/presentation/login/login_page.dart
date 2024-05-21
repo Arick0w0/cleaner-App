@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
             if (state is AuthFailure) {
               showSnackBar(
                 context,
-                'Login failed: ${state.error}',
+                state.error,
                 backgroundColor: MColors.indianred,
               );
             } else if (state is AuthSuccess) {

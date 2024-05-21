@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
+import 'package:mae_ban/core/error/exceptions.dart';
 import 'package:mae_ban/feature/auth/data/models/auth_response_model.dart';
 import 'package:mae_ban/feature/auth/data/models/job_hunter_model.dart';
 import 'package:mae_ban/feature/auth/data/models/job_offer_model.dart';
@@ -34,6 +35,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       SignupJobOfferEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     logger.i('AuthLoading emitted for SignupJobOfferEvent'); // Debugging line
+
+    await Future.delayed(Duration(milliseconds: 1200)); // Add delay
     try {
       await signupJobOffer.execute(event.jobOffer);
       // await _storeAuthState(event.jobOffer.username, 'JOB_OFFER');
@@ -50,6 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       SignupJobHunterEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     logger.i('AuthLoading emitted for SignupJobHunterEvent'); // Debugging line
+    await Future.delayed(Duration(milliseconds: 1200)); // Add delay
     try {
       await signupJobHunter.execute(event.jobHunter);
       // await _storeAuthState(event.jobHunter.username, 'JOB_HUNTER');
@@ -63,9 +67,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+  // Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
+  //   emit(AuthLoading());
+  //   logger.i('AuthLoading emitted for LoginEvent'); // Debugging line
+  //   try {
+  //     final authResponse = await login.execute(event.username, event.password);
+  //     await _storeAuthState(
+  //         event.username, authResponse.role, authResponse.accessToken);
+  //     emit(AuthSuccess(authResponse));
+  //     logger.i(
+  //         'AuthSuccess emitted for LoginEvent with role: ${authResponse.role}'); // Debugging line
+  //   } catch (e) {
+  //     emit(AuthFailure(e.toString()));
+  //     // print( 'AuthFailure emitted for LoginEvent: ${e.toString()}'); // Debugging line
+  //     logger.e(
+  //         'AuthFailure emitted for LoginEvent: ${e.toString()}'); // Logging error
+  //   }
+  // }
+
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     logger.i('AuthLoading emitted for LoginEvent'); // Debugging line
+    await Future.delayed(Duration(milliseconds: 1200)); // Add delay
     try {
       final authResponse = await login.execute(event.username, event.password);
       await _storeAuthState(
@@ -73,9 +96,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthSuccess(authResponse));
       logger.i(
           'AuthSuccess emitted for LoginEvent with role: ${authResponse.role}'); // Debugging line
+    } on InvalidCredentialsException catch (e) {
+      emit(AuthFailure('Incorrect username or password'));
+      logger.e(
+          'AuthFailure emitted for LoginEvent: Incorrect username or password'); // Logging error
     } catch (e) {
       emit(AuthFailure(e.toString()));
-      // print( 'AuthFailure emitted for LoginEvent: ${e.toString()}'); // Debugging line
       logger.e(
           'AuthFailure emitted for LoginEvent: ${e.toString()}'); // Logging error
     }
@@ -83,6 +109,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
+
     try {
       final sharedPreferences = await SharedPreferences.getInstance();
       await sharedPreferences.clear();
