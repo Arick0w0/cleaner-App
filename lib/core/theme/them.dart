@@ -11,8 +11,8 @@ class MAppTheme {
     fontFamily: 'NotoSansLao',
     textTheme: MTextTheme.lightTextTheme,
     scaffoldBackgroundColor: MColors.primary,
+    // bottomSheetTheme: CustomBottomSheetTheme.theme,
     appBarTheme: MAppBarTheme.lightAppBarTheme,
-    bottomSheetTheme: MBottomSheetTheme.lightBottomSheetTheme,
     elevatedButtonTheme: MElevatedButtonTheme.lightElevatedButtonTheme,
     inputDecorationTheme: MTextFormFieldTheme.lightInputDecorationTheme,
   );

@@ -1,8 +1,9 @@
+// lib/feature/job_hunter/domain/entities/job_hunter.dart
 import 'package:equatable/equatable.dart';
+// import 'package:mae_ban/feature/shared/data/models/service_tpye.dart';
 
 class JobHunter extends Equatable {
   final String username;
-  final String password;
   final String firstName;
   final String lastName;
   final String gender;
@@ -12,10 +13,10 @@ class JobHunter extends Equatable {
   final Address address;
   final String career;
   final String nationality;
+  // final List<ServiceType> serviceTypes;
 
   JobHunter({
     required this.username,
-    required this.password,
     required this.firstName,
     required this.lastName,
     required this.gender,
@@ -25,12 +26,12 @@ class JobHunter extends Equatable {
     required this.address,
     required this.career,
     required this.nationality,
+    // required this.serviceTypes,
   });
 
   @override
   List<Object?> get props => [
         username,
-        password,
         firstName,
         lastName,
         gender,
@@ -40,6 +41,7 @@ class JobHunter extends Equatable {
         address,
         career,
         nationality,
+        // serviceTypes,
       ];
 }
 

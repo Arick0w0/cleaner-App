@@ -8,6 +8,9 @@ import 'package:mae_ban/feature/auth/domain/usecases/login.dart';
 import 'package:mae_ban/feature/auth/domain/usecases/signup_job_hunter.dart';
 import 'package:mae_ban/feature/auth/domain/usecases/signup_job_offer.dart';
 import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_bloc.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_bloc.dart';
+import 'package:mae_ban/feature/shared/data/services/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -20,6 +23,7 @@ Future<void> init() async {
 
   // Api Service
   sl.registerLazySingleton(() => ApiService(client: sl()));
+  sl.registerLazySingleton(() => ApiServiceGet());
 
   // Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
@@ -42,4 +46,8 @@ Future<void> init() async {
         signupJobHunter: sl(),
         login: sl(),
       ));
+
+  // Shared Blocs
+  sl.registerFactory(() => DataBloc(apiService: sl()));
+  sl.registerFactory(() => SelectionBloc());
 }

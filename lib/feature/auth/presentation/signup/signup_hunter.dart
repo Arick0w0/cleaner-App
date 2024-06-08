@@ -1,21 +1,32 @@
+import 'dart:convert'; // Add this import for jsonEncode
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mae_ban/core/constants/color.dart';
-// import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/core/constants/size.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/core/utils/show_snackbar.dart';
 import 'package:mae_ban/core/widgets/loader.dart';
+import 'package:mae_ban/feature/auth/data/models/address_model.dart';
 import 'package:mae_ban/feature/auth/data/models/job_hunter_model.dart';
 import 'package:mae_ban/feature/auth/presentation/bloc/obscure_text_bloc.dart';
 import 'package:mae_ban/feature/auth/presentation/widgets/gender_selection_widget.dart';
 import 'package:mae_ban/feature/auth/presentation/widgets/image_picker_widget.dart';
 import 'package:mae_ban/feature/auth/presentation/widgets/password_match.dart';
 import 'package:mae_ban/feature/auth/presentation/widgets/text_form_field.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:mae_ban/feature/shared/data/services/api_service.dart';
+import 'package:mae_ban/feature/shared/presentation/view/area_selector_view.dart';
+import 'package:mae_ban/feature/shared/presentation/view/province_selector_view.dart';
+import 'package:mae_ban/feature/shared/presentation/page/service_type_selector.dart';
+import 'package:mae_ban/feature/shared/presentation/view/service_type_selector_view.dart';
 import 'package:mae_ban/service_locator.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_bloc.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_state.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_event.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_bloc.dart';
 
 class SignUpHunterPage extends StatefulWidget {
   const SignUpHunterPage({super.key});
@@ -38,15 +49,70 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
   final TextEditingController provinceController = TextEditingController();
   final TextEditingController careerController = TextEditingController();
   final TextEditingController nationalityController = TextEditingController();
+  final TextEditingController serviceTypeController = TextEditingController();
 
   String gender = 'MALE';
   final ImagePickerController idCardController = ImagePickerController();
   final ImagePickerController photoIdController = ImagePickerController();
 
   @override
+  void initState() {
+    super.initState();
+
+    // Add listeners to controllers
+    usernameController
+        .addListener(() => print('Username: ${usernameController.text}'));
+    passwordController
+        .addListener(() => print('Password: ${passwordController.text}'));
+    firstNameController
+        .addListener(() => print('First Name: ${firstNameController.text}'));
+    lastNameController
+        .addListener(() => print('Last Name: ${lastNameController.text}'));
+    confirmPasswordController.addListener(
+        () => print('Confirm Password: ${confirmPasswordController.text}'));
+    birthDateController
+        .addListener(() => print('Birth Date: ${birthDateController.text}'));
+    villageController
+        .addListener(() => print('Village: ${villageController.text}'));
+    districtController
+        .addListener(() => print('District: ${districtController.text}'));
+    provinceController
+        .addListener(() => print('Province: ${provinceController.text}'));
+    careerController
+        .addListener(() => print('Career: ${careerController.text}'));
+    nationalityController
+        .addListener(() => print('Nationality: ${nationalityController.text}'));
+    serviceTypeController.addListener(
+        () => print('Service Type: ${serviceTypeController.text}'));
+  }
+
+  @override
+  void dispose() {
+    // Dispose controllers
+    usernameController.dispose();
+    passwordController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    confirmPasswordController.dispose();
+    birthDateController.dispose();
+    villageController.dispose();
+    districtController.dispose();
+    provinceController.dispose();
+    careerController.dispose();
+    nationalityController.dispose();
+    serviceTypeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) =>
+              DataBloc(apiService: sl<ApiServiceGet>())..add(FetchData()),
+        ),
+        BlocProvider(create: (context) => SelectionBloc()),
         BlocProvider(create: (_) => sl<AuthBloc>()),
         BlocProvider(create: (_) => GenderSelectionCubit()),
       ],
@@ -92,10 +158,7 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                       ),
                       const Gap(MSize.spaceBtwItems),
                       ImagePickerWidget(
-                        // title: 'Tap to select ID Card Image',
                         controller: idCardController,
-                        // backgroundColor: MColors.primary,
-                        // errorText: 'Please select an ID Card Image',
                       ),
                       const Gap(MSize.spaceBtwItems),
                       Text(
@@ -104,10 +167,7 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                       ),
                       const Gap(MSize.spaceBtwItems),
                       ImagePickerWidget(
-                        // title: 'Tap to select Photo ID',
                         controller: photoIdController,
-                        // backgroundColor: MColors.primary,
-                        // errorText: 'Please select a Photo ID',
                       ),
                       const Gap(MSize.spaceBtwItems),
                       const GenderSelectionWidget(),
@@ -132,8 +192,15 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                         prefixIcon: const Icon(Icons.calendar_today),
                         errorText: MTexts.pleaseenteryourbirthday,
                         keyboardType: TextInputType.phone,
-
-                        enableDatePicker: true, //enable for format yyyy-mm-dd
+                        enableDatePicker: true, // enable for format yyyy-mm-dd
+                      ),
+                      const Gap(MSize.spaceBtwItems),
+                      ProvinceSelectorView(
+                        provinceController: provinceController,
+                      ),
+                      const Gap(MSize.spaceBtwItems),
+                      AreaSelectorView(
+                        areaController: districtController,
                       ),
                       const Gap(MSize.spaceBtwItems),
                       CustomTextFormField(
@@ -144,23 +211,9 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                       ),
                       const Gap(MSize.spaceBtwItems),
                       CustomTextFormField(
-                        controller: districtController,
-                        labelText: MTexts.district,
-                        prefixIcon: const Icon(Icons.location_city),
-                        errorText: MTexts.pleaseenteryourdistrict,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      CustomTextFormField(
-                        controller: provinceController,
-                        labelText: MTexts.province,
-                        prefixIcon: const Icon(Icons.location_city_sharp),
-                        errorText: MTexts.pleaseenteryourprovince,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      CustomTextFormField(
                         controller: careerController,
                         labelText: MTexts.career,
-                        prefixIcon: const Icon(Icons.person),
+                        prefixIcon: const Icon(Icons.work),
                         errorText: MTexts.pleaseenteryourcareer,
                       ),
                       const Gap(MSize.spaceBtwItems),
@@ -170,6 +223,30 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                         prefixIcon: const Icon(Icons.flag),
                         errorText: MTexts.pleaseenteryournationality,
                       ),
+                      const Gap(MSize.spaceBtwItems),
+                      Text(
+                        'ເລືອກປະເພດບໍລິການ',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const Gap(MSize.spaceBtwItems),
+                      // BlocBuilder<DataBloc, DataState>(
+                      //   builder: (context, dataState) {
+                      //     if (dataState is DataLoaded) {
+                      //       return ServiceTypeSelectionField(
+                      //         serviceTypes: dataState.serviceTypes,
+                      //         serviceTypeController: serviceTypeController,
+                      //       );
+                      //     } else if (dataState is DataLoading) {
+                      //       return Center(child: CircularProgressIndicator());
+                      //     } else if (dataState is DataError) {
+                      //       return Center(
+                      //           child: Text('Error: ${dataState.message}'));
+                      //     }
+                      //     return Container();
+                      //   },
+                      // ),
+                      ServiceTypeSelectorView(
+                          serviceTypeController: serviceTypeController),
                       const Gap(MSize.spaceBtwItems),
                       Text(
                         MTexts.loginPassword,
@@ -208,6 +285,11 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                                 province: provinceController.text,
                               );
 
+                              final selectedServiceTypes = context
+                                  .read<SelectionBloc>()
+                                  .state
+                                  .selectedServiceTypes;
+
                               final jobHunter = JobHunterModel(
                                 username: usernameWithPrefix,
                                 password: passwordController.text,
@@ -226,9 +308,11 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                                     Uri.file(photoIdController.file!.path)
                                         .pathSegments
                                         .last,
+                                serviceTypes: selectedServiceTypes,
                               );
 
-                              print('JobHunter data: $jobHunter');
+                              print(
+                                  'JobHunter data: ${jsonEncode(jobHunter.toJson())}');
 
                               context
                                   .read<AuthBloc>()

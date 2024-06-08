@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:mae_ban/feature/shared/data/models/service_type_model.dart';
+import 'address_model.dart';
 
 class JobHunterModel extends Equatable {
   final String username;
@@ -12,8 +14,9 @@ class JobHunterModel extends Equatable {
   final AddressModel address;
   final String career;
   final String nationality;
+  final List<ServiceTypeModel> serviceTypes;
 
-  JobHunterModel({
+  const JobHunterModel({
     required this.username,
     required this.password,
     required this.firstName,
@@ -25,6 +28,7 @@ class JobHunterModel extends Equatable {
     required this.address,
     required this.career,
     required this.nationality,
+    required this.serviceTypes,
   });
 
   Map<String, dynamic> toJson() {
@@ -40,6 +44,8 @@ class JobHunterModel extends Equatable {
       'address': address.toJson(),
       'career': career,
       'nationality': nationality,
+      'service_types':
+          serviceTypes.map((serviceType) => serviceType.toJson()).toList(),
     };
   }
 
@@ -56,28 +62,6 @@ class JobHunterModel extends Equatable {
         address,
         career,
         nationality,
+        serviceTypes,
       ];
-}
-
-class AddressModel extends Equatable {
-  final String village;
-  final String district;
-  final String province;
-
-  AddressModel({
-    required this.village,
-    required this.district,
-    required this.province,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'village': village,
-      'district': district,
-      'province': province,
-    };
-  }
-
-  @override
-  List<Object?> get props => [village, district, province];
 }

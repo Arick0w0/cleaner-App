@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:mae_ban/core/error/exceptions.dart';
+import 'package:mae_ban/core/secret/secret.dart';
 import 'package:mae_ban/feature/auth/data/models/auth_response_model.dart';
 import 'package:mae_ban/feature/auth/data/models/job_hunter_model.dart';
 import 'dart:convert';
@@ -11,13 +12,13 @@ class ApiService {
   final http.Client client;
   final String baseUrl;
 
-  ApiService({
-    required this.client,
-    this.baseUrl =
-        //
-        'http://54.179.166.162:7070/auth-service/api/v1/auth',
-    // 'http://192.168.100.73:7070/auth-service/api/v1/auth',
-  });
+  ApiService(
+      {required this.client,
+      this.baseUrl =
+          //
+          Config.api
+      // 'http://192.168.100.73:7070/auth-service/api/v1/auth',
+      });
 
   Future<void> signupJobOffer(JobOfferModel jobOffer) async {
     try {

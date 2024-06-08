@@ -194,7 +194,37 @@ class _LoginPageState extends State<LoginPage> {
                                 ])),
                               ),
                             ],
-                          )
+                          ),
+                          const Gap(MSize.defaultSpace),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  context.push('/sign-up-job-hunter');
+                                },
+                                child: Text.rich(
+                                  TextSpan(
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                    children: [
+                                      const TextSpan(
+                                        text: MTexts.doYouWantTosigUpHunter,
+                                      ),
+                                      TextSpan(
+                                        text: MTexts.hunter,
+                                        style: const TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationColor: MColors.accent,
+                                        ).copyWith(color: MColors.accent),
+                                      ),
+                                      const TextSpan(text: MTexts.sure),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       )
                     ],

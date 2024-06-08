@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:mae_ban/core/theme/them.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_bloc.dart';
+import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_bloc.dart';
 import 'package:mae_ban/service_locator.dart' as di;
 import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'app_routes.dart';
@@ -23,6 +24,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (context) => di.sl<AuthBloc>(),
         ),
+        // BlocProvider<DataBloc>(
+        //   create: (context) => di.sl<DataBloc>(),
+        // ),
+        // BlocProvider<SelectionBloc>(
+        //   create: (context) => di.sl<SelectionBloc>(),
+        // ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

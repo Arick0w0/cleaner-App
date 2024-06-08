@@ -9,7 +9,7 @@ class MTextFormFieldTheme {
     prefixIconColor: MColors.secondary,
     suffixIconColor: Colors.grey,
     labelStyle:
-        const TextStyle().copyWith(fontSize: 14, color: MColors.secondary),
+        const TextStyle().copyWith(fontSize: 14, color: MColors.darkGrey),
     hintStyle:
         const TextStyle().copyWith(fontSize: 14, color: MColors.secondary),
     floatingLabelBehavior: FloatingLabelBehavior.auto, // text animations
