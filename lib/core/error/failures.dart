@@ -7,6 +7,18 @@ abstract class Failure extends Equatable {
 
   @override
   List<Object> get props => [properties];
+
+  String get message => 'An unexpected error occurred';
+}
+
+class ServerFailure extends Failure {
+  @override
+  String get message => 'Server Failure';
+}
+
+class CacheFailure extends Failure {
+  @override
+  String get message => 'Cache Failure';
 }
 
 class InvalidCredentialsException implements Exception {
@@ -16,7 +28,3 @@ class InvalidCredentialsException implements Exception {
   @override
   String toString() => message;
 }
-
-class ServerFailure extends Failure {}
-
-class CacheFailure extends Failure {}

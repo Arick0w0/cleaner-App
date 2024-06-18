@@ -6,8 +6,8 @@ import 'package:mae_ban/feature/shared/data/models/service_type_model.dart';
 
 class ApiServiceGet {
   Future<List<ServiceTypeModel>> fetchServiceTypes() async {
-    final response = await http.get(Uri.parse(
-        'http://18.140.3.166:9393/app-service/api/v1/app/service-type'));
+    final response = await http
+        .get(Uri.parse('http://18.142.53.143:9393/api/v1/app/service-type'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(utf8.decode(response.bodyBytes))['data'];
@@ -20,8 +20,8 @@ class ApiServiceGet {
   }
 
   Future<List<Province>> fetchProvinces() async {
-    final response = await http
-        .get(Uri.parse('http://18.140.3.166:9393/app-service/api/v1/app/area'));
+    final response =
+        await http.get(Uri.parse('http://18.142.53.143:9393/api/v1/app/area'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(utf8.decode(response.bodyBytes))['data'];
@@ -35,7 +35,7 @@ class ApiServiceGet {
 
   Future<List<Area>> fetchAreasByProvince(String provinceCodeName) async {
     final response = await http.get(Uri.parse(
-        'http://18.140.3.166:9393/app-service/api/v1/app/area?area_code_name=&province_code_name=$provinceCodeName'));
+        'http://18.142.53.143:9393/api/v1/app/area?area_code_name=&province_code_name=$provinceCodeName'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(utf8.decode(response.bodyBytes))['data'];

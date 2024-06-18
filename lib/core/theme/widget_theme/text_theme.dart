@@ -16,9 +16,9 @@ class MTextTheme {
       color: MColors.secondary,
     ),
     headlineMedium: const TextStyle().copyWith(
-      fontSize: 24.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.w600,
-      color: MColors.secondary,
+      color: MColors.dark,
     ),
     headlineSmall: const TextStyle().copyWith(
       fontSize: 20.0,
@@ -27,18 +27,18 @@ class MTextTheme {
     ),
     titleLarge: const TextStyle().copyWith(
       fontSize: 16.0,
-      fontWeight: FontWeight.w600,
-      color: MColors.secondary,
+      fontWeight: FontWeight.w400,
+      color: MColors.lightgrey,
     ),
     titleMedium: const TextStyle().copyWith(
       fontSize: 14.0,
-      fontWeight: FontWeight.w500,
-      color: MColors.secondary,
+      fontWeight: FontWeight.w400,
+      color: MColors.lightgrey,
     ),
     titleSmall: const TextStyle().copyWith(
       fontSize: 12.0,
       fontWeight: FontWeight.w400,
-      color: MColors.secondary,
+      color: MColors.lightgrey,
     ),
     bodyLarge: const TextStyle().copyWith(
       fontSize: 16.0,
@@ -47,23 +47,23 @@ class MTextTheme {
     ),
     bodyMedium: const TextStyle().copyWith(
       fontSize: 14.0,
-      fontWeight: FontWeight.normal,
-      color: MColors.secondary,
+      fontWeight: FontWeight.w400,
+      color: MColors.dark,
     ),
     bodySmall: const TextStyle().copyWith(
       fontSize: 12.0,
-      fontWeight: FontWeight.w500,
-      color: MColors.secondary,
+      fontWeight: FontWeight.w400,
+      color: MColors.white,
     ),
     labelLarge: const TextStyle().copyWith(
       fontSize: 14.0,
-      fontWeight: FontWeight.normal,
-      color: MColors.secondary,
+      fontWeight: FontWeight.w400,
+      color: MColors.lightgrey,
     ),
     labelMedium: const TextStyle().copyWith(
       fontSize: 12.0,
       fontWeight: FontWeight.normal,
-      color: MColors.secondary,
+      color: MColors.lightgrey,
     ),
   );
 }

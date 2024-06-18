@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/shared/data/models/service_type_model.dart';
 import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_bloc.dart';
@@ -31,13 +32,15 @@ class ServiceTypeSelectionField extends StatelessWidget {
           if (selectedServiceTypes.isNotEmpty) {
             serviceTypeController.text =
                 selectedServiceTypes.map((e) => e.serviceType).join(', ');
-            // You can add any additional logic for service type selection here
+          } else {
+            serviceTypeController
+                .clear(); // Clear the text when no types are selected
           }
         });
       },
       child: InputDecorator(
-        decoration: InputDecoration(
-            // labelText: 'ກະລຸນາເລືອກປະເພດທໍາຄວາມສະອາດ',
+        decoration: const InputDecoration(
+            // labelText: 'Select Service Types',
             // border: OutlineInputBorder(),
             ),
         child: BlocBuilder<SelectionBloc, SelectionState>(
@@ -47,16 +50,18 @@ class ServiceTypeSelectionField extends StatelessWidget {
               serviceTypeDropdownValue = selectionState.selectedServiceTypes
                   .map((e) => e.serviceType)
                   .join(', ');
+            } else {
+              serviceTypeDropdownValue = '';
             }
             return Row(
               children: [
-                Icon(Icons.cleaning_services_outlined,
+                const Icon(Icons.cleaning_services_outlined,
                     color: MColors.secondary),
-                SizedBox(width: 10),
+                const Gap(10),
                 Expanded(
                   child: Text(
                     serviceTypeDropdownValue.isEmpty
-                        ? 'ກະລຸນາເລືອກປະເພດທໍາຄວາມສະອາດ'
+                        ? 'ເລືອກປະເພດບໍລິການ'
                         : serviceTypeDropdownValue,
                     style: TextStyle(
                         color: serviceTypeDropdownValue.isEmpty

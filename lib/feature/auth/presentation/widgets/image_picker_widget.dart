@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:http/http.dart' as http;
-import 'package:image/image.dart' as img_lib; // Import the image library
+import 'package:image/image.dart' as img_lib;
+import 'package:logger/logger.dart'; // Import the image library
 
 class ImagePickerController {
   File? _file;
@@ -93,12 +94,12 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       var response = await request.send();
 
       if (response.statusCode == 200) {
-        print('Upload successful');
+        Logger().i('Upload successful');
       } else {
-        print('Failed to upload image: ${response.statusCode}');
+        Logger().e('Failed to upload image: ${response.statusCode}');
       }
     } else {
-      print('Failed to obtain pre-signed URL');
+      Logger().e('Failed to obtain pre-signed URL');
     }
   }
 

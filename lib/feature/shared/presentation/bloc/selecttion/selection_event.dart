@@ -1,3 +1,4 @@
+// selection_event.dart
 import 'package:equatable/equatable.dart';
 import 'package:mae_ban/feature/shared/data/models/area_model.dart';
 import 'package:mae_ban/feature/shared/data/models/province_model.dart';
@@ -7,7 +8,16 @@ abstract class SelectionEvent extends Equatable {
   const SelectionEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
+}
+
+class ToggleServiceType extends SelectionEvent {
+  final ServiceTypeModel serviceType;
+
+  const ToggleServiceType(this.serviceType);
+
+  @override
+  List<Object?> get props => [serviceType];
 }
 
 class SelectServiceTypes extends SelectionEvent {
@@ -16,7 +26,7 @@ class SelectServiceTypes extends SelectionEvent {
   const SelectServiceTypes(this.serviceTypes);
 
   @override
-  List<Object> get props => [serviceTypes];
+  List<Object?> get props => [serviceTypes];
 }
 
 class SelectProvince extends SelectionEvent {
@@ -25,7 +35,7 @@ class SelectProvince extends SelectionEvent {
   const SelectProvince(this.province);
 
   @override
-  List<Object> get props => [province];
+  List<Object?> get props => [province];
 }
 
 class SelectArea extends SelectionEvent {
@@ -34,5 +44,5 @@ class SelectArea extends SelectionEvent {
   const SelectArea(this.area);
 
   @override
-  List<Object> get props => [area];
+  List<Object?> get props => [area];
 }

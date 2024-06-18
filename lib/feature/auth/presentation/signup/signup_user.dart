@@ -62,7 +62,7 @@ class _SignUpOfferPageState extends State<SignUpOfferPage> {
               MTexts.signUpSuccess,
               backgroundColor: MColors.emerald,
             );
-            context.go('/home-job-offer');
+            context.go('/login');
           }
         },
         builder: (context, state) {

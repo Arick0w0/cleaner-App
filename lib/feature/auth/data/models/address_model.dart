@@ -1,32 +1,40 @@
-import 'package:equatable/equatable.dart';
-
-class AddressModel extends Equatable {
+class Address {
+  final String addressName;
   final String village;
   final String district;
   final String province;
+  final String googleMap;
 
-  const AddressModel({
+  Address({
+    required this.addressName,
     required this.village,
     required this.district,
     required this.province,
+    required this.googleMap,
   });
 
-  factory AddressModel.fromJson(Map<String, dynamic> json) {
-    return AddressModel(
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+      addressName: json['address_name'],
       village: json['village'],
       district: json['district'],
       province: json['province'],
+      googleMap: json['google_map'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'address_name': addressName,
       'village': village,
       'district': district,
       'province': province,
+      'google_map': googleMap,
     };
   }
 
   @override
-  List<Object?> get props => [village, district, province];
+  String toString() {
+    return 'Address(addressName: $addressName, village: $village, district: $district, province: $province, googleMap: $googleMap)';
+  }
 }

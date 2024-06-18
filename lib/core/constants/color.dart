@@ -7,6 +7,18 @@ class MColors {
   static const Color accent = Color(0xFF33C6C2); //button
   static const Color lights = Color(0xFF2EB1AE); //button
 
+// text
+  static const Color grey = Color(0xFF676767);
+  static const Color greys = Color(0xFF939393);
+  static const Color lightgrey = Color(0xFF8C8C8C);
+  static const Color lightgreytext = Color(0xFF4C4D51);
+  // status
+  static const Color orange = Color(0xFFFFBF06);
+  static const Color purple = Color(0xFF613EEA);
+  static const Color green = Color(0xFF77E91E);
+  static const Color redPink = Color(0xFFF03975);
+  static const Color darkGrey = Color(0xFF939393);
+
 // snackbar
   static const Color emerald = Color(0xFF32DE84);
   static const Color indianred = Color(0xFFE35959);
@@ -21,10 +33,10 @@ class MColors {
 
   // Neutral Shades
   static const Color black = Color(0xFF232323);
-  static const Color darkerGrey = Color(0xFF4F4F4F);
-  static const Color darkGrey = Color(0xFF939393);
-  static const Color grey = Color(0xFFE0E0E0);
+  // static const Color darkerGrey = Color(0xFF4F4F4F);
+  // static const Color darkGrey = Color(0xFF939393);
+  // static const Color grey = Color(0xFFE0E0E0);
   static const Color softGrey = Color(0xFFF4F4F4);
-  static const Color lightGrey = Color(0xFFF9F9F9);
+  // static const Color lightGrey = Color(0xFFF9F9F9);
   static const Color white = Color(0xFFFFFFFF);
 }

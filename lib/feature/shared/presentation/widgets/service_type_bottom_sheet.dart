@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/shared/data/models/service_type_model.dart';
 import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_bloc.dart';
 import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_event.dart';
@@ -38,6 +38,10 @@ class _ServiceTypeBottomSheetState extends State<ServiceTypeBottomSheet> {
               final serviceType = widget.serviceTypes[index];
               final isSelected = _selectedServiceTypes.contains(serviceType);
               return CheckboxListTile(
+                checkColor: MColors.white,
+                activeColor: MColors.accent,
+                selectedTileColor: MColors.accent,
+                mouseCursor: SystemMouseCursors.click,
                 title: Text(serviceType.serviceType),
                 value: isSelected,
                 onChanged: (bool? value) {
@@ -53,14 +57,17 @@ class _ServiceTypeBottomSheetState extends State<ServiceTypeBottomSheet> {
             },
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            context
-                .read<SelectionBloc>()
-                .add(SelectServiceTypes(_selectedServiceTypes));
-            Navigator.pop(context); // Close the bottom sheet
-          },
-          child: Text('ຢືນຢັນ'),
+        SizedBox(
+          width: 100,
+          child: ElevatedButton(
+            onPressed: () {
+              context
+                  .read<SelectionBloc>()
+                  .add(SelectServiceTypes(_selectedServiceTypes));
+              Navigator.pop(context); // Close the bottom sheet
+            },
+            child: Text('ຢືນຢັນ'),
+          ),
         ),
       ],
     );

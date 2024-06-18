@@ -29,7 +29,7 @@ class PasswordMatch extends StatelessWidget {
           },
           showSuffixIcon:
               true, // Set to false if you don't want to show the icon
-          icon: const Icon(Icons.lock), // Example icon
+          icon: const Icon(Icons.password), // Example icon
           error: MTexts.plsenterpassword,
         ),
         const Gap(MSize.spaceBtwItems),
@@ -47,7 +47,7 @@ class PasswordMatch extends StatelessWidget {
           },
           showSuffixIcon:
               true, // Set to false if you don't want to show the icon
-          icon: const Icon(Icons.lock), // Example icon
+          icon: const Icon(Icons.password), // Example icon
           error: MTexts.confirmPassword,
         ),
       ],

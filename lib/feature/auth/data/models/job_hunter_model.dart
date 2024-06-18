@@ -11,7 +11,7 @@ class JobHunterModel extends Equatable {
   final String idCardImage;
   final String selfImageIdCard;
   final String birthDate;
-  final AddressModel address;
+  final List<Address> address; // เปลี่ยนเป็น List<AddressModel>
   final String career;
   final String nationality;
   final List<ServiceTypeModel> serviceTypes;
@@ -31,6 +31,31 @@ class JobHunterModel extends Equatable {
     required this.serviceTypes,
   });
 
+  factory JobHunterModel.fromJson(Map<String, dynamic> json) {
+    var addressList = json['address'] as List;
+    List<Address> address =
+        addressList.map((i) => Address.fromJson(i)).toList();
+
+    var serviceTypeList = json['service_types'] as List;
+    List<ServiceTypeModel> serviceTypes =
+        serviceTypeList.map((i) => ServiceTypeModel.fromJson(i)).toList();
+
+    return JobHunterModel(
+      username: json['username'],
+      password: json['password'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      gender: json['gender'],
+      idCardImage: json['id_card_image'],
+      selfImageIdCard: json['self_image_id_card'],
+      birthDate: json['birth_date'],
+      address: address,
+      career: json['career'],
+      nationality: json['nationality'],
+      serviceTypes: serviceTypes,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'username': username,
@@ -41,7 +66,7 @@ class JobHunterModel extends Equatable {
       'id_card_image': idCardImage,
       'self_image_id_card': selfImageIdCard,
       'birth_date': birthDate,
-      'address': address.toJson(),
+      'address': address.map((e) => e.toJson()).toList(),
       'career': career,
       'nationality': nationality,
       'service_types':

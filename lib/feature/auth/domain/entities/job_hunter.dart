@@ -1,6 +1,6 @@
-// lib/feature/job_hunter/domain/entities/job_hunter.dart
 import 'package:equatable/equatable.dart';
-// import 'package:mae_ban/feature/shared/data/models/service_tpye.dart';
+import 'package:mae_ban/feature/auth/domain/entities/address.dart';
+import 'package:mae_ban/feature/shared/domain/entities/service_type.dart';
 
 class JobHunter extends Equatable {
   final String username;
@@ -10,10 +10,10 @@ class JobHunter extends Equatable {
   final String idCardImage;
   final String selfImageIdCard;
   final String birthDate;
-  final Address address;
+  final List<Address> address; // เปลี่ยนจาก Address เป็น List<Address>
   final String career;
   final String nationality;
-  // final List<ServiceType> serviceTypes;
+  final List<ServiceType> serviceTypes;
 
   JobHunter({
     required this.username,
@@ -26,7 +26,7 @@ class JobHunter extends Equatable {
     required this.address,
     required this.career,
     required this.nationality,
-    // required this.serviceTypes,
+    required this.serviceTypes,
   });
 
   @override
@@ -41,21 +41,6 @@ class JobHunter extends Equatable {
         address,
         career,
         nationality,
-        // serviceTypes,
+        serviceTypes,
       ];
-}
-
-class Address extends Equatable {
-  final String village;
-  final String district;
-  final String province;
-
-  Address({
-    required this.village,
-    required this.district,
-    required this.province,
-  });
-
-  @override
-  List<Object?> get props => [village, district, province];
 }

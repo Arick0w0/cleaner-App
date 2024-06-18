@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		rdbTRzurM1+Wc+8NcOkUIT98foA=
+		Rr6FJMpeVPf92iES5bSSJB/lR84=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		X0rIM/+RTCJhnYWzDP3KohyF3ZY=
+		DZ1N3QEiWCSPyvfk5yWiKau307c=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		1toS5ajTt+y9vuu0at4omwieiWU=
+		lKz3B3KG59dnTAZh6jRrC1CIo/I=
 		</data>
 		<key>flutter_assets/assets/fonts/NotoSansLao-Bold.ttf</key>
 		<data>
@@ -48,9 +48,61 @@
 		<data>
 		iTKsqp5KgcX2pBvZqzyTOubyq5w=
 		</data>
+		<key>flutter_assets/assets/logo/.DS_Store</key>
+		<data>
+		zFRGeIvUgnbGgoOG3v4SOPuu28s=
+		</data>
+		<key>flutter_assets/assets/logo/forgotpassword.png</key>
+		<data>
+		wkoqt0+BtSY+mjcu+3hz0tC+tFk=
+		</data>
+		<key>flutter_assets/assets/logo/jdb.jpeg</key>
+		<data>
+		DyY7nnT3+9Vypl64s986C4xqaP4=
+		</data>
+		<key>flutter_assets/assets/logo/ldb.jpeg</key>
+		<data>
+		DJksU25L3K9JMEplvxuMwW7Fx5U=
+		</data>
 		<key>flutter_assets/assets/logo/logo.png</key>
 		<data>
 		oPbmIJykSnvxSb1mgNDiM/zWVJA=
+		</data>
+		<key>flutter_assets/assets/logo/onepay-01.jpeg</key>
+		<data>
+		Xn0NeOGPFsY0Mg1b30uA+oZ7S24=
+		</data>
+		<key>flutter_assets/assets/logo/onepay.jpg</key>
+		<data>
+		D8RvQEgj1a3rDRqZDjBzJdBtF1U=
+		</data>
+		<key>flutter_assets/assets/logo/success01.png</key>
+		<data>
+		YMs79VMHDE+rOPTZJsovK2G7i3c=
+		</data>
+		<key>flutter_assets/assets/logo/sucess.png</key>
+		<data>
+		CoRQQaFJ4Xe9cZ2os5MfooS2vUw=
+		</data>
+		<key>flutter_assets/assets/mock/.DS_Store</key>
+		<data>
+		ewhmGR2r86bR31uLKiKI8+14Hlc=
+		</data>
+		<key>flutter_assets/assets/mock/ab01.png</key>
+		<data>
+		fK2wf6535b7mfL8fAfLNcRP0IOk=
+		</data>
+		<key>flutter_assets/assets/mock/mock01.png</key>
+		<data>
+		pj9LZCCySB/tmQPzghYFbKCkujQ=
+		</data>
+		<key>flutter_assets/assets/mock/mock02.png</key>
+		<data>
+		DvBogOIC5Z2VZSZOJp5BmSJx3iM=
+		</data>
+		<key>flutter_assets/assets/mock/mock04.jpg</key>
+		<data>
+		B7Vn7mK+YHJ3/bSUyzB6ehiYOyM=
 		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -62,7 +114,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		4YPYEUcYBN/JMRmCbiKRR7REUzI=
+		WpdSNgF1m7tW3sytuX/27pgS21o=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -83,14 +135,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3rvvHrkCpKg1E4O6aOsb/W+ND6ywcy5kaK7+LCQDpy8=
+			LuZ9z+Qgtix3uZyZ4/U2472PiIiNNmcLBRIJf4PE8AY=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7zl0ouQ4FvCHs8apnMGzjFkQyoaD0vSA31zGlRr3CIw=
+			UjGKkvCYBqwxvcSfUHWknFtqapZMiBrDkV4jY9fNtNY=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -104,7 +156,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EaSGt+P4GNBvkp4klHL8+/cTVowDwkKITxJrobF1qs8=
+			LyfufBkCEa7mDWMpHvqLVk0RT6B0B3C/QUSN4sZO88w=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/NotoSansLao-Bold.ttf</key>
@@ -149,11 +201,88 @@
 			jFKdWPPHL1P8xBgM2srliq24z12PiqPGSLCCoOfipVs=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/logo/forgotpassword.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zv508kTejhQgSLQJf/qR+xujV/iLp5qsBF3/FkiN0OM=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/logo/jdb.jpeg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			V0nhxHqcgfeL+quXtJO5zMaFe/vNjUo40gNMgIcFeDk=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/logo/ldb.jpeg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BJyWS8jfb4woghB9num2S/jRKlptiif2T8sJ5rrVZAI=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/logo/logo.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			xYenHvxeWRqPUdt/Emx6Wq5uqSZ0qQoxYec1YxX0O7g=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/logo/onepay-01.jpeg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2Gkn7qszS6dWHtiWHJTo/sbg0ioiRwrd5G9Gz89V93U=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/logo/onepay.jpg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			U0m3a81+4FuNUIgG0o8vbn1Hmu/xoCg/JFS7Gbu6HSU=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/logo/success01.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3llWOtOMzD9YBJm2SO65bZWQAaA/UVNQUX6zeGSPPl8=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/logo/sucess.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5tiDVDP+zwM1kDy86EZJ52X2k0JyTZnR2Hz6O0b1HHM=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/mock/ab01.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			10nSal4LrKSQWa9PME89I/NlAr9qyqaICY4UxGETDXk=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/mock/mock01.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Wq3JFqhe3nitMmx1mlzTCEsaHUQbEe09stXA0xWZgus=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/mock/mock02.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DvmKV6F9NxkfTQrg6nf3g28bI+fOt7npsIn6jXbf8Rg=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/mock/mock04.jpg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			J1rESbq3sqZfre85KrPBiYgrJ5yItlGIIdLIyiKW46k=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -174,7 +303,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			NCGnFxyu7+y0/KSRMGnXmb0uWZ1kgwE+w1F3IYEiUvc=
+			ekPMS6m4DbeL0MwqIoQ6LxqYxo6yQqrl6XGDz+GJuFU=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

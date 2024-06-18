@@ -13,7 +13,7 @@ class MElevatedButtonTheme {
       backgroundColor: MColors.accent,
       disabledForegroundColor: MColors.primary,
       disabledBackgroundColor: MColors.primary,
-      side: const BorderSide(color: MColors.accent),
+      // side: const BorderSide(color: MColors.accent),
       padding: const EdgeInsets.symmetric(vertical: MSize.buttonHeight),
       textStyle: const TextStyle(
           fontFamily: 'NotoSansLao',

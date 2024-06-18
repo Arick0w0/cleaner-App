@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +12,7 @@ import 'package:mae_ban/feature/auth/presentation/widgets/password_text_form_fie
 import 'package:mae_ban/feature/auth/presentation/widgets/text_form_field.dart';
 import 'package:mae_ban/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mae_ban/feature/auth/presentation/cubit/user_cubit.dart'; // Import UserCubit
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,8 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
   final SharedPreferences sharedPreferences = sl<SharedPreferences>();
 
   @override
@@ -35,9 +32,6 @@ class _LoginPageState extends State<LoginPage> {
     return BlocProvider(
       create: (_) => sl<AuthBloc>(),
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Login'),
-        // ),
         body: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) async {
             if (state is AuthFailure) {
@@ -48,23 +42,39 @@ class _LoginPageState extends State<LoginPage> {
               );
             } else if (state is AuthSuccess) {
               showSnackBar(
-                  backgroundColor: MColors.emerald,
-                  context,
-                  MTexts.signUpSuccess);
-              await sharedPreferences.setString(
-                  'accessToken', state.authResponse?.accessToken ?? '');
-              await sharedPreferences.setString(
-                  'refreshToken', state.authResponse?.refreshToken ?? '');
-              await sharedPreferences.setString(
-                  'role', state.authResponse?.role ?? 'unknown');
+                backgroundColor: MColors.emerald,
+                context,
+                MTexts.signUpSuccess,
+              );
 
-              final role = state.authResponse?.role ?? 'unknown';
+              final authResponse = state.authResponse;
+              await sharedPreferences.setString(
+                  'accessToken', authResponse?.accessToken ?? '');
+              await sharedPreferences.setString(
+                  'refreshToken', authResponse?.refreshToken ?? '');
+              await sharedPreferences.setString(
+                  'role', authResponse?.role ?? 'unknown');
+              await sharedPreferences.setString(
+                  'username', usernameController.text);
+
+              final role = authResponse?.role ?? 'unknown';
+              final token = authResponse?.accessToken ?? '';
+              final username = usernameController.text;
+
               print('User role: $role'); // Debugging line
 
               if (role == 'JOB_OFFER') {
-                context.go('/home-job-offer');
+                context.go('/home-job-offer', extra: {
+                  'username': username,
+                  'token': token,
+                  'role': role,
+                });
               } else if (role == 'JOB_HUNTER') {
-                context.go('/home-job-hunter');
+                context.go('/home-job-hunter', extra: {
+                  'username': username,
+                  'token': token,
+                  'role': role,
+                });
               } else {
                 showSnackBar(context, 'Unknown role: $role');
               }
@@ -116,23 +126,19 @@ class _LoginPageState extends State<LoginPage> {
                             textAlign: TextAlign.start,
                           ),
                           const Gap(MSize.spaceBtwItems),
-                          // PasswordMatch(
-                          //   passwordController: passwordController,
-                          //   confirmPasswordController:
-                          //       confirmPasswordController,
-                          // ),
-
                           PasswordTextFormField(
                             controller: passwordController,
                             labelText: MTexts.password,
                             error: MTexts.plsenterpassword,
-                            icon: const Icon(Icons.lock),
+                            icon: const Icon(Icons.password),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.push('/forgot-password');
+                                },
                                 child: Text(
                                   MTexts.forgotPassword,
                                   style: Theme.of(context)
@@ -156,9 +162,10 @@ class _LoginPageState extends State<LoginPage> {
                                       '20${usernameController.text}';
                                   context.read<AuthBloc>().add(
                                         LoginEvent(
-                                          // usernameController.text,
                                           usernameWithPrefix,
                                           passwordController.text,
+                                          context.read<
+                                              UserCubit>(), // Pass UserCubit here
                                         ),
                                       );
                                 }
@@ -195,9 +202,12 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
-                          const Gap(MSize.defaultSpace),
+                          Divider(
+                            thickness: 1,
+                            height: 1,
+                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               TextButton(
                                 onPressed: () {

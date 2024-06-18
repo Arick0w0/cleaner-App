@@ -1,5 +1,4 @@
 import 'dart:convert'; // Add this import for jsonEncode
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -20,11 +19,9 @@ import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mae_ban/feature/shared/data/services/api_service.dart';
 import 'package:mae_ban/feature/shared/presentation/view/area_selector_view.dart';
 import 'package:mae_ban/feature/shared/presentation/view/province_selector_view.dart';
-import 'package:mae_ban/feature/shared/presentation/page/service_type_selector.dart';
 import 'package:mae_ban/feature/shared/presentation/view/service_type_selector_view.dart';
 import 'package:mae_ban/service_locator.dart';
 import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_bloc.dart';
-import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_state.dart';
 import 'package:mae_ban/feature/shared/presentation/bloc/getdata/data_event.dart';
 import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_bloc.dart';
 
@@ -130,7 +127,13 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
               MTexts.signUpSuccess,
               backgroundColor: MColors.emerald,
             );
-            context.go('/home-job-hunter');
+            context.go(
+              '/timeline',
+              extra: {
+                'username': usernameController.text,
+                'status': 'REGISTERED'
+              },
+            );
           }
         },
         builder: (context, state) {
@@ -147,188 +150,188 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
                   vertical: MSize.spaceBtwSections,
                   horizontal: 14,
                 ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        MTexts.photoAndId,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      ImagePickerWidget(
-                        controller: idCardController,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      Text(
-                        MTexts.idCard,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      ImagePickerWidget(
-                        controller: photoIdController,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      const GenderSelectionWidget(),
-                      const Gap(MSize.defaultSpace),
-                      CustomTextFormField(
-                        controller: firstNameController,
-                        labelText: MTexts.firstName,
-                        prefixIcon: const Icon(Icons.person),
-                        errorText: MTexts.pleaseenteryourfirstname,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      CustomTextFormField(
-                        controller: lastNameController,
-                        labelText: MTexts.lastName,
-                        prefixIcon: const Icon(Icons.person),
-                        errorText: MTexts.pleaseenteryourlastname,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      CustomTextFormField(
-                        controller: birthDateController,
-                        labelText: MTexts.date,
-                        prefixIcon: const Icon(Icons.calendar_today),
-                        errorText: MTexts.pleaseenteryourbirthday,
-                        keyboardType: TextInputType.phone,
-                        enableDatePicker: true, // enable for format yyyy-mm-dd
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      ProvinceSelectorView(
-                        provinceController: provinceController,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      AreaSelectorView(
-                        areaController: districtController,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      CustomTextFormField(
-                        controller: villageController,
-                        labelText: MTexts.village,
-                        prefixIcon: const Icon(Icons.home),
-                        errorText: MTexts.pleaseenteryourvillage,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      CustomTextFormField(
-                        controller: careerController,
-                        labelText: MTexts.career,
-                        prefixIcon: const Icon(Icons.work),
-                        errorText: MTexts.pleaseenteryourcareer,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      CustomTextFormField(
-                        controller: nationalityController,
-                        labelText: MTexts.nationality,
-                        prefixIcon: const Icon(Icons.flag),
-                        errorText: MTexts.pleaseenteryournationality,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      Text(
-                        'ເລືອກປະເພດບໍລິການ',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      // BlocBuilder<DataBloc, DataState>(
-                      //   builder: (context, dataState) {
-                      //     if (dataState is DataLoaded) {
-                      //       return ServiceTypeSelectionField(
-                      //         serviceTypes: dataState.serviceTypes,
-                      //         serviceTypeController: serviceTypeController,
-                      //       );
-                      //     } else if (dataState is DataLoading) {
-                      //       return Center(child: CircularProgressIndicator());
-                      //     } else if (dataState is DataError) {
-                      //       return Center(
-                      //           child: Text('Error: ${dataState.message}'));
-                      //     }
-                      //     return Container();
-                      //   },
-                      // ),
-                      ServiceTypeSelectorView(
-                          serviceTypeController: serviceTypeController),
-                      const Gap(MSize.spaceBtwItems),
-                      Text(
-                        MTexts.loginPassword,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const Gap(MSize.defaultSpace),
-                      CustomTextFormField(
-                        controller: usernameController,
-                        labelText: MTexts.phoneNumber,
-                        prefixIcon: const Icon(Icons.phone),
-                        keyboardType: TextInputType.phone,
-                        usePrefix: true, // Show prefix // Set the prefix to 020
-                        useMaxLength: true,
-                        errorText: MTexts.pleaseenteryourphonenumber,
-                      ),
-                      const Gap(MSize.spaceBtwItems),
-                      PasswordMatch(
-                        passwordController: passwordController,
-                        confirmPasswordController: confirmPasswordController,
-                      ),
-                      const Gap(MSize.spaceBtwSections),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate() &&
-                                idCardController.file != null &&
-                                photoIdController.file != null) {
-                              final gender =
-                                  context.read<GenderSelectionCubit>().state;
-                              final usernameWithPrefix =
-                                  '20${usernameController.text}';
-                              final address = AddressModel(
-                                village: villageController.text,
-                                district: districtController.text,
-                                province: provinceController.text,
-                              );
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            MTexts.photoAndId,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          ImagePickerWidget(
+                            controller: idCardController,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          Text(
+                            MTexts.idCard,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          ImagePickerWidget(
+                            controller: photoIdController,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          const GenderSelectionWidget(),
+                          const Gap(MSize.defaultSpace),
+                          CustomTextFormField(
+                            controller: firstNameController,
+                            labelText: MTexts.firstName,
+                            prefixIcon: const Icon(Icons.person),
+                            errorText: MTexts.pleaseenteryourfirstname,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          CustomTextFormField(
+                            controller: lastNameController,
+                            labelText: MTexts.lastName,
+                            prefixIcon: const Icon(Icons.person),
+                            errorText: MTexts.pleaseenteryourlastname,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          CustomTextFormField(
+                            controller: birthDateController,
+                            labelText: MTexts.date,
+                            prefixIcon: const Icon(Icons.calendar_today),
+                            errorText: MTexts.pleaseenteryourbirthday,
+                            keyboardType: TextInputType.phone,
+                            enableDatePicker:
+                                true, // enable for format yyyy-mm-dd
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          ProvinceSelectorView(
+                            provinceController: provinceController,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          AreaSelectorView(
+                            areaController: districtController,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          CustomTextFormField(
+                            controller: villageController,
+                            labelText: MTexts.village,
+                            prefixIcon: const Icon(Icons.home),
+                            errorText: MTexts.pleaseenteryourvillage,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          CustomTextFormField(
+                            controller: careerController,
+                            labelText: MTexts.career,
+                            prefixIcon: const Icon(Icons.work),
+                            errorText: MTexts.pleaseenteryourcareer,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          CustomTextFormField(
+                            controller: nationalityController,
+                            labelText: MTexts.nationality,
+                            prefixIcon: const Icon(Icons.flag),
+                            errorText: MTexts.pleaseenteryournationality,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          Text(
+                            'ເລືອກປະເພດບໍລິການ',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          ServiceTypeSelectorView(
+                            serviceTypeController: serviceTypeController,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          Text(
+                            MTexts.loginPassword,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          const Gap(MSize.defaultSpace),
+                          CustomTextFormField(
+                            controller: usernameController,
+                            labelText: MTexts.phoneNumber,
+                            prefixIcon: const Icon(Icons.phone),
+                            keyboardType: TextInputType.phone,
+                            usePrefix:
+                                true, // Show prefix // Set the prefix to 020
+                            useMaxLength: true,
+                            errorText: MTexts.pleaseenteryourphonenumber,
+                          ),
+                          const Gap(MSize.spaceBtwItems),
+                          PasswordMatch(
+                            passwordController: passwordController,
+                            confirmPasswordController:
+                                confirmPasswordController,
+                          ),
+                          const Gap(MSize.spaceBtwSections),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate() &&
+                                    idCardController.file != null &&
+                                    photoIdController.file != null) {
+                                  final gender = context
+                                      .read<GenderSelectionCubit>()
+                                      .state;
+                                  final usernameWithPrefix =
+                                      '20${usernameController.text}';
+                                  final address = Address(
+                                    village: villageController.text,
+                                    district: districtController.text,
+                                    province: provinceController.text,
+                                    addressName: '',
+                                    googleMap: '',
+                                  );
 
-                              final selectedServiceTypes = context
-                                  .read<SelectionBloc>()
-                                  .state
-                                  .selectedServiceTypes;
+                                  final selectedServiceTypes = context
+                                      .read<SelectionBloc>()
+                                      .state
+                                      .selectedServiceTypes;
 
-                              final jobHunter = JobHunterModel(
-                                username: usernameWithPrefix,
-                                password: passwordController.text,
-                                firstName: firstNameController.text,
-                                lastName: lastNameController.text,
-                                birthDate: birthDateController.text,
-                                address: address,
-                                career: careerController.text,
-                                nationality: nationalityController.text,
-                                gender: gender,
-                                idCardImage:
-                                    Uri.file(idCardController.file!.path)
-                                        .pathSegments
-                                        .last,
-                                selfImageIdCard:
-                                    Uri.file(photoIdController.file!.path)
-                                        .pathSegments
-                                        .last,
-                                serviceTypes: selectedServiceTypes,
-                              );
+                                  final jobHunter = JobHunterModel(
+                                    username: usernameWithPrefix,
+                                    password: passwordController.text,
+                                    firstName: firstNameController.text,
+                                    lastName: lastNameController.text,
+                                    birthDate: birthDateController.text,
+                                    address: [
+                                      address
+                                    ], // ทำให้เป็น List<AddressModel>
+                                    career: careerController.text,
+                                    nationality: nationalityController.text,
+                                    gender: gender,
+                                    idCardImage:
+                                        Uri.file(idCardController.file!.path)
+                                            .pathSegments
+                                            .last,
+                                    selfImageIdCard:
+                                        Uri.file(photoIdController.file!.path)
+                                            .pathSegments
+                                            .last,
+                                    serviceTypes: selectedServiceTypes,
+                                  );
 
-                              print(
-                                  'JobHunter data: ${jsonEncode(jobHunter.toJson())}');
+                                  print(
+                                      'JobHunter data: ${jsonEncode(jobHunter.toJson())}');
 
-                              context
-                                  .read<AuthBloc>()
-                                  .add(SignupJobHunterEvent(jobHunter));
-                            } else {
-                              showSnackBar(
-                                context,
-                                MTexts.plsselectimage,
-                                backgroundColor: Colors.orange,
-                              );
-                            }
-                          },
-                          child: const Text(MTexts.signUp),
-                        ),
+                                  context
+                                      .read<AuthBloc>()
+                                      .add(SignupJobHunterEvent(jobHunter));
+                                } else {
+                                  showSnackBar(
+                                    context,
+                                    MTexts.plsselectimage,
+                                    backgroundColor: Colors.orange,
+                                  );
+                                }
+                              },
+                              child: const Text(MTexts.signUp),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),

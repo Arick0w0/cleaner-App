@@ -8,6 +8,11 @@ class MTexts {
 
 // Login Screen Text
   static const String logo = 'assets/logo/logo.png';
+  static const String person = 'assets/logo/forgotpassword.png';
+  static const String ab01 = 'assets/mock/ab01.png';
+  static const String mock01 = 'assets/mock/mock01.png';
+  static const String mock02 = 'assets/mock/mock02.png';
+  static const String mock03 = 'assets/mock/mock03.jpg';
 
 // --- SignUp User Screen Text
   static const String inputPersonalInfo = "ປ້ອນຂໍ້ມູນສ່ວນຕົວ";
@@ -33,13 +38,14 @@ class MTexts {
 
 // Forgot Password Screen Text
   static const String passwordRecovery = "ກູ້ຄືນລະຫັດຜ່ານ";
-  static const String check = "ກວດສອບ";
+  static const String verify = "ກວດສອບ";
 
 // OTP Screen Text
-  static const String confirmOtp = "ຢືນຢັນ OTP";
-  static const String resent = "ສົ່ງໃໝ່ອີກຄັ້ງ";
+  static const String confirmOtp = "ຢືນຢັນລະຫັດ OTP";
+  static const String sendAgain = "ສົ່ງໃໝ່ອີກຄັ້ງ";
+  static const String send = "ສົ່ງລະຫັດOTP";
 
-// Reset Password Screen Text
+// Reset Password Screen Text verifyOtp
   static const String newPassword = "ປ່ຽນລະຫັດຜ່ານ";
   static const String resetPassword = "ປ່ຽນລະຫັດຜ່ານໃຫມ່";
   static const String save = "ບັນທຶກ";
@@ -56,6 +62,7 @@ class MTexts {
   static const String men = "ຊາຍ";
   static const String women = "ຍິງ";
   static const String signUpSuccess = "ລົງທະບຽນ ສໍາເລັດ!";
+  static const String resetSuccess = "ປ່ຽນລະຫັດຜ່ານ ສໍາເລັດ!";
   static const String date = "ວວ-ດດ-ປປປປ";
 
 // static const String mCancel = "ຍົກເລີກ";
@@ -76,5 +83,9 @@ class MTexts {
   static const String passwordsdonotmatch = "ລະຫັດຜ່ານບໍ່ຄືກັນ";
   static const String plsselectimage = "ກະລຸນາເລືອກຮູບ ແລະ ປ້ອນຂໍ້ມູນໃຫ້ຄົບ";
   static const String plsenterphonenumber = " ກະລຸນາປ່ອນເບີໂທຂອງທ່ານໃຫ້ຄົບ";
+
 //--- Home Screen Text
+  static const String popularService = " ບໍລິການຍອດນິຍົມ";
+  static const String popularCleaner = " ແມ່ບ້ານຍອດນິຍົມ";
+  static const String cleanService = " ບໍລິການທໍາຄວາມສະອາດ";
 }

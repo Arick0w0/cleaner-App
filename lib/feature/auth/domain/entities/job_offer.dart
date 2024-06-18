@@ -7,7 +7,7 @@ class JobOffer extends Equatable {
   final String lastName;
   final String gender;
 
-  JobOffer({
+  const JobOffer({
     required this.username,
     required this.password,
     required this.firstName,
