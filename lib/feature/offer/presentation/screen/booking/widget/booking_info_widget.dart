@@ -30,9 +30,12 @@ class BookingInfoWidget extends StatelessWidget {
               name,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontSize: 16),
             ),
-            Gap(5),
+            const Gap(5),
             Text(
               date,
               style: Theme.of(context)
@@ -40,10 +43,10 @@ class BookingInfoWidget extends StatelessWidget {
                   .titleLarge
                   ?.copyWith(fontWeight: FontWeight.w600, color: MColors.dark),
             ),
-            Gap(5),
+            const Gap(5),
             Text(
-              time,
-              style: Theme.of(context).textTheme.labelMedium,
+              ('$time ຊມ'),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),

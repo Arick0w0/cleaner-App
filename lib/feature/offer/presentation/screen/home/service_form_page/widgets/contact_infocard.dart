@@ -53,14 +53,16 @@ class ContactInfoCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${address!.addressName},  ${address!.province}, ${address!.googleMap}',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          '${address!.addressName},  ${address!.village}',
+                          style: Theme.of(context).textTheme.bodyMedium,
                           overflow: TextOverflow.ellipsis,
                           maxLines:
                               1, // จำนวนบรรทัดสูงสุดที่จะแสดง (เลือกได้ตามความต้องการ)
                         ),
-                        Text(' ${address!.village},'),
-                        Text(' ${address!.district},'),
+                        // Text('  ${address!.province}'),
+                        // Text('  ${address!.googleMap}'),
+                        // Text(' ${address!.village},'),
+                        // Text(' ${address!.district},'),
                       ]),
                   InkWell(
                     onTap: onPresseds,

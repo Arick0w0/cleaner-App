@@ -17,5 +17,8 @@ class MAppTheme {
     // bottomSheetTheme: MBottomSheetTheme.lightBottomSheetTheme,
     elevatedButtonTheme: MElevatedButtonTheme.lightElevatedButtonTheme,
     inputDecorationTheme: MTextFormFieldTheme.lightInputDecorationTheme,
+    dividerTheme: const DividerThemeData(
+      color: Color(0xffF1F1F1),
+    ),
   );
 }

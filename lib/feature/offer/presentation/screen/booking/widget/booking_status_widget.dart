@@ -4,21 +4,41 @@ import 'package:mae_ban/core/constants/color.dart';
 
 class BookingStatusWidget extends StatelessWidget {
   final String status;
+  final bool showStatusText;
 
-  BookingStatusWidget({required this.status});
+  const BookingStatusWidget({
+    Key? key,
+    required this.status,
+    this.showStatusText = false,
+  }) : super(key: key);
 
   Color getStatusColor(String status) {
     switch (status) {
-      case 'waiting':
-        return Colors.purple;
-      case 'select cleaner':
-        return Colors.blue;
-      case 'accept':
-        return Colors.yellow;
-      case 'success':
-        return Colors.green;
+      case 'WAIT_HUNTER':
+        return const Color(0xffFFBF06);
+      case 'CHOOSE_HUNTER':
+        return const Color(0xff613EEA);
+      case 'MATCH_HUNTER':
+        return const Color(0xff77E91E);
+      case 'DONE':
+        return Colors.grey;
       default:
-        return Colors.purple;
+        return Colors.grey;
+    }
+  }
+
+  String getStatusText(String status) {
+    switch (status) {
+      case 'WAIT_HUNTER':
+        return 'ລໍຖ້າການຕອບຮັບ';
+      case 'CHOOSE_HUNTER':
+        return 'ເລືອກຜູ້ໃຫ້ບໍລິການ';
+      case 'MATCH_HUNTER':
+        return 'ຕອບຮັບ';
+      case 'DONE':
+        return 'ສຳເລັດ';
+      default:
+        return 'ບໍ່ຮູ້ຈັກ';
     }
   }
 
@@ -27,10 +47,11 @@ class BookingStatusWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          'สถานะ',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
+        if (showStatusText)
+          Text(
+            'ສະຖານະ',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         const Gap(5),
         SizedBox(
           width: 110,
@@ -42,7 +63,7 @@ class BookingStatusWidget extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                status,
+                getStatusText(status),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: MColors.white,
                     ),

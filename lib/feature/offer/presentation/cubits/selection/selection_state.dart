@@ -1,3 +1,4 @@
+// selection_state.dart
 import 'package:flutter/material.dart';
 
 class SelectionState {
@@ -7,8 +8,9 @@ class SelectionState {
   final DateTime selectedDate;
   final TimeOfDay selectedTime;
   final String serviceCost;
-  final int selectedPrice; // เพิ่มฟิลด์นี้
-  final double selectedValue; // แก้ไขฟิลด์นี้ให้เป็น double
+  final int selectedPrice;
+  final double selectedValue;
+  final String codename; // Add codename field
 
   SelectionState({
     required this.selectedLocation,
@@ -19,6 +21,7 @@ class SelectionState {
     required this.serviceCost,
     required this.selectedPrice,
     required this.selectedValue,
+    required this.codename, // Initialize codename
   });
 
   SelectionState copyWith({
@@ -29,7 +32,8 @@ class SelectionState {
     TimeOfDay? selectedTime,
     String? serviceCost,
     int? selectedPrice,
-    double? selectedValue, // แก้ไขฟิลด์นี้ให้เป็น double
+    double? selectedValue,
+    String? codename, // Add codename to copyWith
   }) {
     return SelectionState(
       selectedLocation: selectedLocation ?? this.selectedLocation,
@@ -39,8 +43,8 @@ class SelectionState {
       selectedTime: selectedTime ?? this.selectedTime,
       serviceCost: serviceCost ?? this.serviceCost,
       selectedPrice: selectedPrice ?? this.selectedPrice,
-      selectedValue:
-          selectedValue ?? this.selectedValue, // แก้ไขฟิลด์นี้ให้เป็น double
+      selectedValue: selectedValue ?? this.selectedValue,
+      codename: codename ?? this.codename, // Copy codename
     );
   }
 }

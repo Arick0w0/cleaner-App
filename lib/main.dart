@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:mae_ban/feature/auth/data/models/user_model.dart';
 
+import 'feature/offer/presentation/cubits/countdown/countdown_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting(
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<UserCubit>(
           create: (context) => userCubit,
+        ),
+        BlocProvider(
+          create: (context) => CountdownCubit(),
         ),
         // BlocProvider<PostJobCubit>(
         //   create: (context) =>

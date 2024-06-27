@@ -12,7 +12,7 @@ class AddressForm extends StatefulWidget {
   final String userId;
   final String token;
 
-  AddressForm({required this.userId, required this.token});
+  AddressForm({super.key, required this.userId, required this.token});
 
   @override
   _AddressFormWidgetState createState() => _AddressFormWidgetState();

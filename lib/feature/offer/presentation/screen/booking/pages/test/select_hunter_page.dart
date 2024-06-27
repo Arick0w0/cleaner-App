@@ -33,6 +33,7 @@ class SelectHunter extends StatelessWidget {
                     name: cleaner.name,
                     imageProfile: cleaner.imageProfile,
                     image: cleaner.image,
+                    // onTap: () {},
                   );
                 },
               ),

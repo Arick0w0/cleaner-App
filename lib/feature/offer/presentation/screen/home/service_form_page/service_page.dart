@@ -23,6 +23,8 @@ import 'service_detail_page.dart';
 import 'widgets/date_picker_widget.dart';
 import 'widgets/time_picker_widget.dart';
 
+// service_form_page.dart
+
 class ServiceFormPage extends StatefulWidget {
   final ServiceType service;
 
@@ -100,9 +102,10 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
         'cost': selectionState.serviceCost,
         'userId': user.id,
         'token': token ?? '',
+        'codename': selectionState.codename, // Add codename to formData
       };
 
-      print('Form Data: $formData');
+      // print('Form Data: $formData');
 
       Navigator.push(
         context,
@@ -141,12 +144,12 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
             onPressed: () => context.go('/'),
             icon: const Icon(Icons.arrow_back_ios_new),
           ),
-          title: const Text('บริการทำความสะอาด'),
+          title: const Text('ບໍລິການທໍາຄວາມສະອາດ'),
           centerTitle: true,
           actions: [
             TextButton(
               onPressed: () {},
-              child: const Text('ดูรายละเอียด',
+              child: const Text('ເບິງລາຍລະອຽດ',
                   style: TextStyle(color: Colors.white)),
             ),
             const Gap(10)
@@ -205,17 +208,20 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
                                     (value) {
                                       final selectedPrice = prices.firstWhere(
                                           (price) => price.name == value);
-                                      context.read<SelectionCubit>().updateType(
-                                            value,
-                                          );
+                                      context
+                                          .read<SelectionCubit>()
+                                          .updateType(value);
+                                      print('type: $value');
+                                      print(
+                                          'codeName: ${selectedPrice.codeName}'); // Print codeName
+                                      // Additional logic can be added here
                                     },
                                     recs: prices
                                         .map((price) => price.rec)
-                                        .toList(), // ส่งข้อมูล rec (ถ้ามี)
+                                        .toList(), // Sending rec data
                                   ),
                                 ),
                                 const Gap(8),
-                                // สำหรับ TimeCubit แสดงใน FieldContainer นี้
                                 FieldContainer(
                                   text: selectionState.selectedUnits,
                                   callback: () => _showSelectionModal(
@@ -239,7 +245,6 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
                                     },
                                   ),
                                 ),
-
                                 const Gap(8),
                                 const Text('*  ບໍ່ລວມເວລາພັກຂອງຜູ້ໃຫ້ບໍລິການ',
                                     style: TextStyle(color: Colors.orange)),

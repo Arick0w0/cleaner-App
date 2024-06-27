@@ -46,6 +46,8 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
       "time_service_input": widget.data['time'],
       "price_service_input": total.toInt(), // ส่ง total แทน
       "hours_service_input": widget.data['value'],
+      "place_type": widget.data['codename'],
+
       "address": {
         "address_name": selectedAddress?.addressName ?? '',
         "village": selectedAddress?.village ?? '',
@@ -72,12 +74,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
           const SnackBar(content: Text('พื้นที่นี้ไม่มีให้บริการ')),
         );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Bill generated successfully'),
-            backgroundColor: Colors.green,
-          ),
-        );
+        debugPrint('Bill generated successfully'); // Print to debug console
 
         // Print the data that will be passed to PaymentPage
         print('Bill Code: ${responseData['data']['your_bill_code']}');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/offer/domain/entities/booking.dart';
 import 'package:mae_ban/feature/offer/presentation/screen/booking/widget/booking_info_widget.dart';
@@ -11,6 +12,12 @@ class BookingCard extends StatelessWidget {
 
   const BookingCard({required this.booking, super.key});
 
+  String formatDateTime(String dateTimeStr) {
+    final DateTime dateTime = DateTime.parse(dateTimeStr);
+    final DateFormat formatter = DateFormat('dd-MM-yyyy (HH:mm)');
+    return formatter.format(dateTime);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -18,7 +25,7 @@ class BookingCard extends StatelessWidget {
         context.go('/detail', extra: booking.id);
       },
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         decoration: BoxDecoration(
           color: MColors.white,
           borderRadius: BorderRadius.circular(12),
@@ -39,10 +46,13 @@ class BookingCard extends StatelessWidget {
               children: [
                 BookingInfoWidget(
                   name: booking.name,
-                  date: booking.date,
+                  date: formatDateTime(booking.date), // แปลงวันที่และเวลา
                   time: booking.time,
                 ),
-                BookingStatusWidget(status: booking.status),
+                BookingStatusWidget(
+                  status: booking.status,
+                  showStatusText: true,
+                ),
               ],
             ),
             const Divider(),
@@ -51,11 +61,11 @@ class BookingCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  booking.orderNumber,
+                  "ຄໍາສັ່ງຊື້ ${booking.orderNumber}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Text(
-                  booking.orderDate,
+                  booking.orderDate, // แปลงวันที่และเวลา
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],

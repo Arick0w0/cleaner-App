@@ -16,7 +16,7 @@ class ServiceTypeBloc extends Bloc<ServiceTypeEvent, ServiceTypeState> {
       emit(ServiceTypeLoading());
       try {
         final serviceTypes = await getServiceTypes();
-        print('Service types loaded: $serviceTypes'); // Debugging line
+        // print('Service types loaded: $serviceTypes'); // Debugging line
         emit(ServiceTypeLoaded(serviceTypes: serviceTypes));
       } catch (e) {
         print('Error occurred: $e'); // Debugging line

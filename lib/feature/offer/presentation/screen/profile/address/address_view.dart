@@ -140,7 +140,7 @@ class _AddressViewState extends State<AddressView> {
         },
       ),
       bottomNavigationBar: FooterApp(
-        title: 'Add new address',
+        title: 'ເພີ່ມທີ່ຢູ່ໃໝ່',
         onPressed: () async {
           final result = await Navigator.push(
             context,

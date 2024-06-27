@@ -8,6 +8,8 @@ import 'package:mae_ban/feature/auth/presentation/otp/forgot_password_page.dart'
 import 'package:mae_ban/feature/auth/presentation/otp/otp_screen.dart';
 import 'package:mae_ban/feature/auth/presentation/otp/reset_password_screen.dart';
 import 'package:mae_ban/feature/hunter/presentation/landing_hunter/job_hunter_landing_page.dart.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/start_jop.dart';
+
 import 'package:mae_ban/feature/offer/presentation/screen/home/service_form_page/service_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -18,6 +20,9 @@ import 'package:mae_ban/core/widgets/loader.dart';
 import 'feature/auth/presentation/cubit/user_cubit.dart';
 import 'feature/offer/domain/entities/service_type.dart';
 import 'feature/offer/presentation/job_offer_landing_page.dart.dart';
+import 'feature/offer/presentation/screen/booking/pages/offer_ativity_page.dart';
+import 'feature/offer/presentation/screen/booking/pages/review_page.dart';
+import 'feature/offer/presentation/screen/booking/pages/time_line_page.dart';
 import 'feature/offer/presentation/screen/home/service_form_page/detail_page.dart';
 
 Future<User?> _loadUserFromPreferences() async {
@@ -47,6 +52,18 @@ final GoRouter router = GoRouter(
           }
         },
       ),
+    ),
+    // GoRoute(
+    //   path: '/track-services',
+    //   builder: (context, state) => StartJob(startJobId: '',),
+    // ),
+    // GoRoute(
+    //   path: '/',
+    //   builder: (context, state) => StepperDemo(),
+    // ),
+    GoRoute(
+      path: '/review-page',
+      builder: (context, state) => const ReviewPage(),
     ),
     GoRoute(
       path: '/login',
@@ -119,6 +136,12 @@ final GoRouter router = GoRouter(
         return ServiceFormPage(service: service);
       },
     ),
+
+    GoRoute(
+      path: '/activity-page',
+      builder: (context, state) => const ActivityPage(),
+    ),
+
     GoRoute(
       path: '/detail',
       builder: (context, state) {
