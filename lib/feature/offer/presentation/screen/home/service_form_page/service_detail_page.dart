@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:http/http.dart' as http;
+import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/offer/presentation/screen/home/widget/footer_widget.dart';
 import '../../profile/address/address_view.dart';
 import 'widgets/contact_infocard.dart';
@@ -57,7 +57,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
       }
     };
 
-    print('Headers: $headers');
+    // print('Headers: $headers');
     print('Payload: $payload');
 
     final response = await http.post(
@@ -68,20 +68,22 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
+      // print(responseData);
       if (responseData['error'] == false &&
           responseData['msg'] == 'DONT_HAVE_THIS_AREA') {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('พื้นที่นี้ไม่มีให้บริการ')),
+          const SnackBar(content: Text('ບໍ່ມີພື້ນທີໃຫ້ບໍລິການ')),
         );
       } else {
         debugPrint('Bill generated successfully'); // Print to debug console
 
+        print(responseData['data']);
         // Print the data that will be passed to PaymentPage
-        print('Bill Code: ${responseData['data']['your_bill_code']}');
-        print(
-            'DateTime Service: ${widget.data['date']} ${widget.data['time']}');
-        print('Total Price: $total');
-        print('Token: ${widget.token}');
+        // print('Bill Code: ${responseData['data']['your_bill_code']}');
+        // print(
+        //     'DateTime Service: ${widget.data['date']} ${widget.data['time']}');
+        // print('Total Price: $total');
+        // print('Token: ${widget.token}');
 
         // Navigate to PaymentPage with the received data
         Navigator.push(
@@ -97,8 +99,8 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
         );
       }
     } else {
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      // print('Response status: ${response.statusCode}');
+      // print('Response body: ${response.body}');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to generate bill')),
       );
@@ -169,7 +171,12 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
         onPressed: () {
           if (selectedAddress == null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Please select an address')),
+              const SnackBar(
+                content: Text(
+                  'ກະລຸນນາເພີ່ມທີ່ຢູ່',
+                ),
+                backgroundColor: MColors.orange,
+              ),
             );
             return;
           }

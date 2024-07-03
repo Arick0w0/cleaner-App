@@ -13,7 +13,7 @@ class MColors {
   static const Color lightgrey = Color(0xFF8C8C8C);
   static const Color lightgreytext = Color(0xFF4C4D51);
   // status
-  static const Color orange = Color(0xFFFFBF06);
+  static const Color orange = Color(0xffFFBF06);
   static const Color purple = Color(0xFF613EEA);
   static const Color green = Color(0xFF77E91E);
   static const Color redPink = Color(0xFFF03975);

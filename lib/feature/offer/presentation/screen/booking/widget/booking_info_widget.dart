@@ -6,51 +6,64 @@ class BookingInfoWidget extends StatelessWidget {
   final String name;
   final String date;
   final String time;
+  final String image;
 
-  BookingInfoWidget(
-      {required this.name, required this.date, required this.time});
+  const BookingInfoWidget({
+    Key? key,
+    required this.name,
+    required this.date,
+    required this.time,
+    required this.image,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(50),
-          ),
-        ),
-        const Gap(10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Row(
           children: [
-            Text(
-              name,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(fontSize: 16),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset(
+                width: 60,
+                height: 60,
+                image.isNotEmpty ? image : 'assets/mock/mock05.png',
+                fit: BoxFit.cover,
+              ),
             ),
-            const Gap(5),
-            Text(
-              date,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w600, color: MColors.dark),
-            ),
-            const Gap(5),
-            Text(
-              ('$time ຊມ'),
-              style: Theme.of(context).textTheme.bodyMedium,
+            const Gap(10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontSize: 16),
+                  ),
+                  const Gap(5),
+                  Text(
+                    date,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: MColors.dark,
+                        ),
+                  ),
+                  const Gap(5),
+                  Text(
+                    ('$time ຊມ'),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

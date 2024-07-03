@@ -20,7 +20,7 @@ class ReusableDropdownRow extends StatelessWidget {
       children: [
         Text(label),
         Container(
-          width: 190, // กำหนดขนาดคงที่สำหรับ DropdownButton
+          width: 190,
           height: 35,
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           decoration: BoxDecoration(
@@ -31,13 +31,15 @@ class ReusableDropdownRow extends StatelessWidget {
             child: DropdownButton<String>(
               value: value,
               onChanged: onChanged,
-              items: items.map<DropdownMenuItem<String>>((String value) {
+              items: items.map<DropdownMenuItem<String>>((String item) {
                 return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
+                  value: item,
+                  child: Text(item, style: TextStyle(color: Colors.black)),
                 );
               }).toList(),
               isExpanded: true,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  fontSize: 14), // Set the default text color to black
             ),
           ),
         ),

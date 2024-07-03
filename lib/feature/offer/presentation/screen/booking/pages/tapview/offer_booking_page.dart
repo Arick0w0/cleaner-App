@@ -1,10 +1,14 @@
 // lib/feature/booking/presentation/pages/booking_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/booking_content.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/tapview/booking_content.dart';
 
 class BookingPage extends StatelessWidget {
-  const BookingPage({super.key});
+  final int initialIndex;
+  const BookingPage({
+    super.key,
+    this.initialIndex = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class BookingPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Booking Page'),
         ),
-        body: const BookingContent(),
+        body: BookingContent(initialIndex: initialIndex),
       ),
     );
   }

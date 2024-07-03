@@ -30,6 +30,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is ResetPasswordOtpVerified) {
@@ -48,7 +49,10 @@ class _OtpScreenState extends State<OtpScreen> {
             );
           } else if (state is ResetPasswordOtpSent) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('OTP sent again')),
+              const SnackBar(
+                content: Text(' ສົ່ງOTP'),
+                backgroundColor: Colors.greenAccent,
+              ),
             );
           }
         },
@@ -67,7 +71,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     MTexts.confirmOtp,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  Gap(40),
+                  const Gap(40),
                   OTPTextField(
                     controller: otpController,
                     length: 6,
@@ -93,7 +97,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           .add(VerifyOtpEvent(widget.phoneNumber, _otp));
                     },
                   ),
-                  Gap(MSize.defaultSize),
+                  const Gap(MSize.defaultSize),
                   TextButton(
                     onPressed: () {
                       context
@@ -123,7 +127,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           );
                         }
                       },
-                      child: const Text('Verify OTP'),
+                      child: const Text('ຍືນຍັ້ນ'),
                     ),
                   ),
                 ],

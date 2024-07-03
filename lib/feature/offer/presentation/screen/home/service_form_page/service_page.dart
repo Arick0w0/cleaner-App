@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+
 import 'package:mae_ban/feature/auth/data/local_storage/local_storage_service.dart';
 import 'package:mae_ban/feature/auth/presentation/cubit/user_cubit.dart';
 import 'package:mae_ban/feature/offer/domain/entities/service_type.dart';
@@ -83,8 +84,12 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
       if (selectionState.serviceCost == '0' ||
           selectionState.selectedTime == TimeOfDay(hour: 0, minute: 0)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('กรุณาเลือกประเภทที่พักและเวลา')),
+          const SnackBar(
+            backgroundColor: Colors.amber,
+            content: Text('ກະລຸນາເລືອກປະເພດທີ່ພັກ ແລະ ເວລາ'),
+          ),
         );
+
         return;
       }
 
@@ -105,7 +110,7 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
         'codename': selectionState.codename, // Add codename to formData
       };
 
-      // print('Form Data: $formData');
+      print('Form Data: $formData');
 
       Navigator.push(
         context,

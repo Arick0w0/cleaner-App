@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
-import 'package:mae_ban/core/constants/color.dart';
+import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/feature/offer/presentation/widgets/cleaner_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
+
+import 'package:mae_ban/core/constants/color.dart';
 
 class ChoosePage extends StatefulWidget {
   final String postJobId;
@@ -95,10 +98,6 @@ class _ChoosePageState extends State<ChoosePage> {
           .put(Uri.parse(url), headers: headers, body: body)
           .timeout(const Duration(seconds: 10));
       if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Cleaner chosen successfully')),
-        );
-
         context.go('/home-job-offer', extra: {'initialTabIndex': 1});
         // Fetch the updated job details after choosing cleaner
         await _fetchJobDetails();
@@ -150,33 +149,81 @@ class _ChoosePageState extends State<ChoosePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: Center(
-              child: Text(
-            'ທ່ານຕ້ອງການເລືອກແມ່ບ້ານຄົນນີ້ແທ້ບໍ?',
+          title: Column(
+            children: [
+              SizedBox(
+                width: 50,
+                child: Image.asset(
+                  MTexts.warning,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Gap(10),
+              Text(
+                'ທ່ານຕ້ອງການເລືອກແມ່ບ້ານຄົນນີ້ແທ້ບໍ?',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: MColors.grey),
+              ),
+            ],
+          ),
+          content: Text(
+            'ເລືອກແລ້ວຈະບໍສາມາຍົກເລີກໄດ້?',
+            textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
                 .bodyLarge
-                ?.copyWith(color: MColors.grey),
-          )),
-          content: Text(
-            'ເລືອກແລ້ວຈະບໍສາມາດົກເລີກໄດ້?',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: MColors.orange,
-                ),
+                ?.copyWith(color: MColors.orange, fontSize: 12),
           ),
           actions: [
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Yes'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                _chooseCleaner(hunterUsername);
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 100,
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      // color: MColors.redPink,
+                      border: Border.all(color: MColors.accent),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'ຍົກເລີກ',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: MColors.accent),
+                    ),
+                  ),
+                ),
+                const Gap(10),
+                Container(
+                  width: 100,
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: MColors.accent,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: InkWell(
+                    child: Text(
+                      'ຕົກລົງ',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      _chooseCleaner(hunterUsername);
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -196,30 +243,34 @@ class _ChoosePageState extends State<ChoosePage> {
       appBar: AppBar(
         title: const Text('ຜູ້ໃຫ້ບໍລິການ'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
-        child: cleanerData.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 0.66,
+      body: RefreshIndicator(
+        onRefresh: _fetchCleaners,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+          child: cleanerData.isEmpty
+              ? const Center(child: CircularProgressIndicator())
+              : GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.65,
+                  ),
+                  itemCount: cleanerData.length,
+                  itemBuilder: (context, index) {
+                    final cleaner = cleanerData[index];
+                    return GestureDetector(
+                      onTap: () => _showConfirmationDialog(cleaner['username']),
+                      child: CleanerCard(
+                        name:
+                            '${cleaner['first_name']} ${cleaner['last_name']}',
+                        imageProfile: cleaner['image_profile'] ?? '',
+                        image: cleaner['cover_image'] ?? '',
+                      ),
+                    );
+                  },
                 ),
-                itemCount: cleanerData.length,
-                itemBuilder: (context, index) {
-                  final cleaner = cleanerData[index];
-                  return GestureDetector(
-                    onTap: () => _showConfirmationDialog(cleaner['username']),
-                    child: CleanerCard(
-                      name: '${cleaner['first_name']} ${cleaner['last_name']}',
-                      imageProfile: cleaner['image_profile'] ?? '',
-                      image: cleaner['cover_image'] ?? '',
-                    ),
-                  );
-                },
-              ),
+        ),
       ),
     );
   }

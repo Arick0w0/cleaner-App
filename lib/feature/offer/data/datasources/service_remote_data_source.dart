@@ -22,7 +22,7 @@ class ServiceTypeRemoteDataSourceImpl implements ServiceTypeRemoteDataSource {
     if (response.statusCode == 200) {
       final Map<String, dynamic> data =
           json.decode(utf8.decode(response.bodyBytes));
-      print('Data received from API: $data'); // Debugging line
+      // print('Data received from API: $data'); // Debugging line
       final List<dynamic> serviceTypes = data['data'];
       return serviceTypes
           .map((json) => ServiceTypeModel.fromJson(json))

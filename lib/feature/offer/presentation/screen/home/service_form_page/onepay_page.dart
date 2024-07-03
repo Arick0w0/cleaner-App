@@ -47,10 +47,11 @@ class OnePayPage extends StatelessWidget {
 
       if (responseData['data'] == 'successfully') {
         // Print the data that will be passed to SuccessPage
-        print('Post Job ID: ${responseData['post_job_Id']}');
-        print('Bill Code: $billCode');
-        print('DateTime Service: $dateTimeService');
-        print('Total Price: $totalPrice');
+        // print('Post Job ID: ${responseData['post_job_Id']}');
+        // print('Bill Code: $billCode');
+        // print('DateTime Service: $dateTimeService');
+        // print('Total Price: $totalPrice');
+        print('data: $responseData');
 
         // แสดงหน้า SuccessPage เมื่อ data เป็น successfully
         Navigator.push(
@@ -72,11 +73,15 @@ class OnePayPage extends StatelessWidget {
         );
       }
     } else {
-      print('Failed to submit job');
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      // print('Failed to submit job');
+      // print('Response status: ${response.statusCode}');
+      // print('Response body: ${response.body}');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to submit job')),
+        const SnackBar(
+            content: Text(
+          'Failed to submit job',
+          style: TextStyle(color: Colors.red),
+        )),
       );
     }
   }

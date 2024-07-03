@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/core/utils/show_snackbar.dart';
 import 'package:mae_ban/core/widgets/loader.dart';
@@ -15,7 +16,7 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Forgot Password'),
+        title: const Text('ລືມລະຫັດຜ່ານ'),
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -39,52 +40,60 @@ class ForgotPasswordPage extends StatelessWidget {
             return const Loader();
           }
 
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // TextField(
-                  //   controller: _phoneController,
-                  //   decoration: InputDecoration(
-                  //     labelText: 'Phone Number',
-                  //     border: OutlineInputBorder(),
-                  //   ),
-                  //   keyboardType: TextInputType.phone,
-                  // ),
-                  CustomTextFormField(
-                    controller: _phoneController,
-                    labelText: MTexts.phoneNumber,
-                    prefixIcon: const Icon(Icons.phone),
-                    keyboardType: TextInputType.phone,
-                    errorText: MTexts.pleaseenteryourphonenumber,
-                    useMaxLength: true,
-                    usePrefix: true, // Show prefix
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // TextField(
+                //   controller: _phoneController,
+                //   decoration: InputDecoration(
+                //     labelText: 'Phone Number',
+                //     border: OutlineInputBorder(),
+                //   ),
+                //   keyboardType: TextInputType.phone,
+                // ),
+                SizedBox(
+                  height: 200,
+                  child: Image.asset(MTexts.person),
+                ),
+                Text(
+                  'ກູ້ຄືນລະຫັດຜ່ານ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: MColors.black),
+                ),
+                Gap(25),
+                CustomTextFormField(
+                  controller: _phoneController,
+                  labelText: MTexts.phoneNumber,
+                  prefixIcon: const Icon(Icons.phone),
+                  keyboardType: TextInputType.phone,
+                  errorText: MTexts.pleaseenteryourphonenumber,
+                  useMaxLength: true,
+                  usePrefix: true, // Show prefix
+                ),
+                const Gap(20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      final phoneNumber = '20' + _phoneController.text;
+                      if (phoneNumber.isNotEmpty) {
+                        context.read<AuthBloc>().add(SendOtpEvent(phoneNumber));
+                      } else {
+                        showSnackBar(
+                          context,
+                          MTexts.plsselectimage,
+                          backgroundColor: Colors.orange,
+                        );
+                      }
+                    },
+                    child: const Text('Send OTP'),
                   ),
-                  const Gap(20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        final phoneNumber = '20' + _phoneController.text;
-                        if (phoneNumber.isNotEmpty) {
-                          context
-                              .read<AuthBloc>()
-                              .add(SendOtpEvent(phoneNumber));
-                        } else {
-                          showSnackBar(
-                            context,
-                            MTexts.plsselectimage,
-                            backgroundColor: Colors.orange,
-                          );
-                        }
-                      },
-                      child: const Text('Send OTP'),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },

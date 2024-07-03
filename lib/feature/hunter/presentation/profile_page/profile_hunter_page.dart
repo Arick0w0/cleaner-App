@@ -1,0 +1,220 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mae_ban/core/constants/color.dart';
+import 'package:mae_ban/core/utils/auth_utils.dart';
+import 'package:mae_ban/feature/auth/data/local_storage/local_storage_service.dart';
+import 'package:mae_ban/feature/auth/presentation/cubit/user_cubit.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/profile/address/address_view.dart';
+
+class HunterProfile extends StatelessWidget {
+  const HunterProfile({super.key});
+
+  Future<String?> _getToken() async {
+    final localStorageService = LocalStorageService();
+    return await localStorageService.getToken();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String?>(
+      future: _getToken(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else {
+          final token = snapshot.data;
+          // Print the token to the debug console
+          // debugPrint('Token: $token');
+
+          return Scaffold(
+            backgroundColor: MColors.white,
+            appBar: AppBar(title: const Text('ໂປຣໄຟລ໌')),
+            body: BlocBuilder<UserCubit, UserState>(
+              builder: (context, state) {
+                if (state is UserLoaded) {
+                  final user = state.user;
+                  final imageUrl = user.imageProfile;
+
+                  // Print user data to the debug console
+                  // debugPrint('User ID: ${user.id}');
+                  // debugPrint('Username: ${user.username}');
+                  // debugPrint('First Name: ${user.firstName}');
+                  // debugPrint('Last Name: ${user.lastName}');
+                  // debugPrint('code: ${user.customerCode}');
+                  // debugPrint('role: ${user.role}');
+                  // debugPrint('Phone: ${user.phone}');
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      '${user.firstName}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w400,
+                                              color: MColors.black),
+                                    ),
+                                    Gap(5),
+                                    Text(
+                                      'ແກ້ໄຂ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(color: MColors.accent),
+                                    )
+                                  ],
+                                ),
+                                const Gap(10),
+                                Text('ID: ${user.customerCode}',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium
+                                    // ?.copyWith(
+                                    //     fontWeight: FontWeight.w400,
+                                    //     color: MColors.black),
+                                    ),
+                              ],
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: imageUrl.isNotEmpty
+                                  ? Image.network(
+                                      imageUrl,
+                                      width: 80,
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      'assets/mock/mock04.jpg',
+                                      width: 80,
+                                      height: 80,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                          ],
+                        ),
+                        const Divider(),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: TextAndIcon(
+                            title: 'ການແຈ້ງເຕືອນ',
+                            icon: Icon(
+                              Icons.notifications_none_rounded,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                        const Divider(),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: TextAndIcon(
+                            title: 'ຂໍ້ມູນບັນຊີທະນາຄານ',
+                            icon: Icon(
+                              Icons.card_membership,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                        const Divider(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddressView(
+                                  userId: user.id,
+                                  token: token ?? '',
+                                ),
+                              ),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: TextAndIcon(
+                              title: 'ກະເປົ໋າເງິນ',
+                              icon: Icon(
+                                Icons.wallet,
+                                size: 24,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Divider(),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: TextAndIcon(
+                            title: 'ປະເພດບໍລິການ',
+                            icon: Icon(
+                              Icons.cleaning_services_outlined,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                        const Divider(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('ອອກລະບົບ'),
+                              GestureDetector(
+                                onTap: () => logout(context),
+                                child: const Icon(
+                                  Icons.logout_outlined,
+                                  size: 24,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Spacer(),
+                        const Text('Versions 1.0.0'),
+                      ],
+                    ),
+                  );
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+
+class TextAndIcon extends StatelessWidget {
+  final String title;
+  final Icon icon;
+  const TextAndIcon({
+    super.key,
+    required this.title,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title),
+        icon,
+      ],
+    );
+  }
+}

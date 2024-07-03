@@ -44,34 +44,49 @@ class BookingStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        if (showStatusText)
-          Text(
-            'ສະຖານະ',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        const Gap(5),
-        SizedBox(
-          width: 110,
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
-              color: getStatusColor(status),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Center(
-              child: Text(
-                getStatusText(status),
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: MColors.white,
-                    ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double containerWidth = constraints.maxWidth * 0.25;
+        double fontSize = containerWidth * 0.12;
+
+        if (containerWidth < 90) {
+          containerWidth = 90;
+          fontSize = 10;
+        } else if (containerWidth > 120) {
+          containerWidth = 120;
+          fontSize = 12;
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (showStatusText)
+              Text(
+                'ສະຖານະ',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            const Gap(5),
+            Container(
+              width: containerWidth,
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              decoration: BoxDecoration(
+                color: getStatusColor(status),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: Text(
+                  getStatusText(status),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: MColors.white,
+                        fontSize: fontSize,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }

@@ -14,6 +14,10 @@ class MTexts {
   static const String mock02 = 'assets/mock/mock02.png';
   static const String mock03 = 'assets/mock/mock03.jpg';
 
+// Dialog
+  static const String warning = 'assets/logo/warning.png';
+  static const String success = 'assets/logo/success.png';
+
 // --- SignUp User Screen Text
   static const String inputPersonalInfo = "ປ້ອນຂໍ້ມູນສ່ວນຕົວ";
   static const String loginPassword = "ລະຫັດຜ່ານເຂົ້າສູລະບົບ";

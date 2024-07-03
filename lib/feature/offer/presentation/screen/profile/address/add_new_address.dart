@@ -46,9 +46,11 @@ class _AddressFormWidgetState extends State<AddressForm> {
     );
 
     if (response.statusCode != 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to fetch existing addresses')),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text('Failed to fetch existing addresses'),
+      //   ),
+      // );
       return;
     }
 
@@ -78,12 +80,15 @@ class _AddressFormWidgetState extends State<AddressForm> {
       body: jsonEncode(payload),
     );
 
-    print('Response status: ${updateResponse.statusCode}');
-    print('Response body: ${updateResponse.body}');
+    // print('Response status: ${updateResponse.statusCode}');
+    // print('Response body: ${updateResponse.body}');
 
     if (updateResponse.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Address saved successfully')),
+        SnackBar(
+          content: Text('ບັນທຶກທີຢູ່ສໍາເລັດ'),
+          backgroundColor: Colors.greenAccent[400],
+        ),
       );
       Navigator.pop(context, true); // Pass true to indicate success
     } else {
@@ -97,95 +102,97 @@ class _AddressFormWidgetState extends State<AddressForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ເພີມທີ່ຢູ່'),
+        title: const Text('ເພີມທີ່ຢູ່'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('ກ່ຽວກັບທີ່ພັກຂອງເຈົ້າ'),
-            const Gap(10),
-            Card(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                child: CustomTextFieldRow(
-                  label: 'ຊື່ທີ່ພັກ',
-                  hintText: 'ໃສ່ຊື່ທີ່ພັກ',
-                  controller: addressController,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('ກ່ຽວກັບທີ່ພັກຂອງເຈົ້າ'),
+              const Gap(10),
+              Card(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: CustomTextFieldRow(
+                    label: 'ຊື່ທີ່ພັກ',
+                    hintText: 'ໃສ່ຊື່ທີ່ພັກ',
+                    controller: addressController,
+                  ),
                 ),
               ),
-            ),
-            const Gap(20),
-            const Text('ຂໍ້ມູນທີ່ຢູ່'),
-            const Gap(10),
-            Card(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'ລິ້ງປັກໝຸດຈາກ google map',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: MColors.black),
-                    ),
-                    const Gap(10),
-                    TextgoogleMap(
-                      controller: googleController,
-                    ),
-                    const Divider(),
-                    ReusableDropdownRow(
-                      label: 'ແຂວງ',
-                      value: selectedProvince,
-                      items: ['ນະຄອນຫຼວງວຽງຈັນ'],
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedProvince = newValue!;
-                        });
-                      },
-                    ),
-                    Gap(10),
-                    ReusableDropdownRow(
-                      label: 'ເມືອງ',
-                      value: selectedDistrict,
-                      items: [
-                        'ເມືອງສີສັດຕະນາກ',
-                        'ເມືອງຈັນທະບູລີ',
-                        'ເມືອງໄຊເສດຖາ',
-                        'ເມືອງສີໂຄດຕະບອງ',
-                        'ເມືອງຫາດຊາຍຟອງ',
-                        'ເມືອງນາຊາຍທອງ',
-                        'ເມືອງສັງທອງ',
-                        'ເມືອງປາກງື່ມ',
-                      ],
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedDistrict = newValue!;
-                        });
-                      },
-                    ),
-                    Gap(10),
-                    CustomTextFieldRow(
-                      label: 'ບ້ານ',
-                      hintText: 'ກະລຸນາປ່ອນຂໍ້ມູນບ້ານ',
-                      controller: villageController,
-                    ),
-                  ],
+              const Gap(20),
+              const Text('ຂໍ້ມູນທີ່ຢູ່'),
+              const Gap(10),
+              Card(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'ລິ້ງປັກໝຸດຈາກ google map',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: MColors.black),
+                      ),
+                      const Gap(10),
+                      TextgoogleMap(
+                        controller: googleController,
+                      ),
+                      const Divider(),
+                      ReusableDropdownRow(
+                        label: 'ແຂວງ',
+                        value: selectedProvince,
+                        items: ['ນະຄອນຫຼວງວຽງຈັນ'],
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedProvince = newValue!;
+                          });
+                        },
+                      ),
+                      Gap(10),
+                      ReusableDropdownRow(
+                        label: 'ເມືອງ',
+                        value: selectedDistrict,
+                        items: [
+                          'ເມືອງສີສັດຕະນາກ',
+                          'ເມືອງຈັນທະບູລີ',
+                          'ເມືອງໄຊເສດຖາ',
+                          'ເມືອງສີໂຄດຕະບອງ',
+                          'ເມືອງຫາດຊາຍຟອງ',
+                          'ເມືອງນາຊາຍທອງ',
+                          'ເມືອງສັງທອງ',
+                          'ເມືອງປາກງື່ມ',
+                        ],
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedDistrict = newValue!;
+                          });
+                        },
+                      ),
+                      Gap(10),
+                      CustomTextFieldRow(
+                        label: 'ບ້ານ',
+                        hintText: 'ກະລຸນາປ່ອນຂໍ້ມູນບ້ານ',
+                        controller: villageController,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: FooterApp(

@@ -35,7 +35,7 @@ class SuccessPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('dataTimeService: $postJobId'),
+            // Text('dataTimeService: $postJobId'),
             const Gap(20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

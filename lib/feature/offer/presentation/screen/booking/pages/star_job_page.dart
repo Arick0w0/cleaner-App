@@ -3,10 +3,11 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mae_ban/core/constants/color.dart';
+import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/feature/offer/presentation/cubits/countdown/countdown_cubit.dart';
 import 'package:mae_ban/feature/offer/presentation/screen/booking/widget/text_row.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/booking/widget/timeline/timev2/step_status.dart';
 import 'package:mae_ban/feature/offer/presentation/screen/profile/address/widget/footer_app.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking/widget/dialog_success.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -19,6 +20,16 @@ class StepperDemo extends StatefulWidget {
   const StepperDemo({Key? key, required this.startJobId}) : super(key: key);
   @override
   _StepperDemoState createState() => _StepperDemoState();
+}
+
+enum StepStatus {
+  PRE_DEPARTURE,
+  DEPARTURE,
+  ARRIVED,
+  CONFIRM_ARRIVAL,
+  START_JOB,
+  FINISH_JOB,
+  CONFIRM_FINISH_JOB
 }
 
 class _StepperDemoState extends State<StepperDemo> {
@@ -190,6 +201,67 @@ class _StepperDemoState extends State<StepperDemo> {
     }
   }
 
+  Text getStatusMessage(String status, BuildContext context) {
+    switch (status) {
+      case 'PRE_DEPARTURE':
+        return Text(
+          'ແມ່ບ້ານຈະອອກເດີນທາງເມື່ອໃກ້ເຖິງເວລາທີກຳນົດ',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleMedium,
+        );
+      case 'DEPARTURE':
+        return Text(
+          'ແມ່ບ້ານກຳລັງເດີນທາງ...',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleMedium,
+        );
+      case 'ARRIVED':
+        return Text(
+          'ແມ່ບ້ານໄດ້ເຖິງສະຖານທີແລ້ວກະລຸນາຍືນຢັນສະຖານະ',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: MColors.orange),
+        );
+      case 'CONFIRM_ARRIVAL':
+        return Text(
+          'ກະລຸນາລໍຖ້າແມ່ບ້ານກະກຽມເພື່ອເລີ່ມວຽກ',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: MColors.orange),
+        );
+      case 'START_JOB':
+        return Text(
+          'ແມ່ບ້ານກຳລັງທຳຄວາມສະອາດ...',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: MColors.orange),
+        );
+      case 'FINISH_JOB':
+        return Text(
+          '*ຍືນຢັນສະຖານະເມື່ອເຮັດວຽກສຳເລັດ',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: MColors.orange),
+        );
+      default:
+        return Text('');
+    }
+  }
+
   Widget _buildIndicator(StepStatus? status) {
     if (status == null) {
       return _buildEmptyIndicator();
@@ -279,6 +351,61 @@ class _StepperDemoState extends State<StepperDemo> {
     return formatter.format(dateTime);
   }
 
+  String formatHours(dynamic hours) {
+    if (hours is int) {
+      return hours.toString(); // ถ้าเป็น int ให้แสดงผลตามเดิม
+    } else if (hours is double) {
+      int hourPart = hours.truncate();
+      int minutePart = ((hours - hourPart) * 60).round();
+      return '$hourPart:${minutePart.toString().padLeft(2, '0')}';
+    } else {
+      throw ArgumentError('hours must be an int or a double');
+    }
+  }
+
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Color(0xFFFFFFFF),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40),
+            child: Column(
+              children: [
+                SizedBox(
+                    width: 100,
+                    child: Image.asset(
+                      MTexts.success,
+                      fit: BoxFit.cover,
+                    )),
+                Gap(20),
+                Text(
+                  'ຂອບໃຈທີໃຊ້ບໍລິການຂອງພວກເຮົາ',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
+            ),
+          ),
+          // content: const Text('ຂອບໃຈທີໃຊ້ບໍລິການຂອງພວກເຮົາ'),
+          // actions: <Widget>[
+          //   TextButton(
+          //     child: const Text('OK'),
+          //     onPressed: () {
+          //       Navigator.of(context).pop();
+          //     },
+          //   ),
+          // ],
+        );
+      },
+    );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.of(context).pop();
+      context.go('/review-page');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -287,8 +414,8 @@ class _StepperDemoState extends State<StepperDemo> {
         onRefresh: _fetchDataFromAPI,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.all(16),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
             child: Column(
               children: [
                 const Gap(20),
@@ -356,7 +483,9 @@ class _StepperDemoState extends State<StepperDemo> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('show messages'),
+                            Flexible(
+                              child: getStatusMessage(statusProcess, context),
+                            ),
                             SizedBox(
                               width: 100,
                               height: 30,
@@ -369,7 +498,7 @@ class _StepperDemoState extends State<StepperDemo> {
                                   backgroundColor: MaterialStateProperty.all(
                                     statusProcess == 'ARRIVED' ||
                                             statusProcess == 'FINISH_JOB'
-                                        ? Colors.teal
+                                        ? MColors.accent
                                         : Colors.grey,
                                   ),
                                   shape: MaterialStateProperty.all(
@@ -381,7 +510,6 @@ class _StepperDemoState extends State<StepperDemo> {
                                 onPressed: statusProcess == 'ARRIVED' ||
                                         statusProcess == 'FINISH_JOB'
                                     ? () {
-                                        // ตัวอย่างการเรียกใช้ฟังก์ชัน `_submitStatusProcess`
                                         _submitStatusProcess(
                                             statusProcess == 'ARRIVED'
                                                 ? 'CONFIRM_ARRIVAL'
@@ -480,7 +608,7 @@ class _StepperDemoState extends State<StepperDemo> {
                           const Gap(10),
                           TextRow(
                             title: 'ໄລຍະເວລາ',
-                            text: '${jobData?['hours']} ' "ຊ.ມ",
+                            text: '${formatHours(jobData?['hours'])} ' "ຊ.ມ",
                           ),
                           const Gap(10),
                           TextRow(
@@ -498,7 +626,11 @@ class _StepperDemoState extends State<StepperDemo> {
       ),
       bottomNavigationBar: statusProcess == 'CONFIRM_FINISH_JOB'
           ? FooterApp(
-              title: 'ສຳເລັດ', onPressed: () => context.go('/review-page'))
+              title: 'ສຳເລັດ',
+              onPressed: () {
+                _showSuccessDialog(context);
+              },
+            )
           : null,
     );
   }

@@ -3,9 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/choose_page.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/start_jop.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/time_line_page.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/star_job_page.dart';
 import 'package:mae_ban/feature/offer/presentation/screen/profile/address/widget/footer_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -45,7 +45,7 @@ class _DetailPageState extends State<DetailPage> {
     if (response.statusCode == 200) {
       setState(() {
         jobData = jsonDecode(utf8.decode(response.bodyBytes))['data'];
-        print(jobData!['start_job_id']);
+        print(jobData);
       });
     } else {
       print('Failed to fetch job data: ${response.statusCode}');
@@ -213,12 +213,34 @@ class _DetailPageState extends State<DetailPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(jobData!['chosen_job_hunter']
-                                          ['first_name'] ??
-                                      'ເລືອກຜູ້ໃຫ້ບໍລິການທີ່ທ່ານຕ້ອງການ'),
-                                  Text(jobData!['chosen_job_hunter']
-                                          ['customer_code'] ??
-                                      'ID'),
+                                  Text(
+                                      jobData!['chosen_job_hunter'] != null &&
+                                              jobData!['chosen_job_hunter']
+                                                      ['first_name'] !=
+                                                  null &&
+                                              jobData!['chosen_job_hunter']
+                                                      ['first_name']!
+                                                  .isNotEmpty
+                                          ? jobData!['chosen_job_hunter']
+                                              ['first_name']
+                                          : 'ເລືອກຜູ້ໃຫ້ບໍລິການທີ່ທ່ານຕ້ອງການ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                              color: MColors.black,
+                                              fontWeight: FontWeight.w500)),
+                                  Text(
+                                    jobData!['chosen_job_hunter']
+                                            ['customer_code'] ??
+                                        'ID',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                            color: MColors.black,
+                                            fontWeight: FontWeight.w500),
+                                  ),
                                   const Gap(10),
                                   BookingStatusWidget(
                                     status: jobData!['status'] ?? 'N/A',
@@ -260,7 +282,7 @@ class _DetailPageState extends State<DetailPage> {
                               .textTheme
                               .bodyMedium
                               ?.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                         ),
 
                         // Text(

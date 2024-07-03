@@ -24,7 +24,7 @@ class SelectHunter extends StatelessWidget {
                   crossAxisCount: 2, // จำนวนคอลัมน์ในกริด
                   crossAxisSpacing: 10.0, // ระยะห่างระหว่างคอลัมน์
                   mainAxisSpacing: 10.0, // ระยะห่างระหว่างแถว
-                  childAspectRatio: 0.65, // อัตราส่วนของขนาดวิดเจ็ต (ถ้าจำเป็น)
+                  childAspectRatio: 0.68, // อัตราส่วนของขนาดวิดเจ็ต (ถ้าจำเป็น)
                 ),
                 itemCount: cleaners.length, // จำนวนรายการในกริด
                 itemBuilder: (context, index) {

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../../../../../auth/data/models/address_model.dart';
 import 'add_new_address.dart';
 import 'widget/footer_app.dart';
 
 Future<List<Address>> fetchAddresses(String userId, String token) async {
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  final String? token = sharedPreferences.getString('accessToken');
   final response = await http.get(
     Uri.parse('http://18.142.53.143:9393/api/v1/user/$userId'),
     headers: {
@@ -75,64 +81,72 @@ class _AddressViewState extends State<AddressView> {
             if (addresses.isEmpty) {
               return const Center(child: Text('No address found'));
             }
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              child: ListView.builder(
-                itemCount: addresses.length,
-                itemBuilder: (context, index) {
-                  final address = addresses[index];
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 10,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            address.addressName,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge
-                                ?.copyWith(color: Colors.black, fontSize: 27),
-                          ),
-                          Text(
-                              '${address.village}, ${address.district}, ${address.province}'),
-                          Text(address.googleMap),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pop(context, address);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Text('Select'),
-                              ),
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  child: ListView.builder(
+                    itemCount: addresses.length,
+                    itemBuilder: (context, index) {
+                      final address = addresses[index];
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 10,
+                              offset: const Offset(0, 2),
                             ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                address.addressName,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge
+                                    ?.copyWith(
+                                        color: Colors.black, fontSize: 27),
+                              ),
+                              Text(
+                                  '${address.village}, ${address.district}, ${address.province}'),
+                              Text(address.googleMap),
+                              Gap(10),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context, address);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    color: Colors.greenAccent,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    'ເລືອກ',
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             );
           } else {
             return const Center(child: Text('No address found'));

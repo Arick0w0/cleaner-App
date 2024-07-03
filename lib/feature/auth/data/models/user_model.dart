@@ -32,6 +32,11 @@ class Address {
       'google_map': googleMap,
     };
   }
+
+  @override
+  String toString() {
+    return 'Address{addressName: $addressName, village: $village, district: $district, province: $province, googleMap: $googleMap}';
+  }
 }
 
 class ServiceTypess {
@@ -60,6 +65,11 @@ class ServiceTypess {
       'is_active': isActive,
     };
   }
+
+  @override
+  String toString() {
+    return 'ServiceTypess{id: $id, serviceType: $serviceType, isActive: $isActive}';
+  }
 }
 
 class User {
@@ -70,7 +80,8 @@ class User {
   final String role;
   final String phone;
   final String imageProfile;
-  final String token; // เพิ่ม field token
+  final String token;
+  final String customerCode;
   final List<Address> address;
   final List<ServiceTypess> serviceTypes;
 
@@ -82,12 +93,15 @@ class User {
     required this.role,
     required this.phone,
     required this.imageProfile,
-    required this.token, // เพิ่ม token ใน constructor
+    required this.token,
+    required this.customerCode,
     required this.address,
     required this.serviceTypes,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
+    // print('Deserializing User from JSON: $json'); // Debug print
+
     var addressList = json['address'] as List<dynamic>? ?? [];
     var serviceTypeList = json['service_types'] as List<dynamic>? ?? [];
 
@@ -96,15 +110,19 @@ class User {
     List<ServiceTypess> serviceTypes =
         serviceTypeList.map((i) => ServiceTypess.fromJson(i)).toList();
 
+    final id = json['_id'] ?? '';
+    // print('Deserialized id: $id'); // Debug print
+
     return User(
-      id: json['_id'] ?? '',
+      id: id,
       username: json['username'] ?? '',
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       role: json['role'] ?? '',
       phone: json['phone'] ?? '',
       imageProfile: json['image_profile'] ?? '',
-      token: json['token'] ?? '', // เพิ่มการดึง token จาก json
+      token: json['token'] ?? '',
+      customerCode: json['customer_code'] ?? '',
       address: address,
       serviceTypes: serviceTypes,
     );
@@ -119,9 +137,15 @@ class User {
       'role': role,
       'phone': phone,
       'image_profile': imageProfile,
-      'token': token, // เพิ่ม token ในการส่งกลับ
+      'token': token,
+      'customer_code': customerCode,
       'address': address.map((i) => i.toJson()).toList(),
       'service_types': serviceTypes.map((i) => i.toJson()).toList(),
     };
   }
+
+  // @override
+  // String toString() {
+  //   return 'User{id: $id, username: $username, firstName: $firstName, lastName: $lastName, role: $role, phone: $phone, imageProfile: $imageProfile, token: $token, customerCode: $customerCode, address: $address, serviceTypes: $serviceTypes}';
+  // }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:mae_ban/feature/hunter/presentation/cubit/activity/booking_cubit.dart';
 import 'package:mae_ban/feature/offer/presentation/blocs/service_type/service_type_bloc.dart';
 import 'package:mae_ban/service_locator.dart' as di;
 import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
@@ -11,6 +12,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:mae_ban/feature/auth/data/models/user_model.dart';
 
+import 'feature/hunter/presentation/cubit/bookinghunter_cubit.dart';
+import 'feature/hunter/presentation/cubit/history/history_cubit.dart';
+import 'feature/hunter/presentation/cubit/job_detail/job_detail_cubit.dart';
+import 'feature/hunter/presentation/cubit/start_job/start_job_cubit.dart';
 import 'feature/offer/presentation/cubits/countdown/countdown_cubit.dart';
 
 void main() async {
@@ -44,19 +49,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(
-          create: (context) => di.sl<AuthBloc>(),
-        ),
+        BlocProvider<AuthBloc>(create: (context) => di.sl<AuthBloc>()),
         BlocProvider<ServiceTypeBloc>(
           create: (context) =>
               di.sl<ServiceTypeBloc>()..add(FetchServiceTypes()),
         ),
-        BlocProvider<UserCubit>(
-          create: (context) => userCubit,
-        ),
+        BlocProvider<UserCubit>(create: (context) => userCubit),
+        BlocProvider(create: (context) => CountdownCubit()),
+        BlocProvider(create: (_) => di.sl<BookingCubit>()),
+        BlocProvider(create: (_) => di.sl<JobDetailCubit>()),
+        BlocProvider(create: (_) => di.sl<HistoryCubit>()),
         BlocProvider(
-          create: (context) => CountdownCubit(),
-        ),
+            create: (_) => di.sl<StartJobCubit>()), // Add StartJobCubit
         // BlocProvider<PostJobCubit>(
         //   create: (context) =>
         //       PostJobCubit()..clearPostJobIdsOlderThan(const Duration(days: 7)),

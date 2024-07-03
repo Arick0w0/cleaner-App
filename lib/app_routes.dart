@@ -7,8 +7,11 @@ import 'package:mae_ban/feature/auth/presentation/signup/signup_user.dart';
 import 'package:mae_ban/feature/auth/presentation/otp/forgot_password_page.dart';
 import 'package:mae_ban/feature/auth/presentation/otp/otp_screen.dart';
 import 'package:mae_ban/feature/auth/presentation/otp/reset_password_screen.dart';
+import 'package:mae_ban/feature/hunter/presentation/landing_hunter/ativity_view_page.dart';
+import 'package:mae_ban/feature/hunter/presentation/page/history_page/history_detail_page.dart';
 import 'package:mae_ban/feature/hunter/presentation/landing_hunter/job_hunter_landing_page.dart.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/start_jop.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/tapview/offer_booking_page.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking/pages/test/start_jop.dart';
 
 import 'package:mae_ban/feature/offer/presentation/screen/home/service_form_page/service_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,12 +21,16 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:mae_ban/core/widgets/loader.dart';
 
 import 'feature/auth/presentation/cubit/user_cubit.dart';
+import 'feature/hunter/presentation/page/activity_page/jobdeatial_h_page.dart';
+import 'feature/hunter/presentation/page/activity_page/start_jobs_page.dart';
+import 'feature/hunter/presentation/page/history_page/history_page.dart';
 import 'feature/offer/domain/entities/service_type.dart';
 import 'feature/offer/presentation/job_offer_landing_page.dart.dart';
 import 'feature/offer/presentation/screen/booking/pages/offer_ativity_page.dart';
 import 'feature/offer/presentation/screen/booking/pages/review_page.dart';
-import 'feature/offer/presentation/screen/booking/pages/time_line_page.dart';
+import 'feature/offer/presentation/screen/booking/pages/star_job_page.dart';
 import 'feature/offer/presentation/screen/home/service_form_page/detail_page.dart';
+import 'feature/offer/presentation/screen/booking/widget/dialog_success.dart';
 
 Future<User?> _loadUserFromPreferences() async {
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -60,7 +67,8 @@ final GoRouter router = GoRouter(
     // GoRoute(
     //   path: '/',
     //   builder: (context, state) => StepperDemo(),
-    // ),
+    // ),Test
+
     GoRoute(
       path: '/review-page',
       builder: (context, state) => const ReviewPage(),
@@ -147,6 +155,59 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         final postJobId = state.extra as String;
         return DetailPage(postJobId: postJobId);
+      },
+    ),
+    // ################# Hunter #########################
+    GoRoute(
+      path: '/detail-hunter',
+      builder: (context, state) {
+        final postJobId = state.extra as String;
+        return JobDetailPage(postJobId: postJobId);
+      },
+    ),
+    GoRoute(
+      path: '/history-hunter',
+      builder: (context, state) {
+        final startJobId = state.extra as String;
+        return HistoryDetailPage(startJobId: startJobId);
+      },
+    ),
+    GoRoute(
+      path: '/history-hunter-all',
+      builder: (context, state) => const HistoryHunterPage(),
+    ),
+
+    // ######### Hunter tap view ############ Guide context.go('/activity-view?initialTab=1')
+
+    GoRoute(
+      path: '/activity-view',
+      builder: (context, state) {
+        final initialTab = state.uri.queryParameters['initialTab'] ?? '0';
+        return ActivityViewPage(initialIndex: int.parse(initialTab));
+      },
+    ),
+//     GoRoute(
+//   path: '/activity-view',
+//   builder: (context, state) {
+//     final initialTab = state.uri.queryParameters['initialTab'] ?? '0';
+//     return JobHunterLandingPage(initialTabIndex: int.parse(initialTab));
+//   },
+// ),
+
+    // ######### Offer tap view ############ guide context.go('/booking-view?initialTab=1')
+    GoRoute(
+      path: '/booking-view',
+      builder: (context, state) {
+        final initialTab = state.uri.queryParameters['initialTab'] ?? '0';
+        return BookingPage(initialIndex: int.parse(initialTab));
+      },
+    ),
+
+    GoRoute(
+      path: '/start-job',
+      builder: (context, state) {
+        final startJobId = state.extra as String;
+        return StartJobPage(startJobId: startJobId);
       },
     ),
   ],

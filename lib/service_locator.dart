@@ -13,9 +13,13 @@ import 'package:mae_ban/feature/auth/domain/usecases/signup_job_hunter.dart';
 import 'package:mae_ban/feature/auth/domain/usecases/signup_job_offer.dart';
 import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:mae_ban/feature/auth/presentation/cubit/user_cubit.dart';
+import 'package:mae_ban/feature/hunter/domain/repositories/start_job_repository.dart';
+import 'package:mae_ban/feature/hunter/domain/usecases/accept_booking.dart';
+import 'package:mae_ban/feature/hunter/domain/usecases/get_history.dart';
+import 'package:mae_ban/feature/hunter/presentation/cubit/activity/booking_cubit.dart';
+import 'package:mae_ban/feature/hunter/presentation/cubit/start_job/start_job_cubit.dart';
 import 'package:mae_ban/feature/offer/data/datasources/offer_remote_data_source.dart';
 import 'package:mae_ban/feature/offer/data/datasources/price_remote_data_source.dart';
-import 'package:mae_ban/feature/offer/data/repositories/offer_repository_impl.dart';
 import 'package:mae_ban/feature/offer/data/repositories/price_repository_impl.dart';
 import 'package:mae_ban/feature/offer/domain/repositories/offer_repository.dart';
 import 'package:mae_ban/feature/offer/domain/repositories/price_repository.dart';
@@ -32,6 +36,21 @@ import 'package:mae_ban/feature/shared/presentation/bloc/selecttion/selection_bl
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'feature/auth/data/datasources/auth_remote_data_source_impl.dart';
+import 'feature/auth/data/local_storage/local_storage_service.dart';
+import 'feature/hunter/data/datasource/start_job_remote_data_source.dart';
+import 'feature/hunter/data/repositories/booking_repository.dart';
+import 'feature/hunter/data/repositories/job_detail_repository.dart';
+import 'feature/hunter/data/datasource/booking_remote_data_source.dart';
+import 'feature/hunter/data/datasource/history_remote_data_source.dart';
+import 'feature/hunter/data/datasource/job_detail_remote_data_source.dart';
+import 'feature/hunter/data/repositories/start_job_repository_impl.dart';
+import 'feature/hunter/domain/usecases/get_bookings.dart';
+import 'feature/hunter/domain/usecases/get_job_detail.dart';
+import 'feature/hunter/domain/usecases/get_start_job.dart';
+import 'feature/hunter/domain/usecases/submit_status_process.dart';
+import 'feature/hunter/presentation/cubit/bookinghunter_cubit.dart';
+import 'feature/hunter/presentation/cubit/history/history_cubit.dart';
+import 'feature/hunter/presentation/cubit/job_detail/job_detail_cubit.dart';
 import 'feature/offer/data/datasources/service_remote_data_source.dart';
 import 'feature/offer/data/datasources/time_remote_datasource.dart';
 import 'feature/offer/data/repositories/service_type_repository_impl.dart';
@@ -49,7 +68,8 @@ Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
-
+  // Local Storage Service
+  sl.registerLazySingleton(() => LocalStorageService());
   // Api Service
   sl.registerLazySingleton(
       () => ApiService(client: sl<http.Client>(), baseUrl: Config.apiBaseUrl));
@@ -157,4 +177,65 @@ Future<void> init() async {
       () => TimeRepositoryImpl(remoteDataSource: sl<TimeRemoteDataSource>()));
   sl.registerLazySingleton(() => GetTimes(sl<TimeRepository>()));
   sl.registerFactory(() => TimeCubit(getTimes: sl()));
+
+  // ##################### Hunter   ############################################
+
+  // Data sources
+  sl.registerLazySingleton<BookingRemoteDataSource>(
+    () => BookingRemoteDataSourceImpl(
+      client: sl(),
+      localStorageService: sl<LocalStorageService>(),
+      // connectivity: sl<Connectivity>()
+    ),
+  );
+  sl.registerLazySingleton<HistoryRemoteDataSource>(
+    () => HistoryRemoteDataSourceImpl(
+        client: sl(), localStorageService: sl<LocalStorageService>()),
+  );
+
+  // Repository
+  sl.registerLazySingleton<BookingRepository>(() => BookingRepositoryImpl(
+        bookingRemoteDataSource: sl(),
+        historyRemoteDataSource: sl(),
+      ));
+
+  // Use cases
+  sl.registerLazySingleton(() => GetBookings(repository: sl()));
+  sl.registerLazySingleton(() => AcceptBooking(repository: sl()));
+  sl.registerLazySingleton(() => GetHistory(repository: sl()));
+
+  // Cubit
+  sl.registerFactory(
+      () => BookingCubit(getBookings: sl(), acceptBooking: sl()));
+  sl.registerFactory(() => HistoryCubit(getHistory: sl()));
+  // ##################### Hunter JOB DeTail   ############################################
+
+  // Data sources
+  sl.registerLazySingleton<JobDetailRemoteDataSource>(
+    () => JobDetailRemoteDataSourceImpl(client: sl()),
+  );
+
+  // Repository
+  sl.registerLazySingleton<JobDetailRepository>(
+    () => JobDetailRepositoryImpl(remoteDataSource: sl()),
+  );
+
+  // Use cases
+  sl.registerLazySingleton(() => GetJobDetail(repository: sl()));
+
+  // Cubit
+  sl.registerFactory(() => JobDetailCubit(getJobDetail: sl()));
+
+  ///start job ////
+  sl.registerLazySingleton<StartJobDetailRemoteDataSource>(
+      () => StartJobDetailRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<StartJobRepository>(() =>
+      StartJobDetailRepositoryImpl(
+          remoteDataSource: sl<StartJobDetailRemoteDataSource>()));
+  sl.registerLazySingleton<FetchStartJobDetailUseCase>(
+      () => FetchStartJobDetailUseCase(sl<StartJobRepository>()));
+  sl.registerLazySingleton<SubmitStatusProcessUseCase>(
+      () => SubmitStatusProcessUseCase(sl<StartJobRepository>()));
+  sl.registerFactory<StartJobCubit>(() => StartJobCubit(
+      sl<FetchStartJobDetailUseCase>(), sl<SubmitStatusProcessUseCase>()));
 }

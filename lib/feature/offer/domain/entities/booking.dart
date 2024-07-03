@@ -17,6 +17,7 @@ class Booking {
   final String name;
   final String date;
   final String time;
+  final String image;
   final String status;
   final String orderNumber;
   final String orderDate;
@@ -26,6 +27,7 @@ class Booking {
     required this.name,
     required this.date,
     required this.time,
+    required this.image,
     required this.status,
     required this.orderNumber,
     required this.orderDate,
@@ -38,7 +40,8 @@ class Booking {
       name: json['first_name'] + ' ' + json['last_name'],
       date: json['date_service'],
       time: formatHours(json['hours']),
-      status: json['status'],
+      image: json['image_profile'],
+      status: json['status'] ?? '',
       orderNumber: json['bill_code'],
       orderDate: formatter.format(DateTime.parse(json['created_at']).toLocal()),
     );

@@ -110,7 +110,7 @@ class _OfferHomePageState extends State<OfferHomePage> {
                     ),
                     const Gap(MSize.defaultSpace - 5),
                     Text(
-                      MTexts.popularService,
+                      'ແມ່ບ້ານຍອດນິຍົມ',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const Gap(MSize.defaultSpace - 5),
