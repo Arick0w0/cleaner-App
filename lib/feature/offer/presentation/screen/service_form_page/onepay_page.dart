@@ -97,7 +97,7 @@ class OnePayPage extends StatelessWidget {
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    'MAEBAN',
+                    'MAE BAN',
                     style: TextStyle(
                         color: Color(0xffB61C1C),
                         fontSize: 18,
@@ -108,23 +108,24 @@ class OnePayPage extends StatelessWidget {
               const Divider(),
               const TextOnePay(
                 title: 'Address:',
-                text: 'Hatsaiykhow, Sisattanak, Vientaine Capital',
+                text: 'Thatluangkang, Xaysettha, Vientian Capital',
               ),
               const Divider(),
               const TextOnePay(
                 title: 'Description:',
-                text: 'BUY_Service',
+                text: 'BUY_SERVICE',
               ),
               const Divider(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('Amount:'),
                   Text(
                     '$formattedTotalPrice LAK',
                     style: const TextStyle(
                         color: Color(0xff098DE7),
-                        fontSize: 30,
+                        fontSize: 28,
                         fontWeight: FontWeight.w400),
                   ),
                 ],

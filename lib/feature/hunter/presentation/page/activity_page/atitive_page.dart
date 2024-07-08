@@ -47,19 +47,28 @@ class _ActivePageState extends State<ActivePage> {
                           context.go('/detail-hunter', extra: booking.id);
                         },
                         child: ActivityCard(
-                          booking: booking,
-                          onPressed: () => showConfirmationDialog(
-                            context: context,
-                            title: 'ທ່ານຕ້ອງການຕອບຮັບວຽກນີ້ແທ້ບໍ?',
-                            content:
-                                'ຕອບຮັບແລ້ວກະລຸນາລໍຖ້າການຍືນຍັນຈາກຜູ້ໃຊ້ບໍລິການ?',
-                            onAccept: () {
-                              context
-                                  .read<BookingCubit>()
-                                  .onAcceptBooking(booking.orderNumber);
-                            },
-                          ),
-                        ),
+                            booking: booking,
+                            onPressed: () {
+                              // if (booking.status == 'MATCH_OFFER') {
+                              //   print('Booking ID: ${booking.startJobId}');
+                              //   context.push('/start-job',
+                              //       extra: booking.startJobId);
+                              // } else {
+                              showConfirmationDialog(
+                                context: context,
+                                title: 'ທ່ານຕ້ອງການຕອບຮັບວຽກນີ້ແທ້ບໍ?',
+                                content:
+                                    'ຕອບຮັບແລ້ວກະລຸນາລໍຖ້າການຍືນຍັນຈາກຜູ້ໃຊ້ບໍລິການ?',
+                                onAccept: () {
+                                  context
+                                      .read<BookingCubit>()
+                                      .onAcceptBooking(booking.orderNumber);
+                                },
+                              );
+                            }
+
+                            // },
+                            ),
                       ),
                     ),
                   );

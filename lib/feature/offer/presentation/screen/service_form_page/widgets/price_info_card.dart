@@ -42,7 +42,7 @@ class PriceInfoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'ພາສີມູນຄ່າເພີ່ມ 10%',
+                  'ພາສີມູນຄາເພີ່ມ 10%',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Text(vat.toString() + " LAK"),
@@ -53,7 +53,7 @@ class PriceInfoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'ຍອດລ່ວມທັງໝົດ',
+                  'ຍອດລວມທັງໝົດ',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Text(result.toString() + " LAK"),
@@ -61,7 +61,7 @@ class PriceInfoCard extends StatelessWidget {
             ),
             const Gap(10),
             Text(
-              'ລາຄ່ານີ້ລວມອຸປະກອນ ນໍ້າຢາທໍາຄາວມສະອາດ ແລະ ຄ່າເດີນທາງແລ້ວ',
+              'ລາຄານີ້ລວມອຸປະກອນ ນໍ້າຢາທໍາຄາວມສະອາດ ແລະ ຄາເດີນທາງແລ້ວ',
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ],

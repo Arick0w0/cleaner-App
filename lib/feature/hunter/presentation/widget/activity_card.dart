@@ -22,16 +22,7 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // IgnorePointer(
-        //   ignoring: booking.status == 'NOT_MATCHED',
-        //   child: GestureDetector(
-        //     onTap: () {
-        //       print('Booking ID: ${booking.id}');
-        //       context.go('/detail-hunter', extra: booking.id);
-        //     },
-        //     child:
-        LayoutBuilder(
+    return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -79,48 +70,77 @@ class ActivityCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
-                  Flexible(
-                    child: booking.status == 'WAIT_HUNTER'
-                        ? SizedBox(
-                            height: 30,
-                            width: 100,
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                padding:
-                                    MaterialStateProperty.all(EdgeInsets.zero),
-                                foregroundColor:
-                                    MaterialStateProperty.all(Colors.white),
-                                backgroundColor:
-                                    MaterialStateProperty.all(MColors.accent),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
-                              ),
-                              onPressed: onPressed,
-                              child: Text(
-                                'ຕອບຮັບ',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                  if (booking.status == 'WAIT_HUNTER')
+                    Flexible(
+                      child: SizedBox(
+                        height: 30,
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            backgroundColor:
+                                MaterialStateProperty.all(MColors.accent),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                             ),
-                          )
-                        : Text(
-                            booking.orderDate,
-                            style: Theme.of(context).textTheme.titleSmall,
                           ),
-                  ),
+                          onPressed: onPressed,
+                          child: Text(
+                            'ຕອບຮັບ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  else if (booking.status != 'MATCH_OFFER')
+                    Flexible(
+                      child: Text(
+                        booking.orderDate,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    ),
+                  if (booking.status == 'MATCH_OFFER')
+                    Flexible(
+                      child: SizedBox(
+                        height: 30,
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            backgroundColor:
+                                MaterialStateProperty.all(MColors.accent),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                          ),
+                          onPressed: onPressed,
+                          child: Text(
+                            'ຕິດຕາມ',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
                 ],
               ),
             ],
           ),
         );
       },
-      //   ),
-      // ),
     );
   }
 }

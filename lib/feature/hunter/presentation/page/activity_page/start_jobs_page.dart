@@ -141,7 +141,7 @@ class _StartJobPageState extends State<StartJobPage> {
     switch (status) {
       case 'PRE_DEPARTURE':
         return Text(
-          'ອັບເດດສະຖານະເມື່ອພ້ອມອອກເດີ່ນທາງ',
+          'ອັບເດດສະຖານະເມື່ອພ້ອມອອກເດີນທາງ',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.titleMedium,

@@ -14,6 +14,7 @@ String formatHours(dynamic hours) {
 
 class Booking {
   final String id; // เพิ่ม ID ที่นี่
+  final String startJobId; // เพิ่ม ID ที่นี่
   final String name;
   final String date;
   final String time;
@@ -24,6 +25,7 @@ class Booking {
 
   Booking({
     required this.id, // เพิ่ม ID ที่นี่
+    required this.startJobId, // เพิ่ม ID ที่นี่
     required this.name,
     required this.date,
     required this.time,
@@ -37,6 +39,7 @@ class Booking {
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     return Booking(
       id: json['_id'], // ดึงค่า ID จาก JSON
+      startJobId: json['start_job_id'] ?? '', // ดึงค่า ID จาก JSON
       name: json['first_name'] + ' ' + json['last_name'],
       date: json['date_service'],
       time: formatHours(json['hours']),

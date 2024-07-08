@@ -142,7 +142,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
           if (selectedAddress == null) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('ກະລຸນນາເພີ່ມທີ່ຢູ່'),
+                content: Text('ກະລຸນາເພີ່ມທີ່ຢູ່'),
                 backgroundColor: MColors.orange,
               ),
             );

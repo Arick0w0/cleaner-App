@@ -154,7 +154,7 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
           actions: [
             TextButton(
               onPressed: () {},
-              child: const Text('ເບິງລາຍລະອຽດ',
+              child: const Text('ເບິ່ງລາຍລະອຽດ',
                   style: TextStyle(color: Colors.white)),
             ),
             const Gap(10)
@@ -181,7 +181,7 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
                             key: _formKey,
                             child: ListView(
                               children: [
-                                Text('ເລືອກສະຖານທີໃຊ້ບໍລິການ',
+                                Text('ເລືອກສະຖານທີ່ໃຊ້ບໍລິການ',
                                     style:
                                         Theme.of(context).textTheme.bodyMedium),
                                 const Gap(8),

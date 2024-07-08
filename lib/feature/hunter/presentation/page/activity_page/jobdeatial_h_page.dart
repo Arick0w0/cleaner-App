@@ -148,7 +148,7 @@ class _JobDetailPageState extends State<JobDetailPage> {
                 ),
                 const Divider(),
                 Text(
-                  'ທີ່ຢູ',
+                  'ທີ່ຢູ່',
                   style: Theme.of(context)
                       .textTheme
                       .labelLarge
