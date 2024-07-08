@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 // import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mae_ban/core/constants/color.dart';
@@ -124,7 +125,10 @@ class ActivityCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          onPressed: onPressed,
+                          onPressed: () {
+                            context.push('/start-job',
+                                extra: booking.startJobId);
+                          },
                           child: Text(
                             'ຕິດຕາມ',
                             style: TextStyle(

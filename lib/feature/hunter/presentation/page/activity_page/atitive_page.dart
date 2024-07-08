@@ -66,7 +66,6 @@ class _ActivePageState extends State<ActivePage> {
                                 },
                               );
                             }
-
                             // },
                             ),
                       ),
