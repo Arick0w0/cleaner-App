@@ -119,7 +119,10 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                         const Divider(),
-                        GestureDetector(
+                        InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          // splashColor: MColors.light,
+
                           onTap: () {
                             Navigator.push(
                               context,
@@ -154,27 +157,30 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                         const Divider(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('ອອກລະບົບ'),
-                              GestureDetector(
-                                onTap: () {
-                                  print('Logout tapped'); // Debug print
-                                  logout(context);
-                                },
-                                child: const Icon(
+                        InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () {
+                            // print('Logout tapped'); // Debug print
+                            logout(context);
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('ອອກລະບົບ'),
+                                // GestureDetector(
+                                Icon(
                                   Icons.logout_outlined,
                                   size: 24,
                                 ),
-                              ),
-                            ],
+                                // ),
+                              ],
+                            ),
                           ),
                         ),
                         const Spacer(),
-                        const Text('Version 1.0.0'),
+                        const Text('Version 1.0.0 (Demo)'),
                       ],
                     ),
                   );

@@ -77,9 +77,9 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
           } else if (state is BillingFailure) {
             print(
                 'BillingFailure state reached with error: ${state.error}'); // Debug log
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.error)),
-            );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(content: Text(state.error)),
+            // );
           } else {
             print('State: $state'); // Debug log for other states
           }

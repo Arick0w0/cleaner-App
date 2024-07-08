@@ -150,24 +150,30 @@ class HunterProfile extends StatelessWidget {
                           ),
                         ),
                         const Divider(),
-                        GestureDetector(
-                          onTap: () => logout(context),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () {
+                            // print('Logout tapped'); // Debug print
+                            logout(context);
+                          },
                           child: const Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('ອອກລະບົບ'),
+                                // GestureDetector(
                                 Icon(
                                   Icons.logout_outlined,
                                   size: 24,
                                 ),
+                                // ),
                               ],
                             ),
                           ),
                         ),
                         const Spacer(),
-                        const Text('Versions 1.0.0'),
+                        const Text('Version 1.0.0 (Demo)'),
                       ],
                     ),
                   );
