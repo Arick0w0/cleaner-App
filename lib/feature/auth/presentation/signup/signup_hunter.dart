@@ -57,30 +57,30 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
     super.initState();
 
     // Add listeners to controllers
-    usernameController
-        .addListener(() => print('Username: ${usernameController.text}'));
-    passwordController
-        .addListener(() => print('Password: ${passwordController.text}'));
-    firstNameController
-        .addListener(() => print('First Name: ${firstNameController.text}'));
-    lastNameController
-        .addListener(() => print('Last Name: ${lastNameController.text}'));
-    confirmPasswordController.addListener(
-        () => print('Confirm Password: ${confirmPasswordController.text}'));
-    birthDateController
-        .addListener(() => print('Birth Date: ${birthDateController.text}'));
-    villageController
-        .addListener(() => print('Village: ${villageController.text}'));
-    districtController
-        .addListener(() => print('District: ${districtController.text}'));
-    provinceController
-        .addListener(() => print('Province: ${provinceController.text}'));
-    careerController
-        .addListener(() => print('Career: ${careerController.text}'));
-    nationalityController
-        .addListener(() => print('Nationality: ${nationalityController.text}'));
-    serviceTypeController.addListener(
-        () => print('Service Type: ${serviceTypeController.text}'));
+    //   usernameController
+    //       .addListener(() => print('Username: ${usernameController.text}'));
+    //   passwordController
+    //       .addListener(() => print('Password: ${passwordController.text}'));
+    //   firstNameController
+    //       .addListener(() => print('First Name: ${firstNameController.text}'));
+    //   lastNameController
+    //       .addListener(() => print('Last Name: ${lastNameController.text}'));
+    //   confirmPasswordController.addListener(
+    //       () => print('Confirm Password: ${confirmPasswordController.text}'));
+    //   birthDateController
+    //       .addListener(() => print('Birth Date: ${birthDateController.text}'));
+    //   villageController
+    //       .addListener(() => print('Village: ${villageController.text}'));
+    //   districtController
+    //       .addListener(() => print('District: ${districtController.text}'));
+    //   provinceController
+    //       .addListener(() => print('Province: ${provinceController.text}'));
+    //   careerController
+    //       .addListener(() => print('Career: ${careerController.text}'));
+    //   nationalityController
+    //       .addListener(() => print('Nationality: ${nationalityController.text}'));
+    //   serviceTypeController.addListener(
+    //       () => print('Service Type: ${serviceTypeController.text}'));
   }
 
   @override
@@ -128,7 +128,7 @@ class _SignUpHunterPageState extends State<SignUpHunterPage> {
               backgroundColor: MColors.emerald,
             );
             context.go(
-              '/timeline',
+              '/login',
               extra: {
                 'username': usernameController.text,
                 'status': 'REGISTERED'

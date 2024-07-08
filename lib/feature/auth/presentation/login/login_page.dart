@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
               showSnackBar(
                 backgroundColor: MColors.emerald,
                 context,
-                MTexts.signUpSuccess,
+                MTexts.loginSuccess,
               );
 
               final authResponse = state.authResponse;

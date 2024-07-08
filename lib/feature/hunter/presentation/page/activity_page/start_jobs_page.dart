@@ -7,9 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/core/constants/text_strings.dart';
 import 'package:mae_ban/feature/hunter/presentation/cubit/start_job/start_job_cubit.dart';
+import 'package:mae_ban/feature/hunter/presentation/cubit/start_job/start_job_state.dart';
 import 'package:mae_ban/feature/offer/presentation/cubits/countdown/countdown_cubit.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/booking/widget/text_row.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/profile/address/widget/footer_app.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking_page/widget/text_row.dart';
+import 'package:mae_ban/feature/offer/presentation/widgets/footer_app.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -321,7 +322,7 @@ class _StartJobPageState extends State<StartJobPage> {
                     )),
                 Gap(20),
                 Text(
-                  'ຂອບໃຈສໍາລັບການບໍລິການຂອງທ່ານ\nຄ່າບໍລິການໄດ້ຖືກໂອນເຂົ້າກະເປົ໋າເງິນແລ້ວ',
+                  'ຂອບໃຈສໍາລັບການບໍລິການຂອງທ່ານ',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
@@ -331,10 +332,12 @@ class _StartJobPageState extends State<StartJobPage> {
       },
     );
 
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 1500), () {
       Navigator.of(context).pop();
-      // context.go('/review-page');
-      context.go('/activity-view?initialTab=1');
+      context.go('/home-job-hunter', extra: {
+        'initialTabIndex': 0,
+        'initialActivityTabIndex': 1,
+      });
     });
   }
 
@@ -352,6 +355,7 @@ class _StartJobPageState extends State<StartJobPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('ເລີ່ມວຽກ')),
       body: RefreshIndicator(
+        color: MColors.accent,
         onRefresh: () => context
             .read<StartJobCubit>()
             .fetchStartJobDetail(widget.startJobId),
@@ -362,7 +366,7 @@ class _StartJobPageState extends State<StartJobPage> {
             child: BlocBuilder<StartJobCubit, StartJobState>(
               builder: (context, state) {
                 if (state.isLoading) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state.startJobDetail != null) {
                   final jobData = state.startJobDetail;
                   final statusProcess = jobData?['status_process'] ?? '';
@@ -663,7 +667,7 @@ class _StartJobPageState extends State<StartJobPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('ລາຄາບໍລິການ'),
+                                const Text('ລາຄາບໍລິການ'),
                                 Text(
                                   ' ${formatCurrency(jobData['price'] ?? 'N/A')} LAK',
                                   style: Theme.of(context)
@@ -701,7 +705,7 @@ class _StartJobPageState extends State<StartJobPage> {
               },
             );
           } else {
-            return SizedBox
+            return const SizedBox
                 .shrink(); // Return an empty widget when condition is not met
           }
         },

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/hunter/presentation/widget/status_widget.dart';
 import 'package:mae_ban/feature/offer/domain/entities/booking.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/booking/widget/booking_info_widget.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/booking_page/widget/booking_info_widget.dart';
 
 class ActivityCard extends StatelessWidget {
   final Booking booking;

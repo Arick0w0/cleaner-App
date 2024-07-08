@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mae_ban/core/constants/color.dart';
+import 'package:mae_ban/core/secret/secret.dart';
 import 'package:mae_ban/core/utils/auth_utils.dart';
 import 'package:mae_ban/feature/auth/data/local_storage/local_storage_service.dart';
 import 'package:mae_ban/feature/auth/presentation/cubit/user_cubit.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/profile/address/address_view.dart';
 
 class HunterProfile extends StatelessWidget {
   const HunterProfile({super.key});
@@ -17,6 +18,8 @@ class HunterProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const String baseUrl = Config.s3BaseUrl;
+
     return FutureBuilder<String?>(
       future: _getToken(),
       builder: (context, snapshot) {
@@ -25,10 +28,6 @@ class HunterProfile extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
-          final token = snapshot.data;
-          // Print the token to the debug console
-          // debugPrint('Token: $token');
-
           return Scaffold(
             backgroundColor: MColors.white,
             appBar: AppBar(title: const Text('ໂປຣໄຟລ໌')),
@@ -37,15 +36,6 @@ class HunterProfile extends StatelessWidget {
                 if (state is UserLoaded) {
                   final user = state.user;
                   final imageUrl = user.imageProfile;
-
-                  // Print user data to the debug console
-                  // debugPrint('User ID: ${user.id}');
-                  // debugPrint('Username: ${user.username}');
-                  // debugPrint('First Name: ${user.firstName}');
-                  // debugPrint('Last Name: ${user.lastName}');
-                  // debugPrint('code: ${user.customerCode}');
-                  // debugPrint('role: ${user.role}');
-                  // debugPrint('Phone: ${user.phone}');
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(
@@ -70,7 +60,7 @@ class HunterProfile extends StatelessWidget {
                                               fontWeight: FontWeight.w400,
                                               color: MColors.black),
                                     ),
-                                    Gap(5),
+                                    const Gap(5),
                                     Text(
                                       'ແກ້ໄຂ',
                                       style: Theme.of(context)
@@ -82,25 +72,32 @@ class HunterProfile extends StatelessWidget {
                                 ),
                                 const Gap(10),
                                 Text('ID: ${user.customerCode}',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium
-                                    // ?.copyWith(
-                                    //     fontWeight: FontWeight.w400,
-                                    //     color: MColors.black),
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium),
                               ],
                             ),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(40),
                               child: imageUrl.isNotEmpty
                                   ? Image.network(
-                                      imageUrl,
+                                      baseUrl + imageUrl,
                                       width: 80,
                                       height: 80,
                                       fit: BoxFit.cover,
+                                      errorBuilder: (BuildContext context,
+                                          Object exception,
+                                          StackTrace? stackTrace) {
+                                        return Image.asset(
+                                          'assets/mock/user.png',
+                                          width: 80,
+                                          height: 80,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
                                     )
                                   : Image.asset(
-                                      'assets/mock/mock04.jpg',
+                                      'assets/mock/user.png',
                                       width: 80,
                                       height: 80,
                                       fit: BoxFit.cover,
@@ -131,26 +128,13 @@ class HunterProfile extends StatelessWidget {
                           ),
                         ),
                         const Divider(),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddressView(
-                                  userId: user.id,
-                                  token: token ?? '',
-                                ),
-                              ),
-                            );
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: TextAndIcon(
-                              title: 'ກະເປົ໋າເງິນ',
-                              icon: Icon(
-                                Icons.wallet,
-                                size: 24,
-                              ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: TextAndIcon(
+                            title: 'ກະເປົ໋າເງິນ',
+                            icon: Icon(
+                              Icons.wallet,
+                              size: 24,
                             ),
                           ),
                         ),
@@ -166,20 +150,20 @@ class HunterProfile extends StatelessWidget {
                           ),
                         ),
                         const Divider(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('ອອກລະບົບ'),
-                              GestureDetector(
-                                onTap: () => logout(context),
-                                child: const Icon(
+                        GestureDetector(
+                          onTap: () => logout(context),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('ອອກລະບົບ'),
+                                Icon(
                                   Icons.logout_outlined,
                                   size: 24,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         const Spacer(),

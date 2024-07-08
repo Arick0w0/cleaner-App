@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/hunter/presentation/cubit/start_job/start_job_cubit.dart';
+import 'package:mae_ban/feature/hunter/presentation/cubit/start_job/start_job_state.dart';
 import 'package:mae_ban/feature/hunter/presentation/widget/status_widget.dart';
 
 class HistoryDetailPage extends StatelessWidget {
@@ -18,12 +19,16 @@ class HistoryDetailPage extends StatelessWidget {
     context.read<StartJobCubit>().fetchStartJobDetail(startJobId);
 
     return Scaffold(
+      backgroundColor: MColors.white,
       appBar: AppBar(
         title: Text('ລາຍລະອຽດ'),
         // automaticallyImplyLeading: true,
         leading: IconButton(
           onPressed: () {
-            context.go('/activity-view?initialTab=1');
+            context.go('/home-job-hunter', extra: {
+              'initialTabIndex': 0,
+              'initialActivityTabIndex': 1,
+            });
           },
           icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
@@ -57,38 +62,9 @@ class HistoryDetailPage extends StatelessWidget {
                   ],
                 ),
                 const Divider(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Text(
-                    //   jobDetail!['start_job_id'] ?? 'N/A',
-                    //   style: Theme.of(context)
-                    //       .textTheme
-                    //       .bodyMedium
-                    //       ?.copyWith(fontSize: 16),
-                    // ),
-                    TextColum(
-                      title: 'ວັນທີຮັບບໍລິການ',
-                      text: formatDateTime(jobDetail!['date_service'] ?? 'N/A'),
-                    ),
-                    const Gap(10),
-                    if (jobDetail!['status'] == 'MATCH_HUNTER')
-                      Text(
-                        '*ກະລຸນາເດີນທາງເຖິງສະຖານທີກ່ອນໂມງ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(color: MColors.orange),
-                      )
-                    else if (jobDetail!['status'] == 'CHOOSE_HUNTER')
-                      Text(
-                        '*ກະລຸນາລໍຖ້າການຍືນຍັນຈາກຜູ້ໃຊ້ບໍລິການ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(color: MColors.orange),
-                      ),
-                  ],
+                TextColum(
+                  title: 'ວັນທີຮັບບໍລິການ',
+                  text: formatDateTime(jobDetail!['date_service'] ?? 'N/A'),
                 ),
                 const Divider(),
                 TextColum(

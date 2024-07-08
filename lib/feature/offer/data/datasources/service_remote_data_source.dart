@@ -15,7 +15,7 @@ class ServiceTypeRemoteDataSourceImpl implements ServiceTypeRemoteDataSource {
 
   @override
   Future<List<ServiceTypeModel>> fetchServiceTypes() async {
-    final baseUrl = Config.apiBaseUrl;
+    const baseUrl = Config.apiBaseUrl;
 
     final response = await client.get(Uri.parse('$baseUrl/app/service-type'));
 

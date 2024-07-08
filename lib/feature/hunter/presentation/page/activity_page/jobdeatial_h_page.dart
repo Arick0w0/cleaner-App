@@ -4,11 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:mae_ban/core/constants/color.dart';
+import 'package:mae_ban/core/widgets/confirmation_dialog.dart';
 import 'package:mae_ban/feature/hunter/presentation/cubit/activity/booking_cubit.dart';
 import 'package:mae_ban/feature/hunter/presentation/cubit/job_detail/job_detail_cubit.dart';
 import 'package:mae_ban/feature/hunter/presentation/widget/status_widget.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/home/service_form_page/widgets/text_colum.dart';
-import 'package:mae_ban/feature/offer/presentation/screen/profile/address/widget/footer_app.dart';
+import 'package:mae_ban/feature/offer/presentation/screen/service_form_page/widgets/text_colum.dart';
+import 'package:mae_ban/feature/offer/presentation/widgets/footer_app.dart';
 
 class JobDetailPage extends StatefulWidget {
   final String postJobId;
@@ -56,7 +57,10 @@ class _JobDetailPageState extends State<JobDetailPage> {
       appBar: AppBar(
         title: Text('ລາຍລະອຽດ'),
         leading: IconButton(
-          onPressed: () => context.go('/home-job-hunter'),
+          onPressed: () => context.go('/home-job-hunter', extra: {
+            'initialTabIndex': 0,
+            'initialActivityTabIndex': 0,
+          }),
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
       ),
@@ -67,7 +71,7 @@ class _JobDetailPageState extends State<JobDetailPage> {
           } else if (state is JobDetailLoaded) {
             final jobDetail = state.jobDetail;
             return ListView(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 16),
               children: [
                 Row(
                   children: [
@@ -91,13 +95,6 @@ class _JobDetailPageState extends State<JobDetailPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      jobDetail!['start_job_id'] ?? 'N/A',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(fontSize: 16),
-                    ),
                     TextColum(
                       title: 'ວັນທີຮັບບໍລິການ',
                       text: formatDateTime(jobDetail!['date_service'] ?? 'N/A'),
@@ -224,19 +221,28 @@ class _JobDetailPageState extends State<JobDetailPage> {
               return FooterApp(
                 title: 'ຕອບຮັບ',
                 onPressed: () {
-                  context
-                      .read<BookingCubit>()
-                      .onAcceptBooking(jobDetail!['bill_code']);
+                  showConfirmationDialog(
+                    context: context,
+                    title: 'ທ່ານຕ້ອງການຕອບຮັບວຽກນີ້ແທ້ບໍ?',
+                    content: 'ຕອບຮັບແລ້ວກະລຸນາລໍຖ້າການຍືນຍັນຈາກຜູ້ໃຊ້ບໍລິການ?',
+                    onAccept: () {
+                      context
+                          .read<BookingCubit>()
+                          .onAcceptBooking(jobDetail['bill_code']);
+                      context.read<JobDetailCubit>().fetchJobDetail(
+                          widget.postJobId); // Refetch job details
+                    },
+                  );
                 },
               );
             }
             if (jobDetail?['status'] == 'MATCH_HUNTER') {
               // print("MATCH_HUNTER status detected."); // Debug print
               return FooterApp(
-                title: 'ຕອບຮັບ',
+                title: 'ເລີ່ມວຽກ',
                 onPressed: () {
                   // print("Button pressed."); // Debug print
-                  print(jobDetail!['start_job_id']);
+                  // print(jobDetail!['start_job_id']);
                   context.push('/start-job', extra: jobDetail!['start_job_id']);
                 },
               );

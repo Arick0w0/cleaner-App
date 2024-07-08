@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		H7Ty91Xg1SQqYauDRF1XnjATTF8=
+		IYvFyWUdwkHUEDE8a+ICkBAbTYk=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		wCjLBCAQY+2g13xfSzcYeW6RbjE=
+		MiSqk93uDpSx+HivTXsAhoCcEcc=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>flutter_assets/assets/logo/.DS_Store</key>
 		<data>
-		3rug1Y7M+dyGnstRXf3z8Cfxrw0=
+		ZEy7uCV+l1FLCLUnU+25U7e0nww=
 		</data>
 		<key>flutter_assets/assets/logo/forgotpassword.png</key>
 		<data>
@@ -100,6 +100,10 @@
 		<data>
 		fK2wf6535b7mfL8fAfLNcRP0IOk=
 		</data>
+		<key>flutter_assets/assets/mock/human.png</key>
+		<data>
+		VJqVrv7xleYs5N9/0Rl+YBxQ0pY=
+		</data>
 		<key>flutter_assets/assets/mock/mock01.png</key>
 		<data>
 		pj9LZCCySB/tmQPzghYFbKCkujQ=
@@ -116,6 +120,10 @@
 		<data>
 		JyTATZN/bB3g7Wxr8oZhhb2oKeI=
 		</data>
+		<key>flutter_assets/assets/mock/user.png</key>
+		<data>
+		lIWyTnuT9vY8V+flaPmMeWca9/U=
+		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
 		/CUoTuPQqqdexfyOT9lpJhV+2MQ=
@@ -126,7 +134,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		Dm8KsfQNfe+suKzcdFtzicU1jpI=
+		Zrtt64ouYtBFuwJBtsegGpiafqs=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -147,14 +155,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BaILqugch9bDExQLtStKS8/0iCl8cgpDl8KqFEJxyYY=
+			ri2W0qqwFXye64UBeA2BLlwA45Q/11s4iNwqQlALpqc=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dWD4tBm+b5Ms3dHxGAtPwFEHvOARNyWnedCHxv57A0E=
+			CQi1sMr+efnAJTuA27Bvpn8EyQAdPtgoPnAe6fjbq0U=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -290,6 +298,13 @@
 			10nSal4LrKSQWa9PME89I/NlAr9qyqaICY4UxGETDXk=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/mock/human.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			e6+LgEZd5q9X2tiEzMjuYutSyGGgTR0asFnNzro3elw=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/mock/mock01.png</key>
 		<dict>
 			<key>hash2</key>
@@ -318,6 +333,13 @@
 			xqhLU7ayAneFhQ668LnALpjWqw/fc6Uwxlne0njJACM=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/mock/user.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3vFejbh9dCrjmhXcYsVeh3+It/fAWKa7EI+V8t9HFgU=
+			</data>
+		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<dict>
 			<key>hash2</key>
@@ -336,7 +358,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OiklqPNixsF1XvfPD2lnCRZk+DFai03VNvpsEiujREk=
+			sfE4UAGGyW5gsdcoiS55AtwPmHEYDNOUeaqB8OnKNQY=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

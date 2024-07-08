@@ -41,22 +41,22 @@ final List<Cleaner> cleaners = [
   Cleaner(
     name: 'Somsy Souvannaphong',
     image: 'assets/mock/mock02.png',
-    imageProfile: 'assets/mock/mock04.jpg',
+    imageProfile: 'assets/mock/human.png',
   ),
   Cleaner(
     name: 'Vannasy Keola',
     image: 'assets/mock/mock02.png',
-    imageProfile: 'assets/mock/mock04.jpg',
+    imageProfile: 'assets/mock/human.png',
   ),
   Cleaner(
     name: 'Vannasy Keola',
     image: 'assets/mock/mock02.png',
-    imageProfile: 'assets/mock/mock04.jpg',
+    imageProfile: 'assets/mock/human.png',
   ),
   Cleaner(
     name: 'Vannasy Keola',
     image: 'assets/mock/mock02.png',
-    imageProfile: 'assets/mock/mock04.jpg',
+    imageProfile: 'assets/mock/human.png',
   ),
   // เพิ่มข้อมูลจำลองอีกตามต้องการ
 ];

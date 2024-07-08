@@ -66,6 +66,7 @@ class MTexts {
   static const String men = "ຊາຍ";
   static const String women = "ຍິງ";
   static const String signUpSuccess = "ລົງທະບຽນ ສໍາເລັດ!";
+  static const String loginSuccess = "ຍິນດີຕ້ອນຮັບເຂົ້າສູລະບົບ";
   static const String resetSuccess = "ປ່ຽນລະຫັດຜ່ານ ສໍາເລັດ!";
   static const String date = "ວວ-ດດ-ປປປປ";
 

@@ -40,7 +40,7 @@ class Booking {
       name: json['first_name'] + ' ' + json['last_name'],
       date: json['date_service'],
       time: formatHours(json['hours']),
-      image: json['image_profile'],
+      image: json['chosen_job_hunter']['image_profile'],
       status: json['status'] ?? '',
       orderNumber: json['bill_code'],
       orderDate: formatter.format(DateTime.parse(json['created_at']).toLocal()),

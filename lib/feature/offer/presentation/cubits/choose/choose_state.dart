@@ -1,22 +1,34 @@
-part of 'choose_cubit.dart';
+import 'package:equatable/equatable.dart';
 
-class ChooseState extends Equatable {
-  final List<dynamic> cleanerData;
-  final bool isLoading;
-
-  const ChooseState({required this.cleanerData, required this.isLoading});
-
-  factory ChooseState.initial() {
-    return ChooseState(cleanerData: [], isLoading: true);
-  }
-
-  ChooseState copyWith({List<dynamic>? cleanerData, bool? isLoading}) {
-    return ChooseState(
-      cleanerData: cleanerData ?? this.cleanerData,
-      isLoading: isLoading ?? this.isLoading,
-    );
-  }
+abstract class ChooseState extends Equatable {
+  const ChooseState();
 
   @override
-  List<Object?> get props => [cleanerData, isLoading];
+  List<Object?> get props => [];
 }
+
+class ChooseInitial extends ChooseState {}
+
+class ChooseLoading extends ChooseState {}
+
+class ChooseLoaded extends ChooseState {
+  final List<dynamic> cleaners;
+
+  const ChooseLoaded(this.cleaners);
+
+  @override
+  List<Object?> get props => [cleaners];
+}
+
+class ChooseError extends ChooseState {
+  final String message;
+
+  const ChooseError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class ChooseNoData extends ChooseState {}
+
+class ChooseCleanerChosen extends ChooseState {}

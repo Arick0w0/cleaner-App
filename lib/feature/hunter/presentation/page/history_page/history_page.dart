@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/hunter/presentation/cubit/history/history_cubit.dart';
@@ -62,7 +63,20 @@ class _HistoryPageState extends State<HistoryHunterPage> {
                 child: Container(
                   height: MediaQuery.of(context).size.height,
                   alignment: Alignment.center,
-                  child: Image.asset('assets/logo/gost.gif'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Image.asset('assets/logo/gost.gif'),
+                          Text(
+                            'ບໍ່ມີປະຫວັດ',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -77,7 +91,24 @@ class _HistoryPageState extends State<HistoryHunterPage> {
                   alignment: Alignment.center,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text(state.message),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.wifi_off, size: 80, color: Colors.grey),
+                        const Gap(16),
+                        Text(state.message,
+                            style: TextStyle(fontSize: 18, color: Colors.grey)),
+                        const Gap(16),
+                        SizedBox(
+                          width: 100,
+                          child: ElevatedButton(
+                            onPressed: () =>
+                                context.read<HistoryCubit>().fetchHistory(),
+                            child: Text('Retry'),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

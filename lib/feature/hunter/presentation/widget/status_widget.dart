@@ -36,7 +36,7 @@ class Status extends StatelessWidget {
   String getStatusText(String status) {
     switch (status) {
       case 'WAIT_HUNTER':
-        return 'ຕອບຮັບບໍລການ';
+        return 'ຕອບຮັບບໍລິການ';
       case 'WAIT_OFFER':
         return 'ລໍຖ້າການຕອບຮັບ';
       case 'CHOOSE_HUNTER':

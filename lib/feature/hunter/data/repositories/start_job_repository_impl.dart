@@ -1,3 +1,4 @@
+// import 'package:mae_ban/feature/hunter/data/datasource/start_job_detail_remote_data_source.dart';
 import 'package:mae_ban/feature/hunter/data/datasource/start_job_remote_data_source.dart';
 import 'package:mae_ban/feature/hunter/domain/repositories/start_job_repository.dart';
 
@@ -14,5 +15,12 @@ class StartJobDetailRepositoryImpl implements StartJobRepository {
   @override
   Future<void> submitStatusProcess(String startJobId, String newStatus) async {
     return await remoteDataSource.submitStatusProcess(startJobId, newStatus);
+  }
+
+  @override
+  Future<void> submitStatusProcessOffer(
+      String startJobId, String newStatus) async {
+    return await remoteDataSource.submitStatusProcessOffer(
+        startJobId, newStatus);
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mae_ban/core/secret/secret.dart';
 import 'package:mae_ban/feature/offer/domain/entities/booking.dart';
 import 'package:mae_ban/feature/auth/data/local_storage/local_storage_service.dart';
 
@@ -21,8 +22,8 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
     final token = await localStorageService.getToken();
     if (token == null) throw Exception('Token not found');
     print(token);
-
-    final url = 'http://18.142.53.143:9393/api/v1/job/many-post-jop-hunter';
+    final baseUrl = Config.apiBaseUrl;
+    final url = '${baseUrl}/job/many-post-jop-hunter';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
@@ -52,8 +53,9 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
   Future<void> acceptBooking(String billCode) async {
     final token = await localStorageService.getToken();
     if (token == null) throw Exception('Token not found');
+    final baseUrl = Config.apiBaseUrl;
 
-    final url = 'http://18.142.53.143:9393/api/v1/job/submit-job';
+    final url = '${baseUrl}/job/submit-job';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',

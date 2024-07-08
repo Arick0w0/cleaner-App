@@ -54,17 +54,17 @@ Future<void> showConfirmationDialog({
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 100,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: MColors.accent),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: 100,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: MColors.accent),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(
@@ -78,18 +78,18 @@ Future<void> showConfirmationDialog({
                     ),
                   ),
                   const Gap(10),
-                  Container(
-                    width: 100,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: MColors.accent,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        onAccept();
-                        Navigator.of(context).pop();
-                      },
+                  InkWell(
+                    onTap: () {
+                      onAccept();
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: 100,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: MColors.accent,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(

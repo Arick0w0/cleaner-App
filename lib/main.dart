@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mae_ban/feature/hunter/presentation/cubit/activity/booking_cubit.dart';
+import 'package:mae_ban/feature/hunter/presentation/cubit/start_job/start_job_cubit.dart';
 import 'package:mae_ban/feature/offer/presentation/blocs/service_type/service_type_bloc.dart';
 import 'package:mae_ban/service_locator.dart' as di;
 import 'package:mae_ban/feature/auth/presentation/bloc/auth_bloc.dart';
@@ -12,11 +13,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:mae_ban/feature/auth/data/models/user_model.dart';
 
-import 'feature/hunter/presentation/cubit/bookinghunter_cubit.dart';
 import 'feature/hunter/presentation/cubit/history/history_cubit.dart';
 import 'feature/hunter/presentation/cubit/job_detail/job_detail_cubit.dart';
-import 'feature/hunter/presentation/cubit/start_job/start_job_cubit.dart';
+import 'feature/offer/presentation/cubits/booking/bookings_cubit.dart';
+import 'feature/offer/presentation/cubits/choose/choose_cubit.dart';
 import 'feature/offer/presentation/cubits/countdown/countdown_cubit.dart';
+import 'feature/offer/presentation/cubits/generate_bill/billing_cubit.dart';
+import 'feature/offer/presentation/cubits/historyuser/history_user_cubit.dart';
+import 'feature/offer/presentation/cubits/job_post/job_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,11 +58,19 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               di.sl<ServiceTypeBloc>()..add(FetchServiceTypes()),
         ),
+
         BlocProvider<UserCubit>(create: (context) => userCubit),
         BlocProvider(create: (context) => CountdownCubit()),
         BlocProvider(create: (_) => di.sl<BookingCubit>()),
+        BlocProvider(create: (_) => di.sl<MyBookingCubit>()),
+
         BlocProvider(create: (_) => di.sl<JobDetailCubit>()),
         BlocProvider(create: (_) => di.sl<HistoryCubit>()),
+        BlocProvider(create: (_) => di.sl<HistoryUserCubit>()),
+        BlocProvider(create: (_) => di.sl<BillingCubit>()),
+        BlocProvider(create: (_) => di.sl<JobCubit>()), // Add JobCubit here
+        BlocProvider(create: (_) => di.sl<ChooseCubit>()), // Add JobCubit here
+
         BlocProvider(
             create: (_) => di.sl<StartJobCubit>()), // Add StartJobCubit
         // BlocProvider<PostJobCubit>(

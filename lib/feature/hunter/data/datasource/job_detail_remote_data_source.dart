@@ -1,6 +1,7 @@
 import 'dart:convert';
 // import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mae_ban/core/secret/secret.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class JobDetailRemoteDataSource {
@@ -17,8 +18,9 @@ class JobDetailRemoteDataSourceImpl implements JobDetailRemoteDataSource {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('accessToken');
     if (token == null) throw Exception('Token not found');
+    final baseUrl = Config.apiBaseUrl;
 
-    final url = 'http://18.142.53.143:9393/api/v1/job/post-jop/$postJobId';
+    final url = '${baseUrl}/job/post-jop/$postJobId';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',

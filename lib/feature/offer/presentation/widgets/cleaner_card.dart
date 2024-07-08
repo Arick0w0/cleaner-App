@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:mae_ban/core/constants/size.dart';
+import 'package:mae_ban/core/secret/secret.dart';
 
 class CleanerCard extends StatelessWidget {
   final String name;
@@ -13,13 +14,12 @@ class CleanerCard extends StatelessWidget {
     required this.imageProfile,
     required this.image,
   });
+  final String baseUrl = Config.s3BaseUrl;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 190,
-      // height: 300,
-      // color: Colors.amber,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -39,12 +39,7 @@ class CleanerCard extends StatelessWidget {
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
             ),
-            child: Image.asset(
-              width: 190,
-              height: 154,
-              image.isNotEmpty ? image : 'assets/mock/mock04.jpg',
-              fit: BoxFit.cover,
-            ),
+            child: _buildImage(image, 'assets/mock/mock02.png', 190, 154),
           ),
           const Gap(MSize.spaceBtwItems),
           Padding(
@@ -65,12 +60,16 @@ class CleanerCard extends StatelessWidget {
                       height: 35,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50),
-                        child: Image.asset(
+                        child: Image.network(
                           imageProfile.isNotEmpty
-                              ? imageProfile
-                              : 'assets/mock/mock02.png',
+                              ? baseUrl + imageProfile
+                              : 'assets/mock/human.png',
                           fit: BoxFit.cover,
-                          scale: 1.0,
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return Image.asset('assets/mock/human.png',
+                                fit: BoxFit.cover);
+                          },
                         ),
                       ),
                     ),
@@ -90,24 +89,27 @@ class CleanerCard extends StatelessWidget {
                                   maxLines: 1,
                                 ),
                               ),
-                              Row(children: [
-                                const Icon(
-                                  Icons.star_rate_rounded,
-                                  color: Colors.amber,
-                                  size: 20,
-                                ),
-                                Text(
-                                  '5.0',
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                )
-                              ])
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.star_rate_rounded,
+                                    color: Colors.amber,
+                                    size: 20,
+                                  ),
+                                  Text(
+                                    '5.0',
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           Text('3 ຣີວິວ - ນະຄອນຫຼວງວຽງຈັນ',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall
-                                  ?.copyWith(color: Color(0xffA3ABB6))),
+                                  ?.copyWith(color: const Color(0xffA3ABB6))),
                         ],
                       ),
                     ),
@@ -118,6 +120,20 @@ class CleanerCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildImage(String url, String fallback, double width, double height) {
+    return Image.network(
+      url.isNotEmpty ? baseUrl + url : fallback,
+      width: width,
+      height: height,
+      fit: BoxFit.cover,
+      errorBuilder:
+          (BuildContext context, Object exception, StackTrace? stackTrace) {
+        return Image.asset(fallback,
+            width: width, height: height, fit: BoxFit.cover);
+      },
     );
   }
 }

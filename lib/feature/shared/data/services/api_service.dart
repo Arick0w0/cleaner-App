@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mae_ban/core/secret/secret.dart';
 import 'package:mae_ban/feature/shared/data/models/area_model.dart';
 import 'package:mae_ban/feature/shared/data/models/province_model.dart';
 import 'package:mae_ban/feature/shared/data/models/service_type_model.dart';
 
 class ApiServiceGet {
   Future<List<ServiceTypeModel>> fetchServiceTypes() async {
-    final response = await http
-        .get(Uri.parse('http://18.142.53.143:9393/api/v1/app/service-type'));
+    final baseUrl = Config.apiBaseUrl;
+
+    final response = await http.get(Uri.parse('${baseUrl}/app/service-type'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(utf8.decode(response.bodyBytes))['data'];
@@ -20,8 +22,9 @@ class ApiServiceGet {
   }
 
   Future<List<Province>> fetchProvinces() async {
-    final response =
-        await http.get(Uri.parse('http://18.142.53.143:9393/api/v1/app/area'));
+    final baseUrl = Config.apiBaseUrl;
+
+    final response = await http.get(Uri.parse('${baseUrl}/app/area'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(utf8.decode(response.bodyBytes))['data'];
@@ -34,8 +37,10 @@ class ApiServiceGet {
   }
 
   Future<List<Area>> fetchAreasByProvince(String provinceCodeName) async {
+    final baseUrl = Config.apiBaseUrl;
+
     final response = await http.get(Uri.parse(
-        'http://18.142.53.143:9393/api/v1/app/area?area_code_name=&province_code_name=$provinceCodeName'));
+        '${baseUrl}/app/area?area_code_name=&province_code_name=$provinceCodeName'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(utf8.decode(response.bodyBytes))['data'];
