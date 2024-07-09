@@ -52,7 +52,7 @@ class HunterProfile extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      '${user.firstName}',
+                                      '${user.firstName} ${user.lastName}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge

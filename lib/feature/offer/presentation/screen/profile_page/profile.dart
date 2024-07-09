@@ -57,7 +57,7 @@ class Profile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  state.user.firstName,
+                                  '${state.user.firstName} ${state.user.lastName}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleLarge
