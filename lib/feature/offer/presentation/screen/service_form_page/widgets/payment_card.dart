@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:mae_ban/core/constants/color.dart';
 
 class PayMent extends StatelessWidget {
   final String title;
@@ -33,7 +34,7 @@ class PayMent extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-                  color: Colors.amber,
+                  // color: Colors.amber,
                 ),
                 child: ClipOval(
                   child: Image.asset(
@@ -49,6 +50,9 @@ class PayMent extends StatelessWidget {
             ],
           ),
           Radio<int>(
+            // hoverColor: MColors.accent,
+            // fillColor: MaterialStateProperty.all(MColors.accent),
+            activeColor: MColors.accent,
             value: value,
             groupValue: groupValue,
             onChanged: onChanged,

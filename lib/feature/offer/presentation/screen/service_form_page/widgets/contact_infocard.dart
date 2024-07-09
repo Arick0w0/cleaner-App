@@ -42,7 +42,7 @@ class ContactInfoCard extends StatelessWidget {
             ),
             const Gap(16),
             Text(
-              'ສະຖານທີ່ໃຊ້ບໍລິການ',
+              'ສະຖານທີ່ຮັບບໍລິການ',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const Gap(14),

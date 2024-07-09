@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:mae_ban/core/constants/color.dart';
 import 'package:mae_ban/feature/offer/presentation/widgets/footer_app.dart';
 // import '../../profile/address/widget/footer_app.dart';
 import 'detail_page.dart'; // import DetailPage
@@ -27,9 +28,10 @@ class SuccessPage extends StatelessWidget {
     final formattedTotal = formatter.format(total);
 
     return Scaffold(
+      backgroundColor: MColors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false, // ลบไอคอนย้อนกลับ
-        title: const Text('ຈ່າຍເງິນ ສໍາເລັດ!'),
+        title: const Text('ຈ່າຍເງິນ ສໍາເລັດ'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -53,14 +55,16 @@ class SuccessPage extends StatelessWidget {
             ),
             const Gap(25),
             Text(
-              'ຈ່າຍເງິນ ສໍາເລັດ!',
+              'ຈ່າຍເງິນ ສໍາເລັດ',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Colors.green,
                   fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
             const Gap(200),
-            const Divider(),
+            const Divider(
+              color: Colors.grey,
+            ),
             Column(
               children: [
                 Row(

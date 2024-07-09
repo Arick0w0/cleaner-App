@@ -348,201 +348,157 @@ class _StartJobOfferState extends State<StartJobOffer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('ເລີ່ມວຽກ')),
-      body: RefreshIndicator(
-        color: MColors.accent,
-        onRefresh: () => context
-            .read<StartJobCubit>()
-            .fetchStartJobDetail(widget.startJobId),
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
-            child: BlocBuilder<StartJobCubit, StartJobState>(
-              builder: (context, state) {
-                if (state.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state.startJobDetail != null) {
-                  final jobData = state.startJobDetail;
-                  final statusProcess = jobData?['status_process'] ?? '';
-                  _statuses = _getStatusesFromProcess(statusProcess);
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 1),
+        child: RefreshIndicator(
+          color: MColors.accent,
+          onRefresh: () => context
+              .read<StartJobCubit>()
+              .fetchStartJobDetail(widget.startJobId),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+              child: BlocBuilder<StartJobCubit, StartJobState>(
+                builder: (context, state) {
+                  if (state.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state.startJobDetail != null) {
+                    final jobData = state.startJobDetail;
+                    final statusProcess = jobData?['status_process'] ?? '';
+                    _statuses = _getStatusesFromProcess(statusProcess);
 
-                  // ดึงค่า hours จาก API และแปลงเป็น Duration
-                  double hoursDouble = jobData?['hours'].toDouble();
-                  countdownDuration =
-                      Duration(minutes: (hoursDouble * 60).toInt());
+                    // ดึงค่า hours จาก API และแปลงเป็น Duration
+                    double hoursDouble = jobData?['hours'].toDouble();
+                    countdownDuration =
+                        Duration(minutes: (hoursDouble * 60).toInt());
 
-                  // เริ่มการนับถอยหลังเมื่อสถานะเป็น START_JOB และยังไม่เคยเริ่มการนับถอยหลัง
-                  if (statusProcess == 'START_JOB' && !_hasCountdownStarted) {
-                    startCountdown(countdownDuration);
-                    _hasCountdownStarted = true;
-                  }
+                    // เริ่มการนับถอยหลังเมื่อสถานะเป็น START_JOB และยังไม่เคยเริ่มการนับถอยหลัง
+                    if (statusProcess == 'START_JOB' && !_hasCountdownStarted) {
+                      startCountdown(countdownDuration);
+                      _hasCountdownStarted = true;
+                    }
 
-                  return Column(
-                    children: [
-                      const Gap(20),
-                      Card(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 80,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    _buildTimelineTile(
-                                      isFirst: true,
-                                      status: _statuses[0],
-                                      label: 'ເດີນທາງ',
-                                    ),
-                                    _buildTimelineTile(
-                                      status: _statuses[1],
-                                      label: 'ເຖິງສະຖານທີ',
-                                    ),
-                                    _buildTimelineTile(
-                                      status: _statuses[2],
-                                      label: 'ເລີ່ມວຽກ',
-                                    ),
-                                    _buildTimelineTile(
-                                      isLast: true,
-                                      status: _statuses[3],
-                                      label: 'ສໍາເລັດວຽກ',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Gap(20),
-                              if (statusProcess == 'START_JOB')
-                                Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'ໄລຍະເວລາໃນການເຮັດວຽກ',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge,
-                                        ),
-                                        BlocBuilder<CountdownCubit, Duration>(
-                                          builder: (context, duration) {
-                                            return Text(
-                                              formatDuration(duration),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge
-                                                  ?.copyWith(
-                                                      color: MColors.accent),
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                    const Gap(20),
-                                  ],
-                                ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    child: getStatusMessage(
-                                        statusProcess, context),
-                                  ),
-                                  SizedBox(
-                                    width: 100,
-                                    height: 30,
-                                    child: ElevatedButton(
-                                      style: ButtonStyle(
-                                        padding: MaterialStateProperty.all(
-                                            EdgeInsets.zero),
-                                        foregroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.white),
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          statusProcess == 'ARRIVED' ||
-                                                  statusProcess == 'FINISH_JOB'
-                                              ? MColors.accent
-                                              : Colors.grey,
-                                        ),
-                                        shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5.0),
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: statusProcess == 'ARRIVED' ||
-                                              statusProcess == 'FINISH_JOB'
-                                          ? () {
-                                              print(
-                                                  'Button pressed with statusProcess: $statusProcess');
-                                              String newStatus =
-                                                  statusProcess == 'ARRIVED'
-                                                      ? 'CONFIRM_ARRIVAL'
-                                                      : 'CONFIRM_FINISH_JOB';
-                                              _submitStatusProcess(newStatus);
-                                            }
-                                          : null,
-                                      child: const Text(
-                                        'ຍຶນຍັນ',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const Gap(20),
-                      if (jobData != null)
+                    return Column(
+                      children: [
+                        const Gap(20),
                         Card(
+                          color: Colors.white,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 23, horizontal: 10),
+                            padding: const EdgeInsets.all(10.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'ຂໍ້ມູນການຕິດຕໍ່',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge
-                                      ?.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          color: MColors.black),
+                                SizedBox(
+                                  height: 80,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      _buildTimelineTile(
+                                        isFirst: true,
+                                        status: _statuses[0],
+                                        label: 'ເດີນທາງ',
+                                      ),
+                                      _buildTimelineTile(
+                                        status: _statuses[1],
+                                        label: 'ເຖິງສະຖານທີ',
+                                      ),
+                                      _buildTimelineTile(
+                                        status: _statuses[2],
+                                        label: 'ເລີ່ມວຽກ',
+                                      ),
+                                      _buildTimelineTile(
+                                        isLast: true,
+                                        status: _statuses[3],
+                                        label: 'ສໍາເລັດວຽກ',
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                const Gap(14),
+                                const Gap(20),
+                                if (statusProcess == 'START_JOB')
+                                  Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'ໄລຍະເວລາໃນການເຮັດວຽກ',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge,
+                                          ),
+                                          BlocBuilder<CountdownCubit, Duration>(
+                                            builder: (context, duration) {
+                                              return Text(
+                                                formatDuration(duration),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                        color: MColors.accent),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      const Gap(20),
+                                    ],
+                                  ),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      '${jobData['chosen_job_hunter']['first_name']} ${jobData['chosen_job_hunter']['last_name']}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
-                                              color: MColors.black,
-                                              fontSize: 14),
+                                    Flexible(
+                                      child: getStatusMessage(
+                                          statusProcess, context),
                                     ),
-                                    Text(
-                                      "+856 ${jobData['chosen_job_hunter']['phone']}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
-                                              color: MColors.black,
-                                              fontSize: 14),
+                                    SizedBox(
+                                      width: 100,
+                                      height: 30,
+                                      child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          padding: MaterialStateProperty.all(
+                                              EdgeInsets.zero),
+                                          foregroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.white),
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                            statusProcess == 'ARRIVED' ||
+                                                    statusProcess ==
+                                                        'FINISH_JOB'
+                                                ? MColors.accent
+                                                : Colors.grey,
+                                          ),
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: statusProcess == 'ARRIVED' ||
+                                                statusProcess == 'FINISH_JOB'
+                                            ? () {
+                                                print(
+                                                    'Button pressed with statusProcess: $statusProcess');
+                                                String newStatus =
+                                                    statusProcess == 'ARRIVED'
+                                                        ? 'CONFIRM_ARRIVAL'
+                                                        : 'CONFIRM_FINISH_JOB';
+                                                _submitStatusProcess(newStatus);
+                                              }
+                                            : null,
+                                        child: const Text(
+                                          'ຍຶນຍັນ',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -550,60 +506,109 @@ class _StartJobOfferState extends State<StartJobOffer> {
                             ),
                           ),
                         ),
-                      const Gap(20),
-                      if (jobData != null)
-                        Card(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 23, horizontal: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'ສະຖານທີ່ໃຊ້ບໍລິການ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge
-                                      ?.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          color: MColors.black),
-                                ),
-                                const Gap(14),
-                                TextRow(
-                                  title: 'ບໍລິການ',
-                                  text: jobData['service_name'] ?? 'n/a',
-                                ),
-                                const Gap(10),
-                                TextRow(
-                                  title: 'ກໍານົດການ',
-                                  text: jobData != null
-                                      ? formatDateTime(jobData['date_service'])
-                                      : 'n/a',
-                                ),
-                                const Gap(10),
-                                TextRow(
-                                  title: 'ໄລຍະເວລາ',
-                                  text: '${formatHours(jobData['hours'])} '
-                                      "ຊ.ມ",
-                                ),
-                                const Gap(10),
-                                TextRow(
-                                  title: 'ແຂວງ',
-                                  text:
-                                      jobData['address']?['province'] ?? 'n/a',
-                                ),
-                              ],
+                        const Gap(20),
+                        if (jobData != null)
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 23, horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'ຂໍ້ມູນການຕິດຕໍ່',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.w500,
+                                            color: MColors.black),
+                                  ),
+                                  const Gap(14),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${jobData['chosen_job_hunter']['first_name']} ${jobData['chosen_job_hunter']['last_name']}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge
+                                            ?.copyWith(
+                                                color: MColors.black,
+                                                fontSize: 14),
+                                      ),
+                                      Text(
+                                        "+856 ${jobData['chosen_job_hunter']['phone']}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge
+                                            ?.copyWith(
+                                                color: MColors.black,
+                                                fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                    ],
-                  );
-                } else if (state.errorMessage != null) {
-                  return Center(child: Text('Error: ${state.errorMessage}'));
-                } else {
-                  return Center(child: Text('Please select a job'));
-                }
-              },
+                        const Gap(20),
+                        if (jobData != null)
+                          Card(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 23, horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'ສະຖານທີ່ໃຊ້ບໍລິການ',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                            fontWeight: FontWeight.w500,
+                                            color: MColors.black),
+                                  ),
+                                  const Gap(14),
+                                  TextRow(
+                                    title: 'ບໍລິການ',
+                                    text: jobData['service_name'] ?? 'n/a',
+                                  ),
+                                  const Gap(10),
+                                  TextRow(
+                                    title: 'ກໍານົດການ',
+                                    text: jobData != null
+                                        ? formatDateTime(
+                                            jobData['date_service'])
+                                        : 'n/a',
+                                  ),
+                                  const Gap(10),
+                                  TextRow(
+                                    title: 'ໄລຍະເວລາ',
+                                    text: '${formatHours(jobData['hours'])} '
+                                        "ຊ.ມ",
+                                  ),
+                                  const Gap(10),
+                                  TextRow(
+                                    title: 'ແຂວງ',
+                                    text: jobData['address']?['province'] ??
+                                        'n/a',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                      ],
+                    );
+                  } else if (state.errorMessage != null) {
+                    return Center(child: Text('Error: ${state.errorMessage}'));
+                  } else {
+                    return Center(child: Text('Please select a job'));
+                  }
+                },
+              ),
             ),
           ),
         ),

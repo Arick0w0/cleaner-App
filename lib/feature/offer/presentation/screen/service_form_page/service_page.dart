@@ -181,7 +181,7 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
                             key: _formKey,
                             child: ListView(
                               children: [
-                                Text('ເລືອກສະຖານທີ່ໃຊ້ບໍລິການ',
+                                Text('ເຂດໃຊ້ບໍລິການ',
                                     style:
                                         Theme.of(context).textTheme.bodyMedium),
                                 const Gap(8),

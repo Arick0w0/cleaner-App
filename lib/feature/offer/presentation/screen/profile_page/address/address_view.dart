@@ -82,7 +82,7 @@ class _AddressViewState extends State<AddressView> {
           } else if (snapshot.hasData) {
             final addresses = snapshot.data!;
             if (addresses.isEmpty) {
-              return const Center(child: Text('No address found'));
+              return const Center(child: Text('ບໍ່ມີທີ່ຢູ່'));
             }
             return LayoutBuilder(
               builder: (context, constraints) {
