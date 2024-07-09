@@ -556,14 +556,29 @@ class _StartJobPageState extends State<StartJobPage> {
                                               color: MColors.black,
                                               fontSize: 14),
                                     ),
-                                    Text(
-                                      '+856 ${jobData['username']}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
+                                    GestureDetector(
+                                      onTap: () async {
+                                        final phoneNumber =
+                                            '+856 ${jobData['username']}';
+                                        final url = 'tel:$phoneNumber';
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw 'Could not launch $url';
+                                        }
+                                      },
+                                      child: Text(
+                                        '+856 ${jobData['username']}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge
+                                            ?.copyWith(
                                               color: MColors.black,
-                                              fontSize: 14),
+                                              fontSize: 14,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                            ),
+                                      ),
                                     ),
                                   ],
                                 ),

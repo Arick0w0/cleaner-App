@@ -87,7 +87,8 @@ class _AddressViewState extends State<AddressView> {
             return LayoutBuilder(
               builder: (context, constraints) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   child: ListView.builder(
                     itemCount: addresses.length,
                     itemBuilder: (context, index) {
