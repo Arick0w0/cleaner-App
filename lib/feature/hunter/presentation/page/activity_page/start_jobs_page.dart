@@ -548,7 +548,7 @@ class _StartJobPageState extends State<StartJobPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      jobData['first_name'],
+                                      '${jobData['first_name']} ${jobData['last_name']}',
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleLarge
